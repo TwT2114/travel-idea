@@ -14,6 +14,15 @@ class IdeaController extends Controller
     {
         //
     }
+    public function searchByDestination(Request $request) {
+        $searchTerm = $request->input('searchTerm');
+        // Perform search by destination and return results
+    }
+    public function searchByTag(Request $request) {
+        $searchTerm = $request->input('searchTerm');
+        // Perform search by tag and return results
+    }
+
 
     /**
      * Show the form for creating a new resource.
