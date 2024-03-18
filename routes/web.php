@@ -7,4 +7,4 @@ Route::get('/', function () {
 });
 
 Route::get('/searchByDestination', 'IdeaController@searchByDestination');
-Route::get('/searchByTag', 'IdeaIdealController@searchByTag');
+Route::get('/searchByTag', 'IdeaController@searchByTag');
