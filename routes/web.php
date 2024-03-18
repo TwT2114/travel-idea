@@ -6,5 +6,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/searchByDestination', 'IdealController@searchByDestination');
-Route::get('/searchByTag', 'IdealIdealController@searchByTag');
+Route::get('/searchByDestination', 'IdeaController@searchByDestination');
+Route::get('/searchByTag', 'IdeaIdealController@searchByTag');
