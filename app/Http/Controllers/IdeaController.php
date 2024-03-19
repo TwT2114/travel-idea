@@ -14,13 +14,25 @@ class IdeaController extends Controller
     {
         //
     }
-    public function searchByDestination(Request $request) {
+    public function searchByDestination(Request $request)
+    {
         $searchTerm = $request->input('searchTerm');
-        // Perform search by destination and return results
+        $userId = auth()->user()->id; // get user id
+        $results = TravelIdea::where('destination', 'like', '%' . $searchTerm . '%')
+            ->where('user_id', $userId) // only show own data
+            ->get();
+              //如何显示多个tags的搜索结果？
+        return view('search-results', ['results' => $results]);
     }
-    public function searchByTag(Request $request) {
+
+    public function searchByTag(Request $request)
+    {
         $searchTerm = $request->input('searchTerm');
-        // Perform search by tag and return results
+        $userId = auth()->user()->id;
+        $results= "";
+        //数据库查询逻辑
+
+        return view('search-results', ['results' => $results]);
     }
 
 
