@@ -18,7 +18,7 @@ class IdeaController extends Controller
     {
         $searchTerm = $request->input('searchTerm');
         $userId = auth()->user()->id; // get user id
-        $results = TravelIdea::where('destination', 'like', '%' . $searchTerm . '%')
+        $results = Idea::where('destination', 'like', '%' . $searchTerm . '%')
             ->where('user_id', $userId) // only show own data
             ->get();
               //如何显示多个tags的搜索结果？
