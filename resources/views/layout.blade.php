@@ -31,13 +31,13 @@
             </div>
         </nav>
     </header>
-
-    <article>
+    <main>
         <div class="container">
-        @yield('content')
+            @yield('content')
         </div>
-    </article>
-    <script src="{{ asset('js/app.js') }}"></script>
+    </main>
+
+
     <footer>2024 Teavel Ideas Website </footer>
 </body>
 
