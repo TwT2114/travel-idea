@@ -9,6 +9,10 @@
             $("#end_datepicker").datepicker({dateFormat: 'yy-mm-dd'});
         });
     </script>
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP0xl298_t8EaEby3eCerFXFBidi0tS-o&libraries=places&callback=initMap">
+    </script>
+    <script type="module" src="/js/map.js"></script>
 @endsection
 
 @section('content')
@@ -27,6 +31,22 @@
             </div><br/>
         @endif
     </div>
+{{--        <div>--}}
+{{--            <iframe--}}
+{{--                width="600"--}}
+{{--                height="450"--}}
+{{--                style="border:0"--}}
+{{--                loading="lazy"--}}
+{{--                allowfullscreen--}}
+{{--                referrerpolicy="no-referrer-when-downgrade"--}}
+{{--                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDP0xl298_t8EaEby3eCerFXFBidi0tS-o--}}
+{{--            &q=HK">--}}
+{{--            </iframe>--}}
+{{--        </div>--}}
+
+
+    <div id="map" style="width: 100%; height: 400px;"></div>
+
     <form method="post" action="{{ route('idea.store') }}">
         {{ csrf_field() }}
         <table class="table table-striped"
