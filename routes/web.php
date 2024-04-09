@@ -8,6 +8,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('idea', IdeaController::class)->middleware('auth');
+
 Route::get('/searchByDestination', 'IdeaController@searchByDestination');
 Route::get('/searchByTag', 'IdeaController@searchByTag');
 

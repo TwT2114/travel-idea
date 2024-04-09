@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IdeaController extends Controller
 {
@@ -13,6 +14,9 @@ class IdeaController extends Controller
     public function index()
     {
         //
+        $ideas = Idea::all();
+        return view('idea.index', compact('ideas'));
+
     }
     public function searchByDestination(Request $request)
     {
@@ -41,7 +45,9 @@ class IdeaController extends Controller
      */
     public function create()
     {
-        //
+        // create a new idea
+        $idea = new Idea();
+        return view("idea.create", compact("idea"));
     }
 
     /**
@@ -49,15 +55,40 @@ class IdeaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Store the new idea into database
+        // 1. validate the inputted data
+        $request->validate([
+            'title' => 'required',
+            'destination' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+        ]);
+
+        // 2. create a new idea model
+        $idea = new Idea([
+            'user_id' => Auth::id(),
+            'title' => $request->get('title'),
+            'destination' => $request->get('destination'),
+            'start_date' => $request->get('start_date'),
+            'end_date' => $request->get('end_date'),
+            'tags' => $request->get('tags')
+        ]);
+
+        // 3. save the data into database
+        $idea->save();
+        return redirect('/idea')->with('success', 'Idea has been added');
+
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Idea $idea)
+    public function show(string $id)
     {
-        //
+        // show the idea
+        $idea = Idea::find($id);
+        return view('idea.show', compact('idea'));
     }
 
     /**
@@ -65,7 +96,9 @@ class IdeaController extends Controller
      */
     public function edit(Idea $idea)
     {
-        //
+        // edit the idea
+
+        return view('idea.edit', compact('idea'));
     }
 
     /**
