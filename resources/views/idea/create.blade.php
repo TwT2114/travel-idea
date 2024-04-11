@@ -30,18 +30,7 @@
             </div><br/>
         @endif
     </div>
-{{--        <div>--}}
-{{--            <iframe--}}
-{{--                width="600"--}}
-{{--                height="450"--}}
-{{--                style="border:0"--}}
-{{--                loading="lazy"--}}
-{{--                allowfullscreen--}}
-{{--                referrerpolicy="no-referrer-when-downgrade"--}}
-{{--                src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}--}}
-{{--            &q=HK">--}}
-{{--            </iframe>--}}
-{{--        </div>--}}
+
 
     <form method="post" action="{{ route('idea.store') }}">
         {{ csrf_field() }}

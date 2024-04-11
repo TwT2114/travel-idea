@@ -18,6 +18,7 @@ class IdeaController extends Controller
         return view('idea.index', compact('ideas'));
 
     }
+
     public function searchByDestination(Request $request)
     {
         $searchTerm = $request->input('searchTerm');
@@ -25,7 +26,7 @@ class IdeaController extends Controller
         $results = Idea::where('destination', 'like', '%' . $searchTerm . '%')
             ->where('user_id', $userId) // only show own data
             ->get();
-              //如何显示多个tags的搜索结果？
+        //如何显示多个tags的搜索结果？
         return view('search-results', ['results' => $results]);
     }
 
@@ -33,7 +34,7 @@ class IdeaController extends Controller
     {
         $searchTerm = $request->input('searchTerm');
         $userId = auth()->user()->id;
-        $results= "";
+        $results = "";
         //数据库查询逻辑
 
         return view('search-results', ['results' => $results]);
@@ -58,15 +59,16 @@ class IdeaController extends Controller
         // Store the new idea into database
         // 1. validate the inputted data
         $request->validate([
-            'title' => 'required',
-            'destination' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
+            'title' => 'required | max:255 |min:3',
+            'destination' => 'required | max:255',
+            'start_date' => 'required | date',
+            'end_date' => 'required | date | after_or_equal:start_date',
         ]);
 
         // 2. create a new idea model
         $idea = new Idea([
             'user_id' => Auth::id(),
+            'user_name' => Auth::user()->name,
             'title' => $request->get('title'),
             'destination' => $request->get('destination'),
             'start_date' => $request->get('start_date'),
