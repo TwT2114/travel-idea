@@ -18,27 +18,17 @@ class IdeaController extends Controller
         return view('idea.index', compact('ideas'));
 
     }
-    public function searchByDestination(Request $request)
-    {
-        $searchTerm = $request->input('searchTerm');
-        $userId = auth()->user()->id; // get user id
-        $results = Idea::where('destination', 'like', '%' . $searchTerm . '%')
-            ->where('user_id', $userId) // only show own data
-            ->get();
-              //如何显示多个tags的搜索结果？
-        return view('search-results', ['results' => $results]);
-    }
 
-    public function searchByTag(Request $request)
+    public function search(Request $request)
     {
         $searchTerm = $request->input('searchTerm');
         $userId = auth()->user()->id;
-        $results= "";
-        //数据库查询逻辑
-
-        return view('search-results', ['results' => $results]);
+        $ideas = Idea::where('destination', 'like', '%' . $searchTerm . '%')
+            ->orWhere('tags', 'like', '%' . $searchTerm . '%')
+            ->where('user_id', $userId)
+            ->get();
+        return view('search', compact('ideas'));
     }
-
 
     /**
      * Show the form for creating a new resource.
