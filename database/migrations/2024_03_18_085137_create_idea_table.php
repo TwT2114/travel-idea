@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('ideas', function (Blueprint $table) {
             $table->id()->primary();
             $table->bigInteger('user_id');
-
+            $table->string('user_name');
             $table->string('title');
             $table->string('destination');
+            $table->string('tags');
             $table->string('start_date');
             $table->string('end_date');
 

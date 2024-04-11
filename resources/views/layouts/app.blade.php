@@ -87,12 +87,12 @@
             </div>
         </div>
     </nav>
-    <div class="search-box">
-        <form action="{{ route('idea.search') }}" method="GET">
-            <input type="text" name="searchTerm" placeholder="Search for travel ideas...">
-            <button type="submit">Search</button>
-        </form>
-    </div>
+{{--    <div class="search-box">--}}
+{{--        <form action="{{ route('idea.search') }}" method="GET">--}}
+{{--            <input type="text" name="searchTerm" placeholder="Search for travel ideas...">--}}
+{{--            <button type="submit">Search</button>--}}
+{{--        </form>--}}
+{{--    </div>--}}
     <main class="py-4">
         @yield('content')
     </main>
