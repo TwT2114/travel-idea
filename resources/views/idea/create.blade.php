@@ -44,9 +44,6 @@
 {{--            </iframe>--}}
 {{--        </div>--}}
 
-
-    <div id="map" style="width: 100%; height: 400px;"></div>
-
     <form method="post" action="{{ route('idea.store') }}">
         {{ csrf_field() }}
         <table class="table table-striped"
