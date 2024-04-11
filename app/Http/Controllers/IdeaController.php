@@ -27,7 +27,7 @@ class IdeaController extends Controller
             ->orWhere('tags', 'like', '%' . $searchTerm . '%')
             ->where('user_id', $userId)
             ->get();
-        return view('search', compact('ideas'));
+        return view('idea.search', compact('ideas'));
     }
 
     /**
