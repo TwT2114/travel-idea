@@ -94,16 +94,47 @@ class IdeaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Idea $idea)
+    public function update(Request $request, string $id)
     {
         //
+        //1. validate the inputted data
+        $request->validate([
+            'title' => 'required',
+            'destination' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'tags' => 'required'
+        ]);
+
+        //2. search the book from database
+        $idea = Idea::find($id);
+
+        //3. set the new values
+        $idea->title = $request->get('title');
+        $idea->destination = $request->get('destination');
+        $idea->start_date = $request->get('start_date');
+        $idea->end_date = $request->get('end_date');
+        $idea->tags = $request->get('tags');
+
+
+        //4. save the book into database
+        $idea->save();
+
+        return redirect('/idea')->with('success', 'Idea has been updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Idea $idea)
+    public function destroy(string $id)
     {
         //
+        $idea = Idea::find($id);
+        if ($idea) {
+            $idea->delete();
+            return redirect('/idea')->with('success', 'Idea has been deleted');
+        } else {
+            return redirect('/idea')->with('fail', 'Idea not exist');
+        }
     }
 }
