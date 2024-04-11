@@ -23,9 +23,11 @@ class IdeaController extends Controller
     {
         $searchTerm = $request->input('searchTerm');
         $userId = auth()->user()->id;
-        $ideas = Idea::where('destination', 'like', '%' . $searchTerm . '%')
-            ->orWhere('tags', 'like', '%' . $searchTerm . '%')
-            ->where('user_id', $userId)
+        $ideas = Idea::where('user_id', $userId)
+            ->where(function($query) use ($searchTerm) {
+                $query->where('destination', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('tags', 'like', '%' . $searchTerm . '%');
+            })
             ->get();
         return view('idea.search', compact('ideas'));
     }
