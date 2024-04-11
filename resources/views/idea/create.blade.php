@@ -10,9 +10,8 @@
         });
     </script>
     <script async
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP0xl298_t8EaEby3eCerFXFBidi0tS-o&libraries=places&callback=initMap">
+            src="https://maps.googleapis.com/maps/api/js?key={{config('api.google_map')}}&libraries=places&callback=initMap">
     </script>
-    <script type="module" src="/js/map.js"></script>
 @endsection
 
 @section('content')
@@ -39,7 +38,7 @@
 {{--                loading="lazy"--}}
 {{--                allowfullscreen--}}
 {{--                referrerpolicy="no-referrer-when-downgrade"--}}
-{{--                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDP0xl298_t8EaEby3eCerFXFBidi0tS-o--}}
+{{--                src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}--}}
 {{--            &q=HK">--}}
 {{--            </iframe>--}}
 {{--        </div>--}}

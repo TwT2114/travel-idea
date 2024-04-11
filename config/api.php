@@ -2,7 +2,7 @@
 
 return [
 
-    'google_map' => env('GOOGLE_API_GOOGLE_MAP'),
+    'google_map' => env('GOOGLE_MAP_API'),
 
 
 ];
