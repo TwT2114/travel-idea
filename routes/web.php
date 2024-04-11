@@ -9,7 +9,9 @@ Route::get('/', function () {
 });
 
 Route::resource('idea', IdeaController::class)->middleware('auth');
-Route::get('/search', [IdeaController::class, 'search'])->name('idea.search');
+
+Route::get('/searchByDestination', 'IdeaController@searchByDestination');
+Route::get('/searchByTag', 'IdeaController@searchByTag');
 
 Auth::routes();
 
