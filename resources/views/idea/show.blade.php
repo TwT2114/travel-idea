@@ -3,7 +3,8 @@
 
 @section('script')
     <script async
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP0xl298_t8EaEby3eCerFXFBidi0tS-o&libraries=places&callback=initMap">
+            src="https://maps.googleapis.com/maps/api/js?
+            key={{config('api.google_map')}}&libraries=places&callback=initMap">
     </script>
     <script type="module" src="/js/map.js"></script>
 
