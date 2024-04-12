@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
 
-@section('script')
-
-@endsection
-
 @section('content')
 
     {{--    <div id="map" style="width: 80%; height: 400px;"></div>--}}
@@ -52,42 +48,37 @@
                 &q={{$idea->destination}}">
             </iframe>
         </div>
-        <div>
-            <h2>Add your comment</h2>
-            <form id="commentForm">
-                @csrf
-                <div>
-                    <textarea id="commentInput" name="comment" rows="3" cols="50"></textarea>
-                </div>
-                <button type="submit">Add Comment</button>
-            </form>
-        </div>
+        <h2>Comments</h2>
+        <form id="comment-form" action="{{ route('comment.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="idea_id" value="{{ $idea->id }}">
+            <textarea name="content" rows="3" cols="50"></textarea>
+            <button type="submit">Submit</button>
+        </form>
 
-        <div>
-            <h2>Comments</h2>
-            <ul id="commentList">
-                @if($idea->comments)
-                    @foreach($idea->comments as $comment)
-                        <li>{{$comment->comment}}</li>
-                    @endforeach
-                @endif
-            </ul>
-        </div>
+        <ul id="comment-list">
+            @foreach ($idea->comments as $comment)
+                <li>{{ $comment->content }}</li>
+            @endforeach
+        </ul>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
-            $(document).ready(function () {
-                $('#commentForm').submit(function (event) {
-                    event.preventDefault();
+            $(document).ready(function() {
+                $('#comment-form').submit(function(e) {
+                    e.preventDefault();
 
-                    var comment = $('#commentInput').val();
+                    var formData = $(this).serialize();
 
                     $.ajax({
+                        url: $(this).attr('action'),
                         type: 'POST',
-                        url: "{{ route('comment.store', ['id' => $idea->id]) }}",
-                        data: { comment: comment, _token: '{{ csrf_token() }}' },
-                        success: function (data) {
-                            $('#commentList').append('<li>' + comment + '</li>');
-                            $('#commentInput').val('');  // 清空评论输入框
+                        data: formData,
+                        success: function(response) {
+                            $('#comment-form textarea[name="content"]').val('');
+
+                            var newComment = '<li>' + response.content + '</li>';
+                            $('#comment-list').append(newComment);
                         }
                     });
                 });

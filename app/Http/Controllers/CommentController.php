@@ -10,6 +10,7 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         //
@@ -30,15 +31,16 @@ class CommentController extends Controller
     {
         //validation
         $request->validate([
+            'idea_id' => 'required',
             'comment' => 'required|max:255',
         ]);
         $comment = new Comment();
-        $comment->comment = $request->input('comment');
-        $comment->idea_id = $ideaId;
-        $comment->user_id = auth()->user()->id; //
+        $comment->idea_id = $request->input('idea_id');
+        $comment->content = $request->input('content');
         $comment->save();
 
-        return redirect()->back()->with('success', 'Comment added successfully');
+        return $comment;
+
     }
 
     /**

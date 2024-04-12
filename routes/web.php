@@ -12,10 +12,10 @@ Route::get('/', function () {
 
 Route::resource('idea', IdeaController::class)->middleware('auth');
 Route::resource('user', UserController::class)->middleware('auth');
+Route::resource('comment', CommentController::class)->only(['store']);
 
 Route::get('/search', [IdeaController::class, 'search'])->name('idea.search');
-Route::get('/idea/{id}', [IdeaController::class, 'show']); // 显示单个创意的详情
-Route::post('/idea/{id}/comment', [CommentController::class, 'store'])->name('comment.store');// 对创意添加评论
+Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

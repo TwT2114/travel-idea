@@ -83,6 +83,7 @@ class IdeaController extends Controller
     {
         // show the idea
         $idea = Idea::find($id);
+        $idea->load('comments');
         return view('idea.show', compact('idea'));
     }
 
