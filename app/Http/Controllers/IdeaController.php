@@ -89,11 +89,17 @@ class IdeaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Idea $idea)
+    public function edit(string $id)
     {
         // edit the idea
+        $idea = Idea::find($id);
+        if ($idea->user_id == Auth::id()) {
+            return view('idea.edit', compact('idea'));
+        } else{
+            return redirect('/idea')->with('fail', 'Idea has been updated');
+        }
 
-        return view('idea.edit', compact('idea'));
+
     }
 
     /**
