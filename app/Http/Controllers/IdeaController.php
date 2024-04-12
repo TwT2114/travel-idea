@@ -22,13 +22,13 @@ class IdeaController extends Controller
     public function search(Request $request)
     {
         $searchTerm = $request->input('searchTerm');
-        $userId = auth()->user()->id;
-        $ideas = Idea::where('user_id', $userId)
-            ->where(function($query) use ($searchTerm) {
-                $query->where('destination', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('tags', 'like', '%' . $searchTerm . '%');
-            })
+
+        $ideas = Idea::where(function($query) use ($searchTerm) {
+            $query->where('destination', 'like', '%' . $searchTerm . '%')
+                ->orWhere('tags', 'like', '%' . $searchTerm . '%');
+        })
             ->get();
+
         return view('idea.search', compact('ideas'));
     }
 

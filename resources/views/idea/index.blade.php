@@ -8,7 +8,7 @@
         </form>
     </div>
     <div>
-        <table>
+        <table class="table">
             <thead>
 
             <th>User</th>
@@ -29,12 +29,11 @@
                     <td>{{$idea->tags}}</td>
                     <td>{{$idea->start_date}}</td>
                     <td>{{$idea->end_date}}</td>
-
-
                     <td><a href="{{ route("idea.show", $idea->id) }}">Detail</a></td>
                 </tr>
             @endforeach
             </tbody>
         </table>
     </div>
+
 @endsection
