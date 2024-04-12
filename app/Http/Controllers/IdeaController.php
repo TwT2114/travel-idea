@@ -54,6 +54,8 @@ class IdeaController extends Controller
             'destination' => 'required | max:255',
             'start_date' => 'required | date',
             'end_date' => 'required | date | after_or_equal:start_date',
+            'tags' => 'required'
+
         ]);
 
         // 2. create a new idea model
@@ -102,10 +104,10 @@ class IdeaController extends Controller
         //
         //1. validate the inputted data
         $request->validate([
-            'title' => 'required',
-            'destination' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
+            'title' => 'required | max:255 |min:3',
+            'destination' => 'required | max:255',
+            'start_date' => 'required | date',
+            'end_date' => 'required | date | after_or_equal:start_date',
             'tags' => 'required'
         ]);
 
