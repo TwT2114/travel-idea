@@ -49,7 +49,44 @@
             </iframe>
         </div>
         <div>
-            Add comments here
+            <h2>Add your comment</h2>
+            <form id="commentForm">
+                @csrf
+                <div>
+                    <textarea id="commentInput" name="comment" rows="3" cols="50"></textarea>
+                </div>
+                <button type="submit">Add Comment</button>
+            </form>
         </div>
-    </div>
+
+        <div>
+            <h2>Comments</h2>
+            <ul id="commentList">
+                @if($idea->comments)
+                    @foreach($idea->comments as $comment)
+                        <li>{{$comment->comment}}</li>
+                    @endforeach
+                @endif
+            </ul>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('#commentForm').submit(function (event) {
+                    event.preventDefault();
+
+                    var comment = $('#commentInput').val();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('comment.store', ['id' => $idea->id]) }}",
+                        data: { comment: comment, _token: '{{ csrf_token() }}' },
+                        success: function (data) {
+                            $('#commentList').append('<li>' + comment + '</li>');
+                            $('#commentInput').val('');  // 清空评论输入框
+                        }
+                    });
+                });
+            });
+        </script>
 @endsection

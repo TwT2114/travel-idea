@@ -26,9 +26,19 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request,$ideaId)
     {
-        //
+        //validation
+        $request->validate([
+            'comment' => 'required|max:255',
+        ]);
+        $comment = new Comment();
+        $comment->comment = $request->input('comment');
+        $comment->idea_id = $ideaId;
+        $comment->user_id = auth()->user()->id; //
+        $comment->save();
+
+        return redirect()->back()->with('success', 'Comment added successfully');
     }
 
     /**
