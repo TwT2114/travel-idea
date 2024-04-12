@@ -48,40 +48,53 @@
                 &q={{$idea->destination}}">
             </iframe>
         </div>
-        <h2>Comments</h2>
-        <form id="comment-form" action="{{ route('comment.store') }}" method="POST">
-            @csrf
-            <input type="hidden" name="idea_id" value="{{ $idea->id }}">
-            <textarea name="content" rows="3" cols="50"></textarea>
+        <h1>Comments</h1>
+        <form id="comment-form">
+            <input type="hidden" id="user-id" value="{{ Auth::id() }}">
+            <input type="text" id="comment-input" placeholder="Enter your comment">
             <button type="submit">Submit</button>
         </form>
-
-        <ul id="comment-list">
-            @foreach ($idea->comments as $comment)
-                <li>{{ $comment->content }}</li>
+        <ul id="comments">
+            @foreach($idea->comments as $comment)
+                <li>{{ $comment->user->name }}: {{ $comment->content }}</li>
             @endforeach
         </ul>
+    </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#comment-form').submit(function(e) {
-                    e.preventDefault();
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function fetchComments() {
+                $.get("/api/comments", function(response) {
+                    $("#comments").empty();
 
-                    var formData = $(this).serialize();
-
-                    $.ajax({
-                        url: $(this).attr('action'),
-                        type: 'POST',
-                        data: formData,
-                        success: function(response) {
-                            $('#comment-form textarea[name="content"]').val('');
-
-                            var newComment = '<li>' + response.content + '</li>';
-                            $('#comment-list').append(newComment);
-                        }
+                    response.forEach(function(comment) {
+                        var commentItem = $("<li>").text(comment.user_name + ": " + comment.content);
+                        $("#comments").append(commentItem); // Use append instead of prepend
                     });
                 });
+            }
+
+            fetchComments();
+            setInterval(fetchComments, 5000);
+
+            $("#comment-form").submit(function(e) {
+                e.preventDefault();
+
+                var userId = $("#user-id").val();
+                var ideaId = "{{ $idea->id }}";
+                var comment = $("#comment-input").val();
+
+                $.post("/api/comments", {
+                    user_id: userId,
+                    idea_id: ideaId,
+                    content: comment
+                }, function(response) {
+                    $("#comment-input").val("");
+                    fetchComments();
+                });
             });
-        </script>
+        });
+    </script>
+
 @endsection

@@ -12,10 +12,11 @@ Route::get('/', function () {
 
 Route::resource('idea', IdeaController::class)->middleware('auth');
 Route::resource('user', UserController::class)->middleware('auth');
-Route::resource('comment', CommentController::class)->only(['store']);
+Route::resource('comment', CommentController::class)->middleware('auth');
 
 Route::get('/search', [IdeaController::class, 'search'])->name('idea.search');
-Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
+Route::get('/idea/{id}', [IdeaController::class, 'show'])->name('idea.show');
+Route::post('/api/comments', [CommentController::class, 'store']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

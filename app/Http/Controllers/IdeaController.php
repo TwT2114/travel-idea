@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Idea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Comment;
+
 
 class IdeaController extends Controller
 {
@@ -83,7 +85,7 @@ class IdeaController extends Controller
     {
         // show the idea
         $idea = Idea::find($id);
-        $idea->load('comments');
+        $idea->load('comments.user');
         return view('idea.show', compact('idea'));
     }
 

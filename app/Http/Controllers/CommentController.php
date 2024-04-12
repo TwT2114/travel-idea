@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Idea;
 
 class CommentController extends Controller
 {
@@ -13,7 +15,8 @@ class CommentController extends Controller
 
     public function index()
     {
-        //
+        $comments = Comment::with('user')->latest()->get(['user_id', 'content']); // Eager load the associated user
+        return response()->json($comments);
     }
 
     /**
@@ -27,21 +30,21 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,$ideaId)
+    public function store(Request $request)
     {
         //validation
         $request->validate([
-            'idea_id' => 'required',
-            'comment' => 'required|max:255',
+            'content' => 'required|max:255',
+            'idea_id' => 'required|exists:ideas,id'
         ]);
         $comment = new Comment();
-        $comment->idea_id = $request->input('idea_id');
         $comment->content = $request->input('content');
+        $comment->user_id = auth()->user()->id;
+        $comment->idea_id = $request->input('idea_id');
         $comment->save();
-
-        return $comment;
-
+        return response()->json(['message' => 'Comment stored successfully.']);
     }
+
 
     /**
      * Display the specified resource.
