@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PlanController extends Controller
 {
@@ -13,6 +14,9 @@ class PlanController extends Controller
     public function index()
     {
         //
+        $plans = Plan::all();
+        return view('plan.index', compact('plans'));
+
     }
 
     /**
@@ -21,6 +25,8 @@ class PlanController extends Controller
     public function create()
     {
         //
+        $plan = new Plan();
+        return view('plan.create', compact('plan'));
     }
 
     /**
@@ -28,7 +34,27 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Store the new plan into database
+        // 1. validate the inputted data
+        $request->validate([
+            'title' => 'required',
+        ]);
+
+        // 2. create a new idea model
+        $plan = new Plan([
+            'user_id' => Auth::id(),
+            'user_name' => Auth::user()->name,
+            'title' => $request->get('title'),
+        ]);
+
+        // 3. save the data into database
+        $plan->save();
+
+        // 4. redirect to the plan index page
+        return redirect()->route('plan.index')->with('success', 'Plan created successfully.');
+
+
+
     }
 
     /**
