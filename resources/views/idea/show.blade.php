@@ -32,6 +32,7 @@
 
 @section('content')
 
+    <!-- idea详情页 -->
     {{--    <div id="map" style="width: 80%; height: 400px;"></div>--}}
     <div style="margin: auto; width: auto">
         <div>
