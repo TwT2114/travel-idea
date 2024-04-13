@@ -18,8 +18,7 @@ class CommentController extends Controller
     {
         $idea = Idea::find($id);
         $comments = $idea->comments;
-        $authorName = Idea::where('user_id', $idea->user_id)->value('user_name');
-        return view('idea.show', compact('idea', 'comments', 'authorName'));
+        return view('idea.show', compact('idea', 'comments'));
 
     }
 
@@ -47,6 +46,10 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->user_id = Auth::id();
         $comment->idea_id = $idea->id;
+
+        //获取用户名
+        $user = User::find(Auth::id());
+        $comment->user_name = $user->name;
         $comment->content = $request->get('content');
         $comment->save();
         return redirect()->route('idea.show', $id);
