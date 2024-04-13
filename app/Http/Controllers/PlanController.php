@@ -130,39 +130,39 @@ class PlanController extends Controller
     }
 
 
-/**
- * Remove idea from plan
- */
-public
-function removeIdea(string $planId, string $ideaId)
-{
+    /**
+     * Remove idea from plan
+     */
+    public
+    function removeIdea(string $planId, string $ideaId)
+    {
 
-}
+    }
 
-/**
- * Remove all idea from plan
- */
-public
-function removeAllIdeas(string $planId)
-{
+    /**
+     * Remove all idea from plan
+     */
+    public
+    function removeAllIdeas(string $planId)
+    {
 
-}
+    }
 
-/**
- * Update the specified resource in storage.
- */
-public
-function update(Request $request, Plan $plan)
-{
-    //
-}
+    /**
+     * Update the specified resource in storage.
+     */
+    public
+    function update(Request $request, Plan $plan)
+    {
+        //
+    }
 
-/**
- * Remove the specified resource from storage.
- */
-public
-function destroy(Plan $plan)
-{
-    //
-}
+    /**
+     * Remove the specified resource from storage.
+     */
+    public
+    function destroy(Plan $plan)
+    {
+        //
+    }
 }

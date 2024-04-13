@@ -34,21 +34,22 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,string $id)
+    public function store(Request $request)
     {
-        $idea = Idea::find($id);
         //validation
         $request->validate([
             'content' => 'required|max:255',
         ]);
         //创建评论
+        $id = $request->get('idea_id');
+        $idea = Idea::find($id);
+
         $comment = new Comment();
         $comment->user_id = Auth::id();
         $comment->idea_id = $idea->id;
-        $comment->content = $request->input('content');
+        $comment->content = $request->get('content');
         $comment->save();
-        $authorName = Idea::where('user_id', auth()->user()->id)->value('user_name');
-        return redirect()->route('ideas.show', $id)->with('success', 'Comment submitted successfully')->with('authorName', $authorName);
+        return redirect()->route('idea.show', $id);
     }
 
     /**

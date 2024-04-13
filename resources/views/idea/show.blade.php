@@ -72,32 +72,32 @@
 
         </div>
 
-        <div>
-            <iframe
-                title="map"
-                width="80%"
-                height="450"
-                style="border:0"
-                loading="lazy"
-                allowfullscreen
-                referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}
-                &q={{$idea->destination}}">
-            </iframe>
-        </div>
+        {{--        <div>--}}
+        {{--            <iframe--}}
+        {{--                title="map"--}}
+        {{--                width="80%"--}}
+        {{--                height="450"--}}
+        {{--                style="border:0"--}}
+        {{--                loading="lazy"--}}
+        {{--                allowfullscreen--}}
+        {{--                referrerpolicy="no-referrer-when-downgrade"--}}
+        {{--                src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}--}}
+        {{--                &q={{$idea->destination}}">--}}
+        {{--            </iframe>--}}
+        {{--        </div>--}}
         <!-- 用户提交评论模块 -->
-        @auth
-            <form id="comment-form" method="post" action="{{ route('comment.store',$idea->id) }}">
-                @csrf
-                <div class="form-group">
-                    <label for="content">My Comment</label>
-                    <textarea class="form-control" id="content" name="content"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">submit</button>
-            </form>
-        @else
-            <p>please login!</p>
-        @endauth
+        <form method="post" action="{{ route('comment.store') }}">
+            @csrf
+            {{ csrf_field() }}
+            <div class="form-group">
+                <label for="content">My Comment</label>
+                <input id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
+                <input id="content" name="content" type="text">
+                {{--                    <textarea class="form-control" id="content" name="content"></textarea>--}}
+            </div>
+            <button type="submit" class="btn btn-primary">submit</button>
+        </form>
+
         <!-- 评论区 -->
         <div class="comments-section">
             <h3>Comments</h3>
@@ -115,10 +115,10 @@
 
     <script>
         // 使用 jQuery 发起 AJAX 请求，提交评论并获取最新评论列表
-        $('#commentForm').submit(function(e) {
+        $('#commentForm').submit(function (e) {
             e.preventDefault();
             var formData = $(this).serializeArray();
-            $.post($(this).attr('action'), formData, function(response) {
+            $.post($(this).attr('action'), formData, function (response) {
                 // 更新评论列表
                 var commentList = $('#commentList');
                 var newComment = '<li><strong>' + response.user_name + '</strong><p>' + response.content + '</p><p>' + response.created_at + '</p></li>';
