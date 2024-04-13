@@ -63,9 +63,11 @@ class PlanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Plan $plan)
+    public function show(string $id)
     {
         //
+        $plan = Plan::find($id);
+        return view('plan.show', compact('plan'));
     }
 
     /**
