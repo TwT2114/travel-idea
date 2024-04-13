@@ -112,6 +112,13 @@ class PlanController extends Controller
     {
 
     }
+    /**
+     * Remove all idea from plan
+     */
+    public function removeAllIdeas(string $planId)
+    {
+
+    }
 
     /**
      * Update the specified resource in storage.

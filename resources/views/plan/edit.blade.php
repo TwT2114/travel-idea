@@ -28,6 +28,11 @@
                 @csrf
                 <table class="table table-striped">
                     <caption>Edit Plan</caption>
+                    <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                    </thead>
                     <tbody>
                     <tr>
                         <td><label for="title">Title</label></td>
@@ -48,66 +53,78 @@
         </div>
         <div>
             <h2>Added Ideas</h2><br>
-            <table>
-                <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Title</th>
-                    <th>Destination</th>
-                    <th>Tags</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Remove</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($planIdeas as $key => $planIdea)
-                    <tr>
-                        <td>{{ $planIdea->idea->title }}</td>
-                        <td><a href="{{route('user.show',$planIdea->user_id)}}"> {{$planIdea->user_name}}</a></td>
-                        <td>{{ $planIdea->title }}</td>
-                        <td>{{ $planIdea->destination }}</td>
-                        <td>{{ $planIdea->tags }}</td>
-                        <td>{{ $planIdea->start_date }}</td>
-                        <td>{{ $planIdea->end_date }}</td>
+            @if($planIdeas->isNotEmpty())
+                {{--<a href="{{route('plan.removeAllIdeas',$plan->id)}}">Remove All</a>--}}
 
-                        <td><a href="{{route('plan.removeIdea',[$plan->id, $planIdea->id])}}">Remove</a></td>
+                <table>
+                    <caption>Added Ideas</caption>
+                    <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Title</th>
+                        <th>Destination</th>
+                        <th>Tags</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Remove</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($planIdeas as $key => $planIdea)
+                        <tr>
+                            <td>{{ $planIdea->idea->title }}</td>
+                            <td><a href="{{route('user.show',$planIdea->user_id)}}"> {{$planIdea->user_name}}</a></td>
+                            <td>{{ $planIdea->title }}</td>
+                            <td>{{ $planIdea->destination }}</td>
+                            <td>{{ $planIdea->tags }}</td>
+                            <td>{{ $planIdea->start_date }}</td>
+                            <td>{{ $planIdea->end_date }}</td>
+                            <td><a href="{{route('plan.removeIdea',[$plan->id, $planIdea->id])}}">Remove</a></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p>No ideas added</p>
+            @endif
         </div>
         <div>
-            <h2>Ideas to add</h2>
-            <table>
-                <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Title</th>
-                    <th>Destination</th>
-                    <th>Tags</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-
-                    <th>Add</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                @foreach($ideas as $key => $idea)
+            @if($ideas->isNotEmpty())
+                <h2>Ideas to add</h2>
+                <table>
+                    <caption>Ideas</caption>
+                    <thead>
                     <tr>
-                        <td><a href="{{route('user.show',$idea->user_id)}}"> {{$idea->user_name}}</a></td>
-                        <td>{{ $idea->title }}</td>
-                        <td>{{ $idea->destination }}</td>
-                        <td>{{ $idea->tags }}</td>
-                        <td>{{ $idea->start_date }}</td>
-                        <td>{{ $idea->end_date }}</td>
+                        <th>User</th>
+                        <th>Title</th>
+                        <th>Destination</th>
+                        <th>Tags</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
 
-                        <td><a href="{{route('plan.addIdea',$idea->id)}}">Add</a></td>
+                        <th>Add</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+
+                    @foreach($ideas as $key => $idea)
+                        <tr>
+                            <td><a href="{{route('user.show',$idea->user_id)}}"> {{$idea->user_name}}</a></td>
+                            <td>{{ $idea->title }}</td>
+                            <td>{{ $idea->destination }}</td>
+                            <td>{{ $idea->tags }}</td>
+                            <td>{{ $idea->start_date }}</td>
+                            <td>{{ $idea->end_date }}</td>
+
+                            <td><a href="{{route('plan.addIdea',[$plan->id, $idea->id])}}">Add</a></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p>No ideas</p>
+            @endif
+
         </div>
 
     </div>
