@@ -6,6 +6,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Idea;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -15,7 +16,7 @@ class CommentController extends Controller
 
     public function index(string $id)
     {
-        $idea = Idea::findOrFail($id);
+        $idea = Idea::find($id);
         $comments = $idea->comments;
         $authorName = Idea::where('user_id', $idea->user_id)->value('user_name');
         return view('idea.show', compact('idea', 'comments', 'authorName'));
@@ -35,19 +36,17 @@ class CommentController extends Controller
      */
     public function store(Request $request,string $id)
     {
-        $idea = Idea::findOrFail($id);
+        $idea = Idea::find($id);
         //validation
         $request->validate([
             'content' => 'required|max:255',
         ]);
         //创建评论
-        $newComment = new Comment();
-        $newComment->user_id = auth()->user()->id;
-        $newComment->idea_id = $request->input('idea_id'); // Using the idea_id from form input
-        $newComment->content = $request->input('content');
-        $newComment->save();
-
-
+        $comment = new Comment();
+        $comment->user_id = Auth::id();
+        $comment->idea_id = $idea->id;
+        $comment->content = $request->input('content');
+        $comment->save();
         $authorName = Idea::where('user_id', auth()->user()->id)->value('user_name');
         return redirect()->route('ideas.show', $id)->with('success', 'Comment submitted successfully')->with('authorName', $authorName);
     }
