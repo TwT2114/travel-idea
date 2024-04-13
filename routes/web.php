@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\PlanIdeaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -10,8 +12,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('idea', IdeaController::class)->middleware('auth');
 Route::resource('user', UserController::class)->middleware('auth');
+Route::resource('idea', IdeaController::class)->middleware('auth');
+Route::resource('plan', PlanController::class)->middleware('auth');
+Route::resource('plan_idea', PlanIdeaController::class)->middleware('auth');
+
 Route::resource('comment', CommentController::class)->only(['store']);
 
 Route::get('/search', [IdeaController::class, 'search'])->name('idea.search');
