@@ -87,7 +87,7 @@
         </div>
         <!-- 用户提交评论模块 -->
         @auth
-            <form method="post" action="{{ route('comment.store') }}">
+            <form id="comment-form" method="post" action="{{ route('comment.store',$idea->id) }}">
                 @csrf
                 <div class="form-group">
                     <label for="content">My Comment</label>

@@ -13,7 +13,7 @@ class CommentController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index(String $id)
+    public function index(string $id)
     {
         $idea = Idea::findOrFail($id);
         $comments = $idea->comments;
@@ -33,13 +33,12 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, String $id)
+    public function store(Request $request,string $id)
     {
         $idea = Idea::findOrFail($id);
         //validation
         $request->validate([
             'content' => 'required|max:255',
-            'idea_id' => 'required|exists:ideas,id'
         ]);
         //创建评论
         $newComment = new Comment();
