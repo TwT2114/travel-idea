@@ -67,7 +67,10 @@ class PlanController extends Controller
     {
         //
         $plan = Plan::find($id);
-        return view('plan.show', compact('plan'));
+        $planIdeas = Idea::whereIn('id', function (Builder $query) use ($id) {
+            $query->select('idea_id')->from('plan_ideas')->where('plan_id', $id);
+        })->get();
+        return view('plan.show', compact('plan', 'planIdeas'));
     }
 
     /**
@@ -102,8 +105,17 @@ class PlanController extends Controller
     /**
      * Add idea to plan
      */
-    public function addIdea(string $planId, string $ideaId)
+    public function addIdea(Request $request)
     {
+        // 1. validate the inputted data
+        $request->validate([
+            'plan_id' => 'required|exists:plans,id',
+            'idea_id' => 'required|exists:ideas,id',
+        ]);
+
+        // 2. get the id
+        $planId = $request->get('plan_id');
+        $ideaId = $request->get('idea_id');
 
         // check if the plan belongs to the current user
         if (Plan::where('user_id', Auth::id())->where('id', $planId)->exists()) {
@@ -134,16 +146,15 @@ class PlanController extends Controller
      * Remove idea from plan
      */
     public
-    function removeIdea(string $planId, string $ideaId)
+    function removeIdea(Request $request)
     {
-
+//        string $planId, string $ideaId
     }
 
     /**
      * Remove all idea from plan
      */
-    public
-    function removeAllIdeas(string $planId)
+    public function removeAllIdeas(string $planId)
     {
 
     }

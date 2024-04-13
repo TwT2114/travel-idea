@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PlanIdea extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'plan_id',
+        'idea_id',
+    ];
 }

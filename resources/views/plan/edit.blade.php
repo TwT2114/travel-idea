@@ -72,14 +72,24 @@
                     <tbody>
                     @foreach($planIdeas as $key => $planIdea)
                         <tr>
-                            <td>{{ $planIdea->idea->title }}</td>
                             <td><a href="{{route('user.show',$planIdea->user_id)}}"> {{$planIdea->user_name}}</a></td>
                             <td>{{ $planIdea->title }}</td>
                             <td>{{ $planIdea->destination }}</td>
                             <td>{{ $planIdea->tags }}</td>
                             <td>{{ $planIdea->start_date }}</td>
                             <td>{{ $planIdea->end_date }}</td>
-                            <td><a href="{{route('plan.removeIdea',[$plan->id, $planIdea->id])}}">Remove</a></td>
+                            <td>
+                                <form method="post" action="{{route('plan.removeIdea')}}">
+                                    {{ csrf_field() }}
+                                    @csrf
+                                    <input hidden="hidden" type="text" name="planId" value="{{$plan->id}}">
+                                    <input hidden="hidden" type="text" name="planIdeaId" value="{{ $planIdea->id }}">
+
+                                    <button type="submit">Remove</button>
+
+                                </form>
+                                {{--<a href="{{route('plan.removeIdea',[$plan->id, $planIdea->id])}}">Remove</a>--}}
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -116,7 +126,18 @@
                             <td>{{ $idea->start_date }}</td>
                             <td>{{ $idea->end_date }}</td>
 
-                            <td><a href="{{route('plan.addIdea',[$plan->id, $idea->id])}}">Add</a></td>
+                            <td>
+                                <form method="post" action="{{route('plan.addIdea')}}">
+                                    {{ csrf_field() }}
+                                    @csrf
+
+                                    <input hidden="hidden" type="text" name="plan_id" value="{{ $plan->id}}">
+                                    <input hidden="hidden" type="text" name="idea_id" value="{{ $idea->id }}">
+
+                                    <button type="submit">Add</button>
+
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
