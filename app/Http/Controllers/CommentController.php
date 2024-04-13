@@ -6,6 +6,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Idea;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -13,10 +14,13 @@ class CommentController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
+    public function index(string $id)
     {
-        $comments = Comment::with('user')->latest()->get(['user_id', 'content']); // Eager load the associated user
-        return response()->json($comments);
+        $idea = Idea::find($id);
+        $comments = $idea->comments;
+        $authorName = Idea::where('user_id', $idea->user_id)->value('user_name');
+        return view('idea.show', compact('idea', 'comments', 'authorName'));
+
     }
 
     /**
@@ -35,16 +39,18 @@ class CommentController extends Controller
         //validation
         $request->validate([
             'content' => 'required|max:255',
-            'idea_id' => 'required|exists:ideas,id'
         ]);
-        $comment = new Comment();
-        $comment->content = $request->input('content');
-        $comment->user_id = auth()->user()->id;
-        $comment->idea_id = $request->input('idea_id');
-        $comment->save();
-        return response()->json(['message' => 'Comment stored successfully.']);
-    }
+        //创建评论
+        $id = $request->get('idea_id');
+        $idea = Idea::find($id);
 
+        $comment = new Comment();
+        $comment->user_id = Auth::id();
+        $comment->idea_id = $idea->id;
+        $comment->content = $request->get('content');
+        $comment->save();
+        return redirect()->route('idea.show', $id);
+    }
 
     /**
      * Display the specified resource.

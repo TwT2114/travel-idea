@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Idea;
 use App\Models\Plan;
+use App\Models\PlanIdea;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +40,7 @@ class PlanController extends Controller
         // Store the new plan into database
         // 1. validate the inputted data
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|max:255|min:3',
         ]);
 
         // 2. create a new idea model
@@ -50,33 +53,106 @@ class PlanController extends Controller
         // 3. save the data into database
         $plan->save();
 
+        $newPlan = Plan::where('user_id', Auth::id())->latest()->first();
+
         // 4. redirect to the plan index page
-        return redirect()->route('plan.index')->with('success', 'Plan created successfully.');
-
-
+        return redirect()->route('plan.edit', $newPlan->id)->with('success', 'Plan created successfully.');
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Plan $plan)
+    public function show(string $id)
     {
         //
+        $plan = Plan::find($id);
+        return view('plan.show', compact('plan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Plan $plan)
+    public function edit(string $id)
     {
-        //
+        // edit plan
+
+        $plan = Plan::find($id);
+
+        // check if the plan belongs to the current user
+        if ($plan->user_id != Auth::id()) {
+            return redirect()->route('plan.index')->with('error', 'You are not allowed to edit this plan.');
+        } else {
+
+            // get all the ideas related to the plan
+            $planIdeas = Idea::whereIn('id', function (Builder $query) use ($id) {
+                $query->select('idea_id')->from('plan_ideas')->where('plan_id', $id);
+            })->get();
+
+            // get all the ideas that are not related to the plan
+            $ideas = Idea::whereNotIn('id', function (Builder $query) use ($id) {
+                $query->select('idea_id')->from('plan_ideas')->where('plan_id', $id);
+            })->get();
+
+            return view('plan.edit', compact('plan', 'planIdeas', 'ideas'));
+        }
+
+    }
+
+    /**
+     * Add idea to plan
+     */
+    public function addIdea(string $planId, string $ideaId)
+    {
+
+        // check if the plan belongs to the current user
+        if (Plan::where('user_id', Auth::id())->where('id', $planId)->exists()) {
+            // check if the idea is already related to the plan
+            if (PlanIdea::where('plan_id', $planId)->where('idea_id', $ideaId)->exists()) {
+                return redirect()->route('plan.edit', $planId)->with('error', 'Idea is already related to the plan.');
+
+            } else {
+
+                // add idea to plan
+                $planIdea = new PlanIdea([
+                    'plan_id' => $planId,
+                    'idea_id' => $ideaId,
+                ]);
+
+                $planIdea->save();
+
+                return redirect()->route('plan.edit', $planId)->with('success', 'Idea added to plan successfully.');
+
+            }
+        } else {
+            return redirect()->route('plan.index')->with('error', 'You are not allowed to edit this plan.');
+        }
+    }
+
+
+    /**
+     * Remove idea from plan
+     */
+    public
+    function removeIdea(string $planId, string $ideaId)
+    {
+
+    }
+
+    /**
+     * Remove all idea from plan
+     */
+    public
+    function removeAllIdeas(string $planId)
+    {
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Plan $plan)
+    public
+    function update(Request $request, Plan $plan)
     {
         //
     }
@@ -84,7 +160,8 @@ class PlanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Plan $plan)
+    public
+    function destroy(Plan $plan)
     {
         //
     }

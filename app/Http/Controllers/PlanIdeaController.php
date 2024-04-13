@@ -7,12 +7,30 @@ use Illuminate\Http\Request;
 
 class PlanIdeaController extends Controller
 {
+
+    /**
+     * Get the planIdeas by planId.
+     */
+    public function getPlanIdeas(string $planId)
+    {
+        $planIdeas = PlanIdea::where('plan_id', $planId)->get();
+
+        return view('plan.edit', compact('planIdeas'));
+    }
+
+
+    public function getAllPlanIdeas()
+    {
+        return PlanIdea::all();
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
+
     }
 
     /**
