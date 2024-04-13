@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // 使用 jQuery 发起 AJAX 请求，提交评论并获取最新评论列表
         function submitComment() {
