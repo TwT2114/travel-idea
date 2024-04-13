@@ -54,8 +54,6 @@
         <div>
             <h2>Added Ideas</h2><br>
             @if($planIdeas->isNotEmpty())
-                {{--<a href="{{route('plan.removeAllIdeas',$plan->id)}}">Remove All</a>--}}
-
                 <table>
                     <caption>Added Ideas</caption>
                     <thead>
