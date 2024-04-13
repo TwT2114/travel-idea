@@ -18,12 +18,7 @@ Route::resource('comment', CommentController::class)->middleware('auth');
 Route::resource('plan', PlanController::class)->middleware('auth');
 Route::resource('plan_idea', PlanIdeaController::class)->middleware('auth');
 
-
 Route::get('/search', [IdeaController::class, 'search'])->name('idea.search');
-Route::post('/plan/addIdea', [PlanController::class, 'addIdea'])->name('plan.addIdea');
-Route::post('/plan/removeIdea', [PlanController::class, 'removeIdea'])->name('plan.removeIdea');
-Route::post('/plan/removeAllIdeas', [PlanController::class, 'removeAllIdeas'])->name('plan.removeAllIdeas');
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
