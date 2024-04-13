@@ -11,6 +11,10 @@
         <a href="{{ route('plan.create') }}">Create</a>
     </div>
     <div>
+        <h1>Edit Plan</h1>
+    </div>
+    <div>
+        <h2>Plan Details</h2>
         <div class="message">
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -27,7 +31,6 @@
                 @method('PATCH')
                 @csrf
                 <table class="table table-striped">
-                    <caption>Edit Plan</caption>
                     <thead>
                     <tr>
                         <th></th>
@@ -54,10 +57,8 @@
         <div>
             <h2>Added Ideas</h2><br>
             @if($planIdeas->isNotEmpty())
-                {{--<a href="{{route('plan.removeAllIdeas',$plan->id)}}">Remove All</a>--}}
-
                 <table>
-                    <caption>Added Ideas</caption>
+
                     <thead>
                     <tr>
                         <th>User</th>
@@ -102,7 +103,6 @@
             @if($ideas->isNotEmpty())
                 <h2>Ideas to add</h2>
                 <table>
-                    <caption>Ideas</caption>
                     <thead>
                     <tr>
                         <th>User</th>
