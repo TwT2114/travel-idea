@@ -4,18 +4,29 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // 使用 jQuery 发起 AJAX 请求，提交评论并获取最新评论列表
-        $('#commentForm').submit(function (e) {
-            e.preventDefault();
-            var formData = $(this).serializeArray();
-            $.post($(this).attr('action'), formData, function (response) {
-                // 更新评论列表
-                var commentList = $('#commentList');
-                var newComment = '<li><strong>' + response.user_name + '</strong><p>' + response.content + '</p><p>' + response.created_at + '</p></li>';
-                commentList.prepend(newComment);
+        function submitComment() {
+            var formData = $('#commentForm').serializeArray();
+            $.post($('#commentForm').attr('action'), formData, function (response) {
                 // 清空评论框
                 $('#content').val('');
             }, 'json');
-        });
+        }
+
+        // 获取最新评论列表并更新页面
+        function updateComments() {
+            $.get('{{ route('comment.index', ['idea_id' => $idea->id]) }}', function (response) {
+                var commentList = $('#commentList');
+                commentList.empty();
+
+                $.each(response, function (index, comment) {
+                    var newComment = '<li><strong>' + comment.user_name + '</strong><p>' + comment.content + '</p><p>' + comment.created_at + '</p></li>';
+                    commentList.append(newComment);
+                });
+            }, 'json');
+        }
+
+        // 每隔一定时间间隔调用 updateComments 函数
+        setInterval(updateComments, 5000); // 5000 毫秒表示 5 秒，你可以根据需要调整时间间隔
     </script>
 @endsection
 
@@ -66,24 +77,23 @@
         {{--                &q={{$idea->destination}}">--}}
         {{--            </iframe>--}}
         {{--        </div>--}}
+
         <!-- 用户提交评论模块 -->
-        <form method="post" action="{{ route('comment.store') }}">
+        <form method="post" action="{{ route('comment.store') }}" id="commentForm">
             @csrf
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="content">My Comment</label>
-                <input id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
+                <input id="idea_id" name="idea_id" type="hidden" value="{{ $idea->id }}">
                 <input id="content" name="content" type="text">
-                {{--                    <textarea class="form-control" id="content" name="content"></textarea>--}}
             </div>
             <button type="submit" class="btn btn-primary">submit</button>
         </form>
 
-        <!-- 评论区 -->
         <div class="comments-section">
             <h3>Comments</h3>
             <ul id="commentList">
-                @foreach ($idea->comments as $comment)
+                @foreach ($idea->comments->reverse() as $comment)
                     <li>
                         <strong>{{ $comment->user_name }}</strong>
                         <p>{{ $comment->content }}</p>
@@ -93,6 +103,4 @@
             </ul>
         </div>
     </div>
-
-
 @endsection
