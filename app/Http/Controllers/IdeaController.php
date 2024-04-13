@@ -96,10 +96,11 @@ class IdeaController extends Controller
     {
         // edit the idea
         $idea = Idea::find($id);
+        // check if the idea is created by the current user
         if ($idea->user_id == Auth::id()) {
             return view('idea.edit', compact('idea'));
         } else{
-            return redirect('/idea')->with('fail', 'Idea has been updated');
+            return redirect('/idea')->with('error', 'Idea has been updated');
         }
 
 
