@@ -105,36 +105,64 @@ class PlanController extends Controller
     public function addIdea(string $planId, string $ideaId)
     {
 
+        // check if the plan belongs to the current user
+        if (Plan::where('user_id', Auth::id())->where('id', $planId)->exists()) {
+            // check if the idea is already related to the plan
+            if (PlanIdea::where('plan_id', $planId)->where('idea_id', $ideaId)->exists()) {
+                return redirect()->route('plan.edit', $planId)->with('error', 'Idea is already related to the plan.');
+
+            } else {
+
+                // add idea to plan
+                $planIdea = new PlanIdea([
+                    'plan_id' => $planId,
+                    'idea_id' => $ideaId,
+                ]);
+
+                $planIdea->save();
+
+                return redirect()->route('plan.edit', $planId)->with('success', 'Idea added to plan successfully.');
+
+            }
+        } else {
+            return redirect()->route('plan.index')->with('error', 'You are not allowed to edit this plan.');
+        }
     }
 
-    /**
-     * Remove idea from plan
-     */
-    public function removeIdea(string $planId, string $ideaId)
-    {
 
-    }
-    /**
-     * Remove all idea from plan
-     */
-    public function removeAllIdeas(string $planId)
-    {
+/**
+ * Remove idea from plan
+ */
+public
+function removeIdea(string $planId, string $ideaId)
+{
 
-    }
+}
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Plan $plan)
-    {
-        //
-    }
+/**
+ * Remove all idea from plan
+ */
+public
+function removeAllIdeas(string $planId)
+{
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Plan $plan)
-    {
-        //
-    }
+}
+
+/**
+ * Update the specified resource in storage.
+ */
+public
+function update(Request $request, Plan $plan)
+{
+    //
+}
+
+/**
+ * Remove the specified resource from storage.
+ */
+public
+function destroy(Plan $plan)
+{
+    //
+}
 }
