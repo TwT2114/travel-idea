@@ -39,6 +39,7 @@
             <a href="{{route("idea.edit", $idea->id)}}">Edit</a>
         @endif
     </div>
+    {{--    <div id="map" style="width: 80%; height: 400px;"></div>--}}
     <div style="margin: auto; width: auto">
         <div>
             <h1>
@@ -60,6 +61,7 @@
             <div>
                 Tags: {{$idea->tags}}
             </div>
+
 
 
         </div>
@@ -84,7 +86,7 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="content">My Comment</label>
-                <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
+                <input id="idea_id" name="idea_id" type="hidden" value="{{ $idea->id }}">
                 <input id="content" name="content" type="text">
             </div>
             <button type="submit" class="btn btn-primary">submit</button>
