@@ -20,7 +20,7 @@
 
         <h1>{{ $plan->title }}</h1>
 
-        <p>{{ $plan->user_name }}</p>
+        <p>Post By <a href="{{ route('user.show',$plan->user_id) }}"> {{ $plan->user_name }}</a></p>
 
     </div>
 
@@ -28,7 +28,6 @@
         <h2>Added Ideas</h2><br>
         @if($planIdeas->isNotEmpty())
             <table>
-                <caption>Added Ideas</caption>
                 <thead>
                 <tr>
                     <th>User</th>

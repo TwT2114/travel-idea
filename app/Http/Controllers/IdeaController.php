@@ -73,7 +73,7 @@ class IdeaController extends Controller
 
         // 3. save the data into database
         $idea->save();
-        return redirect('/idea')->with('success', 'Idea has been added');
+        return redirect(route('idea.index'))->with('success', 'Idea has been added');
 
 
     }
@@ -99,7 +99,7 @@ class IdeaController extends Controller
         if ($idea->user_id == Auth::id()) {
             return view('idea.edit', compact('idea'));
         } else{
-            return redirect('/idea')->with('error', 'Idea has been updated');
+            return redirect(route('idea.index'))->with('error', 'Idea has been updated');
         }
 
 
@@ -134,7 +134,7 @@ class IdeaController extends Controller
         //4. save the book into database
         $idea->save();
 
-        return redirect('/idea')->with('success', 'Idea has been updated');
+        return redirect(route('idea.show', $idea->id))->with('success', 'Idea has been updated');
     }
 
     /**
@@ -146,9 +146,9 @@ class IdeaController extends Controller
         $idea = Idea::find($id);
         if ($idea) {
             $idea->delete();
-            return redirect('/idea')->with('success', 'Idea has been deleted');
+            return redirect(route('idea.index'))->with('success', 'Idea has been deleted');
         } else {
-            return redirect('/idea')->with('fail', 'Idea not exist');
+            return redirect(route('idea.index'))->with('fail', 'Idea not exist');
         }
     }
 }

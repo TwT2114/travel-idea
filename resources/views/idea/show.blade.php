@@ -31,8 +31,14 @@
 @endsection
 
 @section('content')
+    <div>
+        <a href="{{route('idea.index')}}">Back</a>
 
-    {{--    <div id="map" style="width: 80%; height: 400px;"></div>--}}
+        {{--only the idea poster can modify--}}
+        @if($idea->user_id == \Illuminate\Support\Facades\Auth::id())
+            <a href="{{route("idea.edit", $idea->id)}}">Edit</a>
+        @endif
+    </div>
     <div style="margin: auto; width: auto">
         <div>
             <h1>
@@ -55,12 +61,6 @@
                 Tags: {{$idea->tags}}
             </div>
 
-            {{--only the idea poster can modify--}}
-            @if($idea->user_id == \Illuminate\Support\Facades\Auth::id())
-                <div>
-                    <a href="{{route("idea.edit", $idea->id)}}">Edit</a>
-                </div>
-            @endif
 
         </div>
 
@@ -84,7 +84,7 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="content">My Comment</label>
-                <input id="idea_id" name="idea_id" type="hidden" value="{{ $idea->id }}">
+                <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
                 <input id="content" name="content" type="text">
             </div>
             <button type="submit" class="btn btn-primary">submit</button>

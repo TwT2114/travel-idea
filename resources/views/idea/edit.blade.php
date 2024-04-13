@@ -2,6 +2,10 @@
 
 @section('content')
     <div>
+        <a href="{{route('idea.show',$idea->id)}}">Back</a>
+        <a href="{{route('idea.destroy',$idea->id)}}">Delete</a>
+    </div>
+    <div>
         <div class="message">
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -18,7 +22,6 @@
                 @method('PATCH')
                 @csrf
                 <table class="table table-striped">
-                    <caption>Edit Idea</caption>
                     <tbody>
                     <tr>
                         <td><label for="title">Title</label></td>

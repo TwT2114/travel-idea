@@ -30,7 +30,7 @@
             <form method="post" action="{{ route('plan.update', $plan->id) }}">
                 @method('PATCH')
                 @csrf
-                <table class="table table-striped">
+                <table>
                     <thead>
                     <tr>
                         <th></th>
