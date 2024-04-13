@@ -86,7 +86,7 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="content">My Comment</label>
-                <input id="idea_id" name="idea_id" type="hidden" value="{{ $idea->id }}">
+                <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
                 <input id="content" name="content" type="text">
             </div>
             <button type="submit" class="btn btn-primary">submit</button>
