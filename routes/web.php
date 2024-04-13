@@ -14,13 +14,11 @@ Route::get('/', function () {
 
 Route::resource('user', UserController::class)->middleware('auth');
 Route::resource('idea', IdeaController::class)->middleware('auth');
+Route::resource('comment', CommentController::class)->middleware('auth');
 Route::resource('plan', PlanController::class)->middleware('auth');
 Route::resource('plan_idea', PlanIdeaController::class)->middleware('auth');
 
-Route::resource('comment', CommentController::class)->only(['store']);
-
 Route::get('/search', [IdeaController::class, 'search'])->name('idea.search');
-Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

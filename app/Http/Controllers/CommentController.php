@@ -13,10 +13,13 @@ class CommentController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
+    public function index(String $id)
     {
-        $comments = Comment::with('user')->latest()->get(['user_id', 'content']); // Eager load the associated user
-        return response()->json($comments);
+        $idea = Idea::findOrFail($id);
+        $comments = $idea->comments;
+        $authorName = Idea::where('user_id', $idea->user_id)->value('user_name');
+        return view('idea.show', compact('idea', 'comments', 'authorName'));
+
     }
 
     /**
@@ -30,21 +33,25 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, String $id)
     {
+        $idea = Idea::findOrFail($id);
         //validation
         $request->validate([
             'content' => 'required|max:255',
             'idea_id' => 'required|exists:ideas,id'
         ]);
-        $comment = new Comment();
-        $comment->content = $request->input('content');
-        $comment->user_id = auth()->user()->id;
-        $comment->idea_id = $request->input('idea_id');
-        $comment->save();
-        return response()->json(['message' => 'Comment stored successfully.']);
-    }
+        //创建评论
+        $newComment = new Comment();
+        $newComment->user_id = auth()->user()->id;
+        $newComment->idea_id = $request->input('idea_id'); // Using the idea_id from form input
+        $newComment->content = $request->input('content');
+        $newComment->save();
 
+
+        $authorName = Idea::where('user_id', auth()->user()->id)->value('user_name');
+        return redirect()->route('ideas.show', $id)->with('success', 'Comment submitted successfully')->with('authorName', $authorName);
+    }
 
     /**
      * Display the specified resource.
