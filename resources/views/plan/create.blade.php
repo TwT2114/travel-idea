@@ -22,8 +22,7 @@
 
     <form method="post" action="{{ route('plan.store') }}">
         {{ csrf_field() }}
-        <table class="table table-striped"
-               style="font-size: medium;text-align: center;vertical-align: center;width: 70%; margin: auto;">
+        <table class="table table-striped">
             <tbody>
             <tr>
                 <td><label for="title">Title</label></td>

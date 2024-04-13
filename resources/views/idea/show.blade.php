@@ -3,37 +3,18 @@
 @section('script')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-            function fetchComments() {
-                $.get("/api/comments", function (response) {
-                    $("#comments").empty();
-
-                    response.forEach(function (comment) {
-                        var commentItem = $("<li>").text(comment.user_name + ": " + comment.content);
-                        $("#comments").append(commentItem); // Use append instead of prepend
-                    });
-                });
-            }
-
-            fetchComments();
-            setInterval(fetchComments, 5000);
-
-            $("#comment-form").submit(function (e) {
-                e.preventDefault();
-
-                var userId = $("#user-id").val();
-                var ideaId = "{{ $idea->id }}";
-                var comment = $("#comment-input").val();
-
-                $.post("/api/comments", {
-                    user_id: userId,
-                    idea_id: ideaId,
-                    content: comment
-                }, function (response) {
-                    $("#comment-input").val("");
-                    fetchComments();
-                });
-            });
+        // 使用 jQuery 发起 AJAX 请求，提交评论并获取最新评论列表
+        $('#commentForm').submit(function (e) {
+            e.preventDefault();
+            var formData = $(this).serializeArray();
+            $.post($(this).attr('action'), formData, function (response) {
+                // 更新评论列表
+                var commentList = $('#commentList');
+                var newComment = '<li><strong>' + response.user_name + '</strong><p>' + response.content + '</p><p>' + response.created_at + '</p></li>';
+                commentList.prepend(newComment);
+                // 清空评论框
+                $('#content').val('');
+            }, 'json');
         });
     </script>
 @endsection
@@ -113,19 +94,5 @@
         </div>
     </div>
 
-    <script>
-        // 使用 jQuery 发起 AJAX 请求，提交评论并获取最新评论列表
-        $('#commentForm').submit(function (e) {
-            e.preventDefault();
-            var formData = $(this).serializeArray();
-            $.post($(this).attr('action'), formData, function (response) {
-                // 更新评论列表
-                var commentList = $('#commentList');
-                var newComment = '<li><strong>' + response.user_name + '</strong><p>' + response.content + '</p><p>' + response.created_at + '</p></li>';
-                commentList.prepend(newComment);
-                // 清空评论框
-                $('#content').val('');
-            }, 'json');
-        });
-    </script>
+
 @endsection
