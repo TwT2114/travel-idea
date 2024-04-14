@@ -147,9 +147,14 @@ class PlanController extends Controller
      */
     public function removeAllIdeas(string $planId)
     {
-        // TODO
+
         // delete all the related ideas in plan_ideas table
-        PlanIdea::where('plan_id', $planId)->delete();
+        $plan = Plan::find($planId);
+
+        if ($plan->user_id == Auth::id()) {
+            PlanIdea::where('plan_id', $planId)->delete();
+            return redirect()->route('plan.edit', $planId)->with('success', 'All ideas removed from plan successfully');
+        }
     }
 
     /**

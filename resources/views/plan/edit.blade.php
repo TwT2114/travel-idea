@@ -68,7 +68,12 @@
                             <th>Tags</th>
                             <th>Start Date</th>
                             <th>End Date</th>
-                            <th>Remove</th>
+                            <th><form method="post" action="{{ route('plan.removeAllIdeas', $plan->id ) }}">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit">Remove All</button>
+                                </form>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
