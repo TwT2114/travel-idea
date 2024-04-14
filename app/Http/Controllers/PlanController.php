@@ -143,16 +143,6 @@ class PlanController extends Controller
 
 
     /**
-     * Remove idea from plan
-     */
-    public
-    function removeIdea(Request $request)
-    {
-        // TODO
-//        string $planId, string $ideaId
-    }
-
-    /**
      * Remove all idea from plan
      */
     public function removeAllIdeas(string $planId)
@@ -165,32 +155,33 @@ class PlanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public
-    function update(Request $request, string $id)
+    public function update(Request $request, string $id)
     {
-        // TODO bug not check
-        //1. validate the inputted data
+        // validate the inputted data
         $request->validate([
             'title' => 'required|max:255|min:3',
         ]);
         // 2. get the data by id
         $plan = Plan::find($id);
 
-        // 3. update the data
-        $plan->title = $request->get('title');
+        // check user
+        if ($plan->user_id == Auth::id()) {
+            // update the data
+            $plan->title = $request->get('title');
+        }
 
-        // 4. save the data
+
+        // save the data
         $plan->save();
+        return redirect(route('plan.show', $plan->id))->with('success', 'Plan updated successfully.');
 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public
-    function destroy(string $id)
+    public function destroy(string $id)
     {
-        // TODO bug not check
         // get Plan by id
         $plan = Plan::find($id);
 
