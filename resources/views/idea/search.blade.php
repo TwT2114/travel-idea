@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="search-box">
-        <form action="{{ route('idea.search') }}" method="GET">
-            <input type="text" name="searchTerm" placeholder="Search for travel ideas...">
-            <button type="submit">Search</button>
-        </form>
-    </div>
     <h1>Search Results</h1>
     @if(session()->has('success'))
         <div class="alert alert-success">

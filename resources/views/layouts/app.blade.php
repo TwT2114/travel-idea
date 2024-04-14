@@ -39,11 +39,12 @@
             </div>
 
             <div class="nav-item">
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <form class="form-inline" action="{{ route('idea.search') }}" method="GET" style="display: flex;">
+                    <input class="form-control mr-sm-2" type="text" name="searchTerm" placeholder="Search for destination or tags... " style="width: 250px;">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px;">Search</button>
                 </form>
             </div>
+            <div class="nav-item">
 
 {{--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"--}}
 {{--                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"--}}
