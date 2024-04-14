@@ -17,9 +17,15 @@ class CommentController extends Controller
     public function index(string $id)
     {
         $idea = Idea::find($id);
-        $comments = $idea->comments;
-        return view('idea.show', compact('idea', 'comments'));
+        $comments = $idea->comments->map(function ($comment) {
+            return [
+                'user_name' => $comment->user_name,
+                'content' => $comment->content,
+                'created_at' => $comment->created_at,
+            ];
+        });
 
+        return response()->json($comments);
     }
 
     /**
@@ -52,6 +58,8 @@ class CommentController extends Controller
         $comment->user_name = $user->name;
         $comment->content = $request->get('content');
         $comment->save();
+
+        //评论成功后跳转到该idea
         return redirect()->route('idea.show', $id);
     }
 

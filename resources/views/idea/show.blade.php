@@ -8,20 +8,22 @@
             $.post($('#commentForm').attr('action'), formData, function (response) {
                 // 清空评论框
                 $('#content').val('');
+                updateComments();
             }, 'json');
         }
 
         // 获取最新评论列表并更新页面
+        // 把原有的 updateComments 函数调整为以下代码
         function updateComments() {
-            $.get('{{ route('comment.index', ['idea_id' => $idea->id]) }}', function (response) {
+            $.get('{{ route('comment.index', ['id' => $idea->id]) }}', function (response) {
                 var commentList = $('#commentList');
                 commentList.empty();
 
-                $.each(response, function (index, comment) {
+                response.forEach(function(comment) {
                     var newComment = '<li><strong>' + comment.user_name + '</strong><p>' + comment.content + '</p><p>' + comment.created_at + '</p></li>';
                     commentList.append(newComment);
                 });
-            }, 'json');
+            });
         }
 
         // 每隔一定时间间隔调用 updateComments 函数
