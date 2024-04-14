@@ -8,6 +8,7 @@
             $.post($('#commentForm').attr('action'), formData, function (response) {
                 // 清空评论框
                 $('#content').val('');
+                updateComments();
             }, 'json');
         }
 
@@ -17,11 +18,11 @@
                 var commentList = $('#commentList');
                 commentList.empty();
 
-                $.each(response, function (index, comment) {
+                response.forEach(function(comment) {
                     var newComment = '<li><strong>' + comment.user_name + '</strong><p>' + comment.content + '</p><p>' + comment.created_at + '</p></li>';
                     commentList.append(newComment);
                 });
-            }, 'json');
+            });
         }
 
         // 每隔一定时间间隔调用 updateComments 函数

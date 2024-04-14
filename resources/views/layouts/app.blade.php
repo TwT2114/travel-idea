@@ -34,11 +34,15 @@
     <header id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-{{--                <a class="navbar-brand" href="{{ url('/') }}">--}}
-{{--                    {{ config('app.name', 'Laravel') }}--}}
-{{--                </a>--}}
                 <div class="nav-item">
                     <img src="/css/images/旅游主题_地图.png" alt="Logo" width="100">
+                </div>
+
+                <div class="nav-item">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -47,66 +51,30 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-{{--                <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
-{{--                    <!-- Left Side Of Navbar -->--}}
-{{--                    <ul class="navbar-nav me-auto">--}}
-                        <div class="nav-item">
-                            <a href="#">
-                                <img src="/css/images/首页.png" alt="Home" width="55">
-                                <div class="nav-text">Home</div>
-                            </a>
-                        </div>
-                        <div class="nav-item">
-                            <a href="/idea">
-                                <img src="/css/images/发布信息.png" alt="Idea List" width="55">
-                                <div class="nav-text">Idea List</div>
-                            </a>
-                        </div>
-
-{{--                    </ul>--}}
-
-                    <!-- Right Side Of Navbar -->
-{{--                    <ul class="navbar-nav ms-auto">--}}
-                        <!-- Authentication Links -->
                         @guest
+
                             @if (Route::has('login'))
-{{--                                <div class="nav-item">--}}
-{{--                                    <img src="/css/images/登录.png" alt="Login" width="55">--}}
-{{--                                    <a class="nav-text" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
-{{--                                </div>--}}
-                                <div class="nav-item">
+                                <div class="nav-link">
                                     <a href="{{ route('login') }}">
-                                        <img src="/css/images/登录.png" alt="Login" width="55">
-                                        <div class="nav-text">{{ __('Login') }}</div>
+                                        <div class="nav-link">{{ __('Login') }}</div>
                                     </a>
                                 </div>
 
                     @endif
 
                             @if (Route::has('register'))
-{{--                                <div class="nav-item">--}}
-{{--                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
-{{--                                    <img src="/css/images/注册.png" alt="Register" width="55">--}}
-{{--                                </div>--}}
-                                <div class="nav-item">
+                                <div class="nav-link">
                                     <a href="{{ route('register') }}">
-                                        <img src="/css/images/注册.png" alt="Register" width="55">
-                                        <div class="nav-text">{{ __('Register') }}</div>
+                                        <div>{{ __('Register') }}</div>
                                     </a>
                                 </div>
                             @endif
                         @else
-                            <div class="nav-item">
-                                <a href="/idea/create">
-                                    <img src="/css/images/Add_idea.png" alt="New Idea" width="55">
-                                    <div class="nav-text">New Idea</div>
-                                </a>
-                            </div>
+
 
                             <div class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-text dropdown-toggle" href="#" role="button"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="/css/images/loggin_user.png" alt="Register" width="55">
                                     <div class="nav-text">{{ Auth::user()->name }}</div>
                                 </a>
 
@@ -123,15 +91,36 @@
                                 </div>
                             </div>
                         @endguest
-{{--                    </ul>--}}
-{{--                </div>--}}
             </div>
         </nav>
     </header>
 
-    <main class="container">
-        @yield('content')
-        @yield('script')
+    <main  class="container-fluid row">
+        <aside class="col-2 bg-light sidebar">
+            <div class="aside-item">
+                <a href="/idea">
+                    <div class="nav-text"><img src="/css/images/首页.png" alt="Idea List" >Idea List</div>
+                </a>
+            </div>
+
+            @guest
+                @if (Route::has('login'))
+                @endif
+                @if (Route::has('register'))
+                @endif
+            @else
+                <div class="nav-item">
+                    <a href="/idea/create">
+                        <img src="/css/images/Add_idea.png" alt="New Idea" width="55">
+                        <div class="nav-text">New Idea</div>
+                    </a>
+                </div>
+            @endguest
+        </aside>
+
+        <div  role="main" class="col-10">
+            @yield('content')
+        </div>
     </main>
 
     <footer>

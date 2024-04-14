@@ -14,12 +14,23 @@ class CommentController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index(string $id)
+    public function index(Request $request)
     {
-        $idea = Idea::find($id);
-        $comments = $idea->comments;
-        return view('idea.show', compact('idea', 'comments'));
+        $id = $request->get('idea_id');
+        // $idea = Idea::find($id);
 
+        $idea = Idea::with(['comments' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->find($id);
+
+        $comments = $idea->comments->map(function ($comment) {
+            return [
+                'user_name' => $comment->user_name,
+                'content' => $comment->content,
+                'created_at' => $comment->created_at,
+            ];
+        });
+        return response()->json($comments);
     }
 
     /**
@@ -52,6 +63,8 @@ class CommentController extends Controller
         $comment->user_name = $user->name;
         $comment->content = $request->get('content');
         $comment->save();
+
+        //评论成功后跳转到该idea
         return redirect()->route('idea.show', $id);
     }
 
