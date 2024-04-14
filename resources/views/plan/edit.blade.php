@@ -74,7 +74,8 @@
                         <tbody>
                         @foreach($planIdeas as $key => $planIdea)
                             <tr>
-                                <td><a href="{{route('user.show',$planIdea->user_id)}}"> {{$planIdea->user_name}}</a>
+                                <td>
+                                    <a href="{{ route('user.show',$planIdea->user_id) }}"> {{ $planIdea->user_name }}</a>
                                 </td>
                                 <td>{{ $planIdea->title }}</td>
                                 <td>{{ $planIdea->destination }}</td>
@@ -82,13 +83,10 @@
                                 <td>{{ $planIdea->start_date }}</td>
                                 <td>{{ $planIdea->end_date }}</td>
                                 <td>
-                                    <form method="post" action="{{route('plan.removeIdea')}}">
-                                        {{ csrf_field() }}
+                                    <form method="post"
+                                          action="{{route('plan_idea.destroy', $planIdea->id)}}">
+                                        @method('DELETE')
                                         @csrf
-                                        <input hidden="hidden" type="text" name="planId" value="{{$plan->id}}">
-                                        <input hidden="hidden" type="text" name="planIdeaId"
-                                               value="{{ $planIdea->id }}">
-
                                         <button type="submit">Remove</button>
 
                                     </form>

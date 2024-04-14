@@ -16,7 +16,7 @@
             <a href="{{ route('plan.edit', $plan->id) }}">Edit</a>
         @endif
     </div>
-    <div class="container">
+    <div>
 
         <h1>{{ $plan->title }}</h1>
 
