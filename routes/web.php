@@ -22,6 +22,14 @@ Route::get('/search', [IdeaController::class, 'search'])->name('idea.search');
 Route::post('/plan/addIdea', [PlanController::class, 'addIdea'])->name('plan.addIdea');
 Route::delete('/plan/removeAllIdeas/{id}', [PlanController::class, 'removeAllIdeas'])->name('plan.removeAllIdeas');
 
+Route::get('/user/{user}', 'App\Http\Controllers\UserController@show')->name('user.show');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+

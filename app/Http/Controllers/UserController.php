@@ -36,7 +36,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $ideas = $user->ideas; // Retrieve the user's created ideas
+        $plans = $user->plans; // Retrieve the user's created plans
+        return view('user.show', compact('user', 'ideas', 'plans')); // Pass the user, ideas, and plans to the user.show view
     }
 
     /**
