@@ -148,6 +148,7 @@ class PlanController extends Controller
     public
     function removeIdea(Request $request)
     {
+        // TODO
 //        string $planId, string $ideaId
     }
 
@@ -156,7 +157,7 @@ class PlanController extends Controller
      */
     public function removeAllIdeas(string $planId)
     {
-
+        // TODO
         // delete all the related ideas in plan_ideas table
         PlanIdea::where('plan_id', $planId)->delete();
     }
@@ -167,7 +168,7 @@ class PlanController extends Controller
     public
     function update(Request $request, string $id)
     {
-        //
+        // TODO bug not check
         //1. validate the inputted data
         $request->validate([
             'title' => 'required|max:255|min:3',
@@ -189,7 +190,7 @@ class PlanController extends Controller
     public
     function destroy(string $id)
     {
-        //
+        // TODO bug not check
         // get Plan by id
         $plan = Plan::find($id);
 
