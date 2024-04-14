@@ -25,7 +25,7 @@ class IdeaController extends Controller
     {
         $searchTerm = $request->input('searchTerm');
 
-        $ideas = Idea::where(function($query) use ($searchTerm) {
+        $ideas = Idea::where(function ($query) use ($searchTerm) {
             $query->where('destination', 'like', '%' . $searchTerm . '%')
                 ->orWhere('tags', 'like', '%' . $searchTerm . '%');
         })
@@ -98,7 +98,7 @@ class IdeaController extends Controller
         // check if the idea is created by the current user
         if ($idea->user_id == Auth::id()) {
             return view('idea.edit', compact('idea'));
-        } else{
+        } else {
             return redirect(route('idea.index'))->with('error', 'Idea has been updated');
         }
 
@@ -142,11 +142,18 @@ class IdeaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // get Idea by id
         $idea = Idea::find($id);
+
+        // check if the idea exist
         if ($idea) {
-            $idea->delete();
-            return redirect(route('idea.index'))->with('success', 'Idea has been deleted');
+            // check Authorization
+            if ($idea->user_id == Auth::id()) {
+                $idea->delete();
+                return redirect(route('idea.index'))->with('success', 'Idea has been deleted');
+            } else {
+                return redirect(route('idea.index'))->with('fail', 'No Authorization to delete this idea');
+            }
         } else {
             return redirect(route('idea.index'))->with('fail', 'Idea not exist');
         }

@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Comment;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Idea extends Model
 {
     use HasFactory;
+
+    use SoftDeletes;
 
     public function comments()
     {
