@@ -13,9 +13,8 @@
         }
 
         // 获取最新评论列表并更新页面
-        // 把原有的 updateComments 函数调整为以下代码
         function updateComments() {
-            $.get('{{ route('comment.index', ['id' => $idea->id]) }}', function (response) {
+            $.get('{{ route('comment.index', ['idea_id' => $idea->id]) }}', function (response) {
                 var commentList = $('#commentList');
                 commentList.empty();
 

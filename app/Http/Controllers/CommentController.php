@@ -14,9 +14,15 @@ class CommentController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index(string $id)
+    public function index(Request $request)
     {
-        $idea = Idea::find($id);
+        $id = $request->get('idea_id');
+        // $idea = Idea::find($id);
+
+        $idea = Idea::with(['comments' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->find($id);
+
         $comments = $idea->comments->map(function ($comment) {
             return [
                 'user_name' => $comment->user_name,
@@ -24,7 +30,6 @@ class CommentController extends Controller
                 'created_at' => $comment->created_at,
             ];
         });
-
         return response()->json($comments);
     }
 
