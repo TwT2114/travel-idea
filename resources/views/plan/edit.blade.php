@@ -75,7 +75,9 @@
                         @foreach($planIdeas as $key => $planIdea)
                             <tr>
                                 <td>
-                                    <a href="{{ route('user.show',$planIdea->user_id) }}"> {{ $planIdea->user_name }}</a>
+                                    <a href="{{ route('user.show',$planIdea->user_id) }}">
+                                        {{ $planIdea->user_name }}
+                                    </a>
                                 </td>
                                 <td>{{ $planIdea->title }}</td>
                                 <td>{{ $planIdea->destination }}</td>
