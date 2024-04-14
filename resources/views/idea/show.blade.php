@@ -78,9 +78,9 @@
             </iframe>
         </div>
         <div>
-            <p>目的地：{{$idea->destination}}</p>
-            <p>纬度：{{$latitude}}</p>
-            <p>经度：{{$longitude}}</p>
+            <p>Destination：{{$idea->destination}}</p>
+            <p>Latitude：{{$latitude}}</p>
+            <p>Longitude：{{$longitude}}</p>
         </div>
 
         <!-- 热门景点api -->
