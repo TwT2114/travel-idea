@@ -157,40 +157,58 @@ class PlanController extends Controller
     public function removeAllIdeas(string $planId)
     {
 
+        // delete all the related ideas in plan_ideas table
+        PlanIdea::where('plan_id', $planId)->delete();
     }
 
     /**
      * Update the specified resource in storage.
      */
     public
-    function update(Request $request, Plan $plan)
+    function update(Request $request, string $id)
     {
         //
+        //1. validate the inputted data
+        $request->validate([
+            'title' => 'required|max:255|min:3',
+        ]);
+        // 2. get the data by id
+        $plan = Plan::find($id);
+
+        // 3. update the data
+        $plan->title = $request->get('title');
+
+        // 4. save the data
+        $plan->save();
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public
-    function destroy(Plan $plan)
+    function destroy(string $id)
     {
         //
-        // get Idea by id
-        $id = Plan::find($plan->id);
+        // get Plan by id
+        $plan = Plan::find($id);
 
-        $idea = Idea::find($id);
-
-        // check if the idea exist
-        if ($idea) {
+        // check if the plan exist
+        if ($plan) {
             // check Authorization
-            if ($idea->user_id == Auth::id()) {
-                $idea->delete();
-                return redirect(route('idea.index'))->with('success', 'Idea has been deleted');
+            if ($plan->user_id == Auth::id()) {
+                $plan->delete();
+
+                // delete all the related ideas in plan_ideas table
+                PlanIdea::where('plan_id', $id)->delete();
+
+                // redirect to the plan index page
+                return redirect(route('plan.index'))->with('success', 'Plan has been deleted');
             } else {
-                return redirect(route('idea.index'))->with('fail', 'No Authorization to delete this idea');
+                return redirect(route('plan.show', $plan->id))->with('fail', 'No Authorization to delete this plan');
             }
         } else {
-            return redirect(route('idea.index'))->with('fail', 'Idea not exist');
+            return redirect(route('plan.index'))->with('fail', 'Idea not exist');
         }
     }
 }
