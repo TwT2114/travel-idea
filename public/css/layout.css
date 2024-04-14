@@ -1,14 +1,14 @@
-
-.nav-container {
-    display: flex; /* 启用Flexbox布局 */
-    justify-content: center; /* 水平居中对齐所有项目 */
-    align-items: center; /* 垂直居中 */
-    background-color: #718096;
+nav {
+    padding: 0;
+    height: 15vh; /* 高度为视口的10% */
+    /*display: flex; !* 启用Flexbox布局 *!*/
+    /*justify-content: center; !* 水平居中对齐所有项目 *!*/
+    /*align-items: center; !* 垂直居中 *!*/
+    /*background-color: #fffa90*/
 }
+
 .nav-item {
     display: inline-block; /* 确保横向排列 */
-    text-align: center; /* 图标和文本居中对齐 */
-    align-items: center; /* 垂直居中对齐图标和文本 */
     margin: 20px 50px; /* 两侧外间距 */
     align-self: flex-start; /* 调整此项以改变nav-item的垂直对齐而不影响logo */
 }
@@ -21,8 +21,69 @@
 .nav-text {
     color: #000;
     font-weight: bold;
-    text-shadow: 1px 1px 3px #808080; /* 为文字添加阴影以提高对比度，增加可读性 */
     font-family: 'Nunito', sans-serif; /* 保持整站字体风格统一 */
     margin-top: 5px; /* 适当增加与图标的间距 */
+    margin-right: 10px; /* 右侧留出一定间距 */
+    display: flex;
+    justify-content: space-between; /* 将内容靠右对齐并留有间距 */
 }
+
+.container{
+    margin: 0 auto; /* 居中显示 */
+    padding-top: 40px;
+    padding-left: 30px;
+    padding-right: 20px;
+}
+
+aside {
+    background-color: white; /* 设置背景色为白色 */
+}
+
+.aside-item {
+    margin-top: 40px; /* 增加上边距 */
+    margin-bottom: 20px;
+    margin-left: 10px; /* 设置距禽左边5像素 */
+    display: flex; /* 使用弹性布局使图片和文本在同一行 */
+    align-items: center; /* 垂直居中 */
+}
+
+.aside-item:hover {
+    background-color: #f0f0f0; /* 淡灰色背景 */
+}
+
+.aside-item img {
+    width: 23px; /* 设置图片宽度为20像素 */
+    margin-right: 5px; /* 图片和文本之间的间距 */
+}
+
+.aside-item a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.aside-text {
+    font-size: 18px; /* 设置字体大小为20像素 */
+    text-align: left; /* 文本左对齐 */
+    font-weight: bold;
+}
+
+
+a:hover {
+    text-decoration: none; /* 悬停时依然不显示下划线 */
+    color: inherit; /* 悬停时颜色不变化 */
+}
+
+
+main {
+    margin-top: auto; /* 将内容推到nav元素下方 */
+    padding: 0;
+    min-height: 85vh; /* 最小高度为视口的80% */
+}
+
+
+
+
+
 

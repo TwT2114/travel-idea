@@ -33,7 +33,7 @@
 <body>
 <header id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class="container">
+        <div>
             <div class="nav-item">
                 <img src="/css/images/旅游主题_地图.png" alt="Logo" width="100">
             </div>
@@ -45,11 +45,11 @@
                 </form>
             </div>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+{{--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"--}}
+{{--                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"--}}
+{{--                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">--}}
+{{--                <span class="navbar-toggler-icon"></span>--}}
+{{--            </button>--}}
 
             @guest
 
@@ -98,7 +98,7 @@
     <aside class="col-2 bg-light sidebar">
         <div class="aside-item">
             <a href="/idea">
-                <div class="nav-text"><img src="/css/images/首页.png" alt="Idea List">Idea List</div>
+                <div class="aside-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
             </a>
         </div>
 
@@ -108,16 +108,22 @@
             @if (Route::has('register'))
             @endif
         @else
-            <div class="nav-item">
+            <div class="aside-item">
                 <a href="/idea/create">
-                    <img src="/css/images/Add_idea.png" alt="New Idea" width="55">
-                    <div class="nav-text">New Idea</div>
+                    <img src="/css/images/new.png" alt="New Idea">
+                    <div class="aside-text">New Idea</div>
+                </a>
+            </div>
+            <div class="aside-item">
+                <a href="/user">
+                    <img src="/css/images/user.png" alt="User">
+                    <div class="aside-text">User</div>
                 </a>
             </div>
         @endguest
     </aside>
 
-    <div role="main" class="col-10">
+    <div role="main" class="col-10 container">
         @yield('content')
     </div>
 </main>
