@@ -65,20 +65,29 @@
 
 
         </div>
+        <div>
+            <iframe
+                title="map"
+                width="80%"
+                height="450"
+                style="border:0"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}&q={{$idea->destination}}">
+            </iframe>
+        </div>
+        <div>
+            <p>目的地：{{$idea->destination}}</p>
+            <p>纬度：{{$latitude}}</p>
+            <p>经度：{{$longitude}}</p>
+        </div>
 
-        {{--        <div>--}}
-        {{--            <iframe--}}
-        {{--                title="map"--}}
-        {{--                width="80%"--}}
-        {{--                height="450"--}}
-        {{--                style="border:0"--}}
-        {{--                loading="lazy"--}}
-        {{--                allowfullscreen--}}
-        {{--                referrerpolicy="no-referrer-when-downgrade"--}}
-        {{--                src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}--}}
-        {{--                &q={{$idea->destination}}">--}}
-        {{--            </iframe>--}}
-        {{--        </div>--}}
+        <!-- 热门景点api -->
+
+
+
+
 
         <!-- 用户提交评论模块 -->
         <form method="post" action="{{ route('comment.store') }}" id="commentForm">

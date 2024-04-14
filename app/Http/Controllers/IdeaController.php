@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Idea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Comment;
+use Illuminate\Support\Facades\Http;
+
 
 
 class IdeaController extends Controller
@@ -85,7 +86,24 @@ class IdeaController extends Controller
     {
         // show the idea
         $idea = Idea::find($id);
-        return view('idea.show', compact('idea'));
+
+        // 调用Google Maps Geocoding API获取地理信息
+        $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+            'address' => $idea->destination,
+            'key' => config('api.google_map')
+        ]);
+
+        $geocodingData = $response->json();
+
+        if ($geocodingData['status'] === 'OK') {
+            $location = $geocodingData['results'][0]['geometry']['location'];
+            $latitude = $location['lat'];
+            $longitude = $location['lng'];
+            return view('idea.show', compact('idea', 'latitude', 'longitude'));
+        } else {
+            // 如果获取地理信息失败，处理相应逻辑
+            return view('error');
+        }
     }
 
     /**
