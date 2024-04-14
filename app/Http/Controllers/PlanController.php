@@ -175,5 +175,22 @@ class PlanController extends Controller
     function destroy(Plan $plan)
     {
         //
+        // get Idea by id
+        $id = Plan::find($plan->id);
+
+        $idea = Idea::find($id);
+
+        // check if the idea exist
+        if ($idea) {
+            // check Authorization
+            if ($idea->user_id == Auth::id()) {
+                $idea->delete();
+                return redirect(route('idea.index'))->with('success', 'Idea has been deleted');
+            } else {
+                return redirect(route('idea.index'))->with('fail', 'No Authorization to delete this idea');
+            }
+        } else {
+            return redirect(route('idea.index'))->with('fail', 'Idea not exist');
+        }
     }
 }
