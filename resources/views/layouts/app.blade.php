@@ -149,5 +149,8 @@
         @yield('content')
     </div>
 </main>
+<footer>
+    <div>Copyright &copy; 2024 Travel Idea</div>
+</footer>
 </body>
 </html>

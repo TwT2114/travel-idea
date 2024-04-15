@@ -33,7 +33,8 @@ nav {
 }
 
 .search-box {
-    margin-left: 10%;
+    display: flex;
+    justify-content: flex-start; /* Change the alignment to start */
 }
 
 .glass-container{
@@ -112,11 +113,17 @@ main {
     max-height: 77vh; /* 减去顶部和底部的 padding 值 */
 }
 
-.weather {
-    position: absolute;
-    right: 10%;
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
 }
 
-.map {}
+    .weather {
+        position: absolute;
+        right: 10%;
+    }
+
+    .map {}
 
 
