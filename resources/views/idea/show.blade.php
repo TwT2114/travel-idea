@@ -78,9 +78,10 @@
             </iframe>
         </div>
 
-        <div id="weatherInfo">
+        <div id="weatherInfo" src="http://api.weatherapi.com/v1/astronomy.json?key=56203730c15cf4319de5ea97fff5a8b2&q={{ $idea->destination }}&dt={{ $idea->start_date }}">
             <iframe src="/idea/{{ $idea->id }}/weather"></iframe>
         </div>
+
         <!-- 热门景点api -->
 {{--        <div>--}}
 {{--        <ul class="poi-list">--}}
