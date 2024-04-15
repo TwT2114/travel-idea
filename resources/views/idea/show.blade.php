@@ -109,9 +109,8 @@
             <div class="form-group">
                 <label for="content">My Comment</label>
                 <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
-                <input id="content" name="content" type="text">
+                <input id="content" name="content" type="text">  <button type="submit" class="btn btn-primary">submit</button>
             </div>
-            <button type="submit" class="btn btn-primary">submit</button>
         </form>
 
         <!-- 评论区，只展示最新的10条评论 -->
