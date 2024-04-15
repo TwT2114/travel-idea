@@ -15,7 +15,7 @@ class IdeaController extends Controller
     public function index()
     {
         //
-        $ideas = Idea::all();
+        $ideas = Idea::latest()->get();
         return view('idea.index', compact('ideas'));
 
     }
