@@ -147,7 +147,6 @@ class PlanController extends Controller
      */
     public function removeAllIdeas(string $planId)
     {
-
         // delete all the related ideas in plan_ideas table
         $plan = Plan::find($planId);
 
