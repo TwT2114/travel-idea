@@ -147,14 +147,20 @@ class PlanController extends Controller
      */
     public function removeAllIdeas(string $planId)
     {
-
         // delete all the related ideas in plan_ideas table
         $plan = Plan::find($planId);
-
-        if ($plan->user_id == Auth::id()) {
-            PlanIdea::where('plan_id', $planId)->delete();
-            return redirect()->route('plan.edit', $planId)->with('success', 'All ideas removed from plan successfully');
+        if ($plan) {
+            if ($plan->user_id == Auth::id()) {
+                PlanIdea::where('plan_id', $planId)->delete();
+                return redirect(route('plan.edit', $planId))
+                    ->with('success', 'All ideas removed from plan successfully');
+            } else {
+                return redirect(route('plan.show'))->with('error', 'No Authorization to remove ideas from this plan');
+            }
+        } else {
+            return redirect(route('plan.index'))->with('error', 'Plan not exist');
         }
+
     }
 
     /**
