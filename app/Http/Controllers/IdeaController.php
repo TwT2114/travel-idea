@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
-
-
 class IdeaController extends Controller
 {
     /**
@@ -190,4 +188,45 @@ class IdeaController extends Controller
             return redirect(route('idea.index'))->with('fail', 'Idea not exist');
         }
     }
+//获取景点的api
+    public function getAccessToken()
+    {
+        $client_id = 'W5CLahWjPhuJEotzu4Bwy8bYI5dQuCQd';
+        $client_secret = 'wEv3PcGoFMs5gZtK';
+
+        $response = Http::asForm()->post('https://test.api.amadeus.com/v1/security/oauth2/token', [
+            'grant_type' => 'client_credentials',
+            'client_id' => $client_id,
+            'client_secret' => $client_secret,
+        ]);
+
+        $accessToken = $response->json()['access_token'];
+        return $accessToken;
+    }
+
+    public function getPointsOfInterest(string $id)
+    {
+        $idea = Idea::find($id);
+        $latitude = $idea->latitude;
+        $longitude = $idea->longitude;
+        $accessToken = $this->getAccessToken();
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $accessToken,
+        ])->get("https://test.api.amadeus.com/v1/reference-data/locations/pois", [
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'radius' => 20,
+        ]);
+        if ($response->successful()) {
+            $pointsOfInterest = $response->json();
+            return view('idea.interest', ['data' => $pointsOfInterest['data']]);
+        } else {
+            // 如果 API 响应不成功，返回到 idea.show 视图，并显示错误信息
+            return redirect()->route('idea.show', $idea->id)->with('error', 'Sorry, no points of interest yet');
+
+        }
+    }
+
+
 }

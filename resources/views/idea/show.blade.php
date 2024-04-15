@@ -31,6 +31,11 @@
 @endsection
 
 @section('content')
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div>
         <a href="{{route('idea.index')}}">Back</a>
 
@@ -84,24 +89,11 @@
         </div>
 
         <!-- 热门景点api -->
-{{--        <div>--}}
-{{--        <ul class="poi-list">--}}
-{{--            @foreach($data as $poi)--}}
-{{--                <li class="poi-item">--}}
-{{--                    <h3>{{ $poi['name'] }}</h3>--}}
-{{--                    <p>Category: {{ $poi['category'] }}</p>--}}
-{{--                    <p>Latitude: {{ $poi['geoCode']['latitude'] }}, Longitude: {{ $poi['geoCode']['longitude'] }}</p>--}}
-{{--                    <p>Rank: {{ $poi['rank'] }}</p>--}}
-{{--                    <p>Tags: {{ implode(', ', $poi['tags']) }}</p>--}}
-{{--                </li>--}}
-{{--            @endforeach--}}
-{{--        </ul>--}}
-{{--        </div>--}}
-
-
-
-
-
+        @if($idea)
+            <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">Get Points Of Interest</a>
+        @else
+            <p>no points of interest</p>
+        @endif
 
         <!-- 用户提交评论模块 -->
         <form method="post" action="{{ route('comment.store') }}" id="commentForm">
@@ -127,5 +119,8 @@
                 @endforeach
             </ul>
         </div>
+
+
+
     </div>
 @endsection
