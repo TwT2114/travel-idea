@@ -2,6 +2,8 @@
 
 @section('script')
 
+@endsection
+
 @section('content')
     <div>
         <a href="{{route('idea.index')}}">View Ideas</a>
@@ -12,7 +14,7 @@
 
     <h2>Created Ideas:</h2>
     <ul>
-        @foreach($user->ideas as $idea)
+        @foreach($userIdeas as $idea)
             <li>
                 <a href="{{route('idea.show', $idea->id)}}">{{$idea->title}}</a>
             </li>
@@ -21,7 +23,7 @@
 
     <h2>Created Plans:</h2>
     <ul>
-        @foreach($user->plans as $plan)
+        @foreach($userPlans as $plan)
             <li>
                 <a href="{{route('plan.show', $plan->id)}}">{{$plan->title}}</a>
             </li>

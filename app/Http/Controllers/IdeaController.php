@@ -102,7 +102,7 @@ class IdeaController extends Controller
             return view('idea.show', compact('idea', 'latitude', 'longitude'));
         } else {
             // 如果获取地理信息失败，处理相应逻辑
-            return view('error');
+            return view('idea.show', compact('idea'));
         }
     }
 

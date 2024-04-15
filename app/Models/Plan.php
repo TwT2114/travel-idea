@@ -17,4 +17,5 @@ class Plan extends Model
         'user_name',
         'title',
     ];
+
 }

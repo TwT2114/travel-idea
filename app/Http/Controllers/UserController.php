@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Idea;
+use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -34,11 +36,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(string $id)
     {
-        $ideas = $user->ideas; // Retrieve the user's created ideas
-        $plans = $user->plans; // Retrieve the user's created plans
-        return view('user.show', compact('user', 'ideas', 'plans')); // Pass the user, ideas, and plans to the user.show view
+        $user = User::find($id);
+        if ($user) {
+            $userPlans = Plan::where('user_id', $user->id)->get();
+            $userIdeas = Idea::where('user_id', $user->id)->get();
+            return view('user.show', compact('user', 'userPlans', 'userIdeas'));
+        }
     }
 
     /**
