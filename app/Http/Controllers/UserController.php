@@ -43,6 +43,8 @@ class UserController extends Controller
             $userPlans = Plan::where('user_id', $user->id)->get();
             $userIdeas = Idea::where('user_id', $user->id)->get();
             return view('user.show', compact('user', 'userPlans', 'userIdeas'));
+        } else{
+            return redirect(route('home'))->with('error', 'User not found');
         }
     }
 
