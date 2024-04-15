@@ -33,7 +33,7 @@ nav {
 }
 
 .search-box {
-    margin-left: 80%;
+    margin-left: 10%;
 }
 
 .glass-container{
@@ -112,5 +112,11 @@ main {
     max-height: 77vh; /* 减去顶部和底部的 padding 值 */
 }
 
+.weather {
+    position: absolute;
+    right: 10%;
+}
+
+.map {}
 
 

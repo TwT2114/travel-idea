@@ -23,7 +23,7 @@
                         '<strong>' + comment.user_name + '</strong>' +
                         '<p>' + comment.content + '</p>' +
                         '<time>' + comment.created_at + '</time>' +
-                        '<form method="get" action="/comment/delete/'+ comment.id +'">' +
+                        '<form method="get" action="/comment/delete/' + comment.id + '">' +
                         // '<input type="hidden" name="comment_id" value="'+ comment.id +'"> ' +
                         '<button type="submit">Delete</button>' +
                         '</form>' +
@@ -39,11 +39,7 @@
 @endsection
 
 @section('content')
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+
     <div>
         <a href="{{route('idea.index')}}">Back</a>
 
@@ -52,12 +48,32 @@
             <a href="{{route("idea.edit", $idea->id)}}">Edit</a>
         @endif
     </div>
+    <div class="message">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div><br/>
+        @endif
+    </div>
     {{--    <div id="map" style="width: 80%; height: 400px;"></div>--}}
     <div style="margin: auto; width: auto">
         <div>
             <h1>
                 {{$idea->title}}
             </h1>
+
+            <div id="weatherInfo" class="weather">
+                <iframe title="weather" height="700" src="/idea/{{ $idea->id }}/weather"></iframe>
+            </div>
             <div>
                 Post By <a href="{{route('user.show',$idea->user_id)}}">{{$idea->user_name}}</a>
             </div>
@@ -66,45 +82,39 @@
                 {{$idea->destination}}
             </div>
             <div>
-                Start Date: {{$idea->start_date}}
-            </div>
-            <div>
-                End Date: {{$idea->end_date}}
+                Start From {{$idea->start_date}} to {{$idea->end_date}}
             </div>
             <div>
                 Tags: {{$idea->tags}}
             </div>
-
-
         </div>
+
+
         {{--Google Map--}}
         <div>
-            <iframe
-                title="map"
-                width="80%"
-                height="450"
-                style="border:0"
-                loading="lazy"
-                allowfullscreen
-                referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}&q={{$idea->destination}}">
+            <iframe class="map"
+                    title="map"
+                    width="50%"
+                    height="450"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}&q={{$idea->destination}}">
             </iframe>
         </div>
         <div>
-            <p>Destination：{{$idea->destination}}</p>
             <p>Latitude：{{$idea->latitude}}</p>
             <p>Longitude：{{$idea->longitude}}</p>
         </div>
 
         <!-- 热门景点api -->
         @if($idea)
-            <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">Get Points Of Interest (Support cities in EU)</a>
+            <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">Get Points Of Interest (Support cities in
+                EU)</a>
         @else
             <p>no points of interest</p>
         @endif
-        <div id="weatherInfo">
-            <iframe src="/idea/{{ $idea->id }}/weather"></iframe>
-        </div>
+
 
 
         <!-- 用户提交评论模块 -->
@@ -128,8 +138,8 @@
                         <p>{{ $comment->content }}</p>
                         <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
                         <form method="get" action="{{ route('comment.delete', $comment->id) }}">
-{{--                            @method('DELETE')--}}
-{{--                            <input hidden="hidden" type="text" name="comment_id" value="{{ $comment->id }}">--}}
+                            {{--                            @method('DELETE')--}}
+                            {{--                            <input hidden="hidden" type="text" name="comment_id" value="{{ $comment->id }}">--}}
                             <button type="submit">Delete</button>
                         </form>
                     </li>
