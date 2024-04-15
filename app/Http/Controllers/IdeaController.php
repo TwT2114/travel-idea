@@ -188,6 +188,7 @@ class IdeaController extends Controller
             return redirect(route('idea.index'))->with('fail', 'Idea not exist');
         }
     }
+
 //获取景点的api
     public function getAccessToken()
     {

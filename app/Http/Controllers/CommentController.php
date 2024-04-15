@@ -20,7 +20,7 @@ class CommentController extends Controller
         // $idea = Idea::find($id);
 
         $idea = Idea::with(['comments' => function ($query) {
-            $query->orderBy('created_at', 'desc');
+            $query->orderBy('created_at', 'desc')->take(10); // 限制只获取最新的 10 条评论
         }])->find($id);
 
         $comments = $idea->comments->map(function ($comment) {

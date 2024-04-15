@@ -26,7 +26,7 @@
         }
 
         // 每隔一定时间间隔调用 updateComments 函数
-        setInterval(updateComments, 5000); //  5 秒，根据需要调整时间间隔
+        setInterval(updateComments, 1000); //  1 秒，根据需要调整时间间隔
     </script>
 @endsection
 
@@ -114,6 +114,7 @@
             <button type="submit" class="btn btn-primary">submit</button>
         </form>
 
+        <!-- 评论区，只展示最新的10条评论 -->
         <div class="comments-section">
             <h3>Comments</h3>
             <ul id="commentList">
@@ -121,7 +122,7 @@
                     <li>
                         <strong>{{ $comment->user_name }}</strong>
                         <p>{{ $comment->content }}</p>
-                        <time datetime="{{ $comment->created_at }}"></time>
+                        <p>{{ $comment->created_at }}</p>
                     </li>
                 @endforeach
             </ul>
