@@ -1,5 +1,30 @@
 @extends('layouts.app')
 
+@section('script')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.like-button').click(function(e) {
+                e.preventDefault();
+                var ideaId = $(this).data('idea-id');
+                var likeCountElement = $('#likeCount_' + ideaId);
+
+                $.ajax({
+                    url: '/idea/like/' + ideaId,
+                    method: 'GET',
+                    success: function(response) {
+                        var data = response.data;
+                        likeCountElement.text(data.favorites);
+                    },
+                    error: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
+
 @section('content')
     <div class="message">
         @if (session('error'))
@@ -55,26 +80,4 @@
         </table>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.like-button').click(function(e) {
-                e.preventDefault();
-                var ideaId = $(this).data('idea-id');
-                var likeCountElement = $('#likeCount_' + ideaId);
-
-                $.ajax({
-                    url: '/idea/like/' + ideaId,
-                    method: 'GET',
-                    success: function(response) {
-                        var data = response.data;
-                        likeCountElement.text(data.favorites);
-                    },
-                    error: function(response) {
-                        console.log(response);
-                    }
-                });
-            });
-        });
-    </script>
 @endsection
