@@ -230,7 +230,7 @@ class IdeaController extends Controller
     public function getWeather(Idea $idea)
     {
         $weathers = $this->getCityWeather($idea->destination);
-        $html = view('weather_widget', compact('weathers'))->render();
+        $html = view('idea.weather_widget', compact('weathers'))->render();
         // return response()->json(['html' => $html]);
         return $html;
     }
