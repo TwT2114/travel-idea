@@ -116,7 +116,7 @@
                 </a>
             </div>
             <div class="aside-item">
-                <a href="/user">
+                <a href="/user/{{ Auth::id() }}">
                     <img src="/css/images/user.png" alt="User">
                     <div class="aside-text">User</div>
                 </a>
