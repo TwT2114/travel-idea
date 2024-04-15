@@ -227,34 +227,47 @@ class IdeaController extends Controller
 
         }
     }
-        public function getWeather(Idea $idea)
-        {
-            $weathers = $this->getCityWeather($idea->destination);
-            $html = view('weather_widget', compact('weathers'))->render();
-            // return response()->json(['html' => $html]);
-            return $html;
+    public function getWeather(Idea $idea)
+    {
+        $weathers = $this->getCityWeather($idea->destination);
+        $html = view('weather_widget', compact('weathers'))->render();
+        // return response()->json(['html' => $html]);
+        return $html;
+    }
+    public function getCityWeather($destination)
+    {
+        $apiKey = env('WEATHER_API_KEY');
+        $getGeoUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" . $destination . "&limit=1&appid=" . $apiKey;
+        $geoData = Http::get($getGeoUrl)->throw()->json();
+        $lon = $geoData[0]['lon'];
+        $lat = $geoData[0]['lat'];
+        $url = "https://api.openweathermap.org/data/2.5/forecast?lat=" . $lat . "&lon=" . $lon . "&appid=" . $apiKey . "&units=metric";
+        $response = Http::get($url)->throw()->json();
+        $weatherData = $this->array_slice_with_step($response['list'], 0, 5, 8);
+        foreach ($weatherData as $weather) {
+            $tenDaysOfWeatherDataList[] = [
+                'date' => explode(" ", $weather['dt_txt'])[0],
+                'temperatureMax' => $weather['main']['temp_max'],
+                'temperatureMin' => $weather['main']['temp_min'],
+                'weatherIcon' => $weather['weather'][0]['icon'],
+                'weatherIconPhrase' => $weather['weather'][0]['main'],
+            ];
         }
+        return $tenDaysOfWeatherDataList;
+    }
 
-        private function getCityWeather($destination)
-        {
-            $apiKey = env('WEATHER_API_KEY');
-            $getGeoUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" . $destination . "&limit=1&appid=" . $apiKey;
-            $geoData = Http::get($getGeoUrl)->throw()->json();
-            $lon = $geoData[0]['lon'];
-            $lat = $geoData[0]['lat'];
-            $url = "https://api.openweathermap.org/data/2.5/forecast?lat=" . $lat . "&lon=" . $lon . "&appid=" . $apiKey . "&units=metric";
-            $response = Http::get($url)->throw()->json();
-            $weatherData = array_slice($response['list'], 0, 5);
-            foreach ($weatherData as $weather) {
-                $weatherDataList[] = [
-                    'date' => explode(" ", $weather['dt_txt'])[0],
-                    'temperatureMax' => $weather['main']['temp_max'],
-                    'temperatureMin' => $weather['main']['temp_min'],
-                    'weatherIcon' => $weather['weather'][0]['icon'],
-                    'weatherIconPhrase' => $weather['weather'][0]['main'],
-                ];
+    function array_slice_with_step($array, $offset, $length, $step = 1, $preserve_keys = false)
+    {
+        $result = [];
+        $count = 0;
+        for ($i = $offset; $i < count($array) && $count < $length; $i += $step) {
+            if ($preserve_keys) {
+                $result[$i] = $array[$i];
+            } else {
+                $result[] = $array[$i];
             }
-            return $weatherDataList;
+            $count++;
         }
-
+        return $result;
+    }
 }
