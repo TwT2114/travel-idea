@@ -7,11 +7,8 @@ body {
 
 nav {
     padding: 0;
-    /*height: 15vh; !* 高度为视口的10% *!*/
-    /*display: flex; !* 启用Flexbox布局 *!*/
-    /*justify-content: center; !* 水平居中对齐所有项目 *!*/
-    /*align-items: center; !* 垂直居中 *!*/
-    /*background-color: #fffa90*/
+    height: 15vh; /* 高度为视口的10% */
+
 }
 
 .nav-item {
@@ -57,7 +54,7 @@ nav {
 
 aside {
     background-color: #eff6ef; /* 设置背景色为白色 */
-    flex: 1;
+    min-height: 85vh;
 }
 
 .aside-item {
@@ -101,15 +98,19 @@ main {
     margin-top: auto; /* 将内容推到nav元素下方 */
     display: flex;
     padding: 0;
-    min-height: 80vh; /* 最小高度为视口的80% */
+    min-height: 85vh; /* 最小高度为视口的80% */
 }
 
 .main-container{
-    padding: 30px 0 0 30px; /* 添加内部 30px 的 padding */
+    flex: 1; /* 设置剩余空间为flex-grow: 1，即自动填充剩余空间 */
+    margin: 30px 0 30px 30px; /* 左侧的 margin */
+    padding: 30px;
+    backdrop-filter: blur(3px);
+    background-color: rgba(150,204,163, 0.4);
+    border-radius: 10px;
+    overflow: auto;
+    max-height: 77vh; /* 减去顶部和底部的 padding 值 */
 }
-
-
-
 
 
 

@@ -120,7 +120,7 @@
         @if (Route::has('register'))
         @endif
     @else
-    <aside class="col-2 sidebar">
+    <aside class="col-2">
             <div class="aside-item">
                 <a href="{{ route('idea.index') }}">
                     <div class="aside-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
@@ -157,9 +157,5 @@
         @yield('content')
     </div>
 </main>
-
-<footer>
-    <div style="text-align: center;">Copyright &copy; 2024 Travel Ideas</div>
-</footer>
 </body>
 </html>
