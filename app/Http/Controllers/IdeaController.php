@@ -237,7 +237,7 @@ class IdeaController extends Controller
     }
     public function getCityWeather($destination)
     {
-        $apiKey = env('WEATHER_API_KEY');
+        $apiKey = config('api.weather');
         $getGeoUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" . $destination . "&limit=1&appid=" . $apiKey;
         $geoData = Http::get($getGeoUrl)->throw()->json();
         $lon = $geoData[0]['lon'];
