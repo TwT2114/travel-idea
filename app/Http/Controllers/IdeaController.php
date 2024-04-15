@@ -165,7 +165,7 @@ class IdeaController extends Controller
         $idea->latitude =$latitude;
         $idea->longitude =$longitude;
 
-        //4. save the book into database
+        //4. save the idea into database
         $idea->save();
 
         return redirect(route('idea.show', $idea->id))->with('success', 'Idea has been updated');
