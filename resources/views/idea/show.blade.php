@@ -98,7 +98,7 @@
 
         <!-- 热门景点api -->
         @if($idea)
-            <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">Get Points Of Interest</a>
+            <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">Get Points Of Interest (Support cities in EU)</a>
         @else
             <p>no points of interest</p>
         @endif
