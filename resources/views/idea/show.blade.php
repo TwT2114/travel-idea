@@ -26,7 +26,7 @@
         }
 
         // 每隔一定时间间隔调用 updateComments 函数
-        setInterval(updateComments, 5000); // 5000 毫秒表示 5 秒，你可以根据需要调整时间间隔
+        setInterval(updateComments, 5000); //  5 秒，根据需要调整时间间隔
     </script>
 @endsection
 
@@ -79,11 +79,25 @@
         </div>
         <div>
             <p>Destination：{{$idea->destination}}</p>
-            <p>Latitude：{{$latitude}}</p>
-            <p>Longitude：{{$longitude}}</p>
+            <p>Latitude：{{$idea->latitude}}</p>
+            <p>Longitude：{{$idea->longitude}}</p>
         </div>
 
         <!-- 热门景点api -->
+{{--        <div>--}}
+{{--        <ul class="poi-list">--}}
+{{--            @foreach($data as $poi)--}}
+{{--                <li class="poi-item">--}}
+{{--                    <h3>{{ $poi['name'] }}</h3>--}}
+{{--                    <p>Category: {{ $poi['category'] }}</p>--}}
+{{--                    <p>Latitude: {{ $poi['geoCode']['latitude'] }}, Longitude: {{ $poi['geoCode']['longitude'] }}</p>--}}
+{{--                    <p>Rank: {{ $poi['rank'] }}</p>--}}
+{{--                    <p>Tags: {{ implode(', ', $poi['tags']) }}</p>--}}
+{{--                </li>--}}
+{{--            @endforeach--}}
+{{--        </ul>--}}
+{{--        </div>--}}
+
 
 
 
