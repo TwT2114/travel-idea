@@ -26,9 +26,7 @@
                         '<form method="post" action="/comment/'+ comment.id +'">' +
                         '<input type="hidden" name="_method" value="DELETE"> ' +
                         '<button type="submit">Delete</button>' +
-
                         '</form>' +
-
                         '</li>';
                     commentList.append(newComment);
                 });
