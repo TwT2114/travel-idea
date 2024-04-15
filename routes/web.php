@@ -23,17 +23,16 @@ Route::get('/idea/getPointsOfInterest/{id}', [IdeaController::class, 'getPointsO
     ->name('idea.getPointsOfInterest');
 Route::get('/search', [IdeaController::class, 'search'])->name('idea.search');
 
-Route::post('/plan/addIdea', [PlanController::class, 'addIdea'])->name('plan.addIdea');
-Route::get('/comment/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
+Route::post('/plan/addIdea', [PlanController::class, 'addIdea'])->name('plan.addIdea')->middleware('auth');
+Route::get('/comment/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete')->middleware('auth');
 
-Route::delete('/plan/removeAllIdeas/{id}', [PlanController::class, 'removeAllIdeas'])->name('plan.removeAllIdeas');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::delete('/plan/removeAllIdeas/{id}', [PlanController::class, 'removeAllIdeas'])
+    ->name('plan.removeAllIdeas')
+    ->middleware('auth');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::get('idea/like/{id}', [IdeaController::class, 'likeIdea'])->name('idea.like');
