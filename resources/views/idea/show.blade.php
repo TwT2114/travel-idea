@@ -31,11 +31,6 @@
 @endsection
 
 @section('content')
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
     <div>
         <a href="{{route('idea.index')}}">Back</a>
 
@@ -82,24 +77,29 @@
                 src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}&q={{$idea->destination}}">
             </iframe>
         </div>
-        <div>
-            <p>Destination：{{$idea->destination}}</p>
-            <p>Latitude：{{$idea->latitude}}</p>
-            <p>Longitude：{{$idea->longitude}}</p>
+
+        <div id="weatherInfo">
+            <iframe src="/idea/{{ $idea->id }}/weather"></iframe>
         </div>
 
         <!-- 热门景点api -->
-        @if($idea)
-            <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">Get Points Of Interest</a>
-        @else
-            <p>no points of interest</p>
-        @endif
+{{--        <div>--}}
+{{--        <ul class="poi-list">--}}
+{{--            @foreach($data as $poi)--}}
+{{--                <li class="poi-item">--}}
+{{--                    <h3>{{ $poi['name'] }}</h3>--}}
+{{--                    <p>Category: {{ $poi['category'] }}</p>--}}
+{{--                    <p>Latitude: {{ $poi['geoCode']['latitude'] }}, Longitude: {{ $poi['geoCode']['longitude'] }}</p>--}}
+{{--                    <p>Rank: {{ $poi['rank'] }}</p>--}}
+{{--                    <p>Tags: {{ implode(', ', $poi['tags']) }}</p>--}}
+{{--                </li>--}}
+{{--            @endforeach--}}
+{{--        </ul>--}}
+{{--        </div>--}}
 
 
-        <!-- 天气api -->
-        <div id="weatherInfo" src="http://api.weatherapi.com/v1/astronomy.json?key=56203730c15cf4319de5ea97fff5a8b2&q={{ $idea->destination }}&dt={{ $idea->start_date }}">
-            <iframe src="/idea/{{ $idea->id }}/weather"></iframe>
-        </div>
+
+
 
 
         <!-- 用户提交评论模块 -->
