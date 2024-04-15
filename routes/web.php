@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\PlanIdeaController;
 use App\Http\Controllers\UserController;
@@ -17,6 +18,8 @@ Route::resource('idea', IdeaController::class)->middleware('auth');
 Route::resource('comment', CommentController::class)->middleware('auth');
 Route::resource('plan', PlanController::class)->middleware('auth');
 Route::resource('plan_idea', PlanIdeaController::class)->middleware('auth');
+
+Route::get('/idea/{idea}/weather', [IdeaController::class, 'getWeather'])->name('idea.weather');
 Route::get('/idea/getPointsOfInterest/{id}', [IdeaController::class, 'getPointsOfInterest'])->name('idea.getPointsOfInterest');
 Route::get('/search', [IdeaController::class, 'search'])->name('idea.search');
 Route::post('/plan/addIdea', [PlanController::class, 'addIdea'])->name('plan.addIdea');
@@ -31,3 +34,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
