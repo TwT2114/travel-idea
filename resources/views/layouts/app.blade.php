@@ -33,64 +33,74 @@
 <body>
 <header id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div>
-            <div class="nav-item">
-                <img src="/css/images/旅游主题_地图.png" alt="Logo" width="100">
-            </div>
+        <div class="container">
+            <img src="/css/images/旅游主题_地图.png" alt="Logo" width="100">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Book Store') }}
+            </a>
 
-            <div class="nav-item">
-                <form class="form-inline" action="{{ route('idea.search') }}" method="GET" style="display: flex;">
-                    <input class="form-control mr-sm-2" type="text" name="searchTerm" placeholder="Search for destination or tags... " style="width: 250px;">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-left: 10px;">Search</button>
-                </form>
-            </div>
-            <div class="nav-item">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-{{--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"--}}
-{{--                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"--}}
-{{--                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">--}}
-{{--                <span class="navbar-toggler-icon"></span>--}}
-{{--            </button>--}}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav me-auto">
 
-            @guest
-
-                @if (Route::has('login'))
-                    <div class="nav-link">
-                        <a href="{{ route('login') }}">
-                            <div class="nav-link">{{ __('Login') }}</div>
-                        </a>
-                    </div>
-
-                @endif
-
-                @if (Route::has('register'))
-                    <div class="nav-link">
-                        <a href="{{ route('register') }}">
-                            <div>{{ __('Register') }}</div>
-                        </a>
-                    </div>
-                @endif
-            @else
-
-                <div class="nav-item dropdown">
-                    <a id="navbarDropdown" class="nav-text dropdown-toggle" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <div class="nav-text">{{ Auth::user()->name }}</div>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
+                    <li class="nav-item search-box">
+                        <form class="form-inline" action="{{ route('idea.search') }}" method="GET"
+                              style="display: flex;">
+                            <input class="form-control mr-sm-2" type="text" name="searchTerm"
+                                   placeholder="Search for destination or tags... " style="width: 250px;">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                                    style="margin-left: 10px;">
+                                Search
+                            </button>
                         </form>
-                    </div>
-                </div>
-            @endguest
+                    </li>
+                </ul>
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ms-auto">
+
+                    <!-- Authentication Links -->
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                        @endif
+
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
+
+
+            </div>
         </div>
     </nav>
 </header>
