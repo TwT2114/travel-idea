@@ -23,12 +23,10 @@
                         '<strong>' + comment.user_name + '</strong>' +
                         '<p>' + comment.content + '</p>' +
                         '<time>' + comment.created_at + '</time>' +
-                        '<form method="post" action="/comment/'+ comment.id +'">' +
-                        '<input type="hidden" name="_method" value="DELETE"> ' +
+                        '<form method="get" action="/comment/delete/'+ comment.id +'">' +
+                        // '<input type="hidden" name="comment_id" value="'+ comment.id +'"> ' +
                         '<button type="submit">Delete</button>' +
-
                         '</form>' +
-
                         '</li>';
                     commentList.append(newComment);
                 });
@@ -41,6 +39,11 @@
 @endsection
 
 @section('content')
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div>
         <a href="{{route('idea.index')}}">Back</a>
 
@@ -95,7 +98,7 @@
 
         <!-- 热门景点api -->
         @if($idea)
-            <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">Get Points Of Interest</a>
+            <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">Get Points Of Interest (Support cities in EU)</a>
         @else
             <p>no points of interest</p>
         @endif
@@ -124,7 +127,9 @@
                         <strong>{{ $comment->user_name }}</strong>
                         <p>{{ $comment->content }}</p>
                         <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
-                        <form method="post" action="{{ route('comment.destroy',$comment->id) }}">
+                        <form method="get" action="{{ route('comment.delete', $comment->id) }}">
+{{--                            @method('DELETE')--}}
+{{--                            <input hidden="hidden" type="text" name="comment_id" value="{{ $comment->id }}">--}}
                             <button type="submit">Delete</button>
                         </form>
                     </li>
