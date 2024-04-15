@@ -1,14 +1,11 @@
 @extends('layouts.app')
 
 @section('script')
-
 @endsection
 
 @section('content')
-    <div>
-        <a href="{{route('idea.index')}}">View Ideas</a>
-        <a href="{{route('plan.index')}}">View Plans</a>
-    </div>
+    <link rel="stylesheet" type="text/css" href="/css/user.css" />
+
     <div class="message">
         @if (session('error'))
             <div class="alert alert-danger">
@@ -25,24 +22,34 @@
             </div><br/>
         @endif
     </div>
-    <h1>{{$user->name}}'s Created Ideas and Plans</h1>
+    <h2>{{$user->name}}'s Created Ideas and Plans</h2>
 
-    <h2>Created Ideas:</h2>
-    <ul>
-        @foreach($userIdeas as $idea)
-            <li>
-                <a href="{{route('idea.show', $idea->id)}}">{{$idea->title}}</a>
-            </li>
-        @endforeach
-    </ul>
+    <div class="user-container">
+        <div class="user-section">
+            <h3>Created Ideas:</h3>
+            <ul>
+                @foreach($userIdeas as $idea)
+                    <li>
+                        <a href="{{route('idea.show', $idea->id)}}">{{$idea->title}}</a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
 
-    <h2>Created Plans:</h2>
-    <ul>
-        @foreach($userPlans as $plan)
-            <li>
-                <a href="{{route('plan.show', $plan->id)}}">{{$plan->title}}</a>
-            </li>
-        @endforeach
-    </ul>
+        <div class="user-section">
+            <h3>Created Plans:</h3>
+            <ul>
+                @foreach($userPlans as $plan)
+                    <li>
+                        <a href="{{route('plan.show', $plan->id)}}">{{$plan->title}}</a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
 
+    <div>
+        <a href="{{route('idea.index')}}">View All Ideas</a>
+        <a href="{{route('plan.index')}}">View All Plans</a>
+    </div>
 @endsection

@@ -1,0 +1,39 @@
+h2 {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    /* Add any other desired styles for h2 heading */
+}
+
+.user-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-section {
+    width: 48%;
+    background-color:rgba(255, 255, 255, 0.9); /* Set the background color to white */
+    border: 0px solid #ccc; /* Adjust the border to be less wide */
+    padding: 10px;
+    border-radius: 10px; /* Add rounded corners */
+}
+
+h3 {
+    background-color: #f2f2f2; /* Set the background color of the headers to a light gray */
+    padding: 5px;
+    margin-top: 0; /* Remove the default margin to have consistent spacing */
+    order-radius: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+div {
+    text-align: center;
+}
