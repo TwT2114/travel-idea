@@ -32,11 +32,11 @@
 </head>
 <body>
 <header id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light glass-container">
         <div class="container" style="position:sticky;top:0;">
             <img src="/css/images/旅游主题_地图.png" alt="Logo" width="100">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Book Store') }}
+                {{ config('app.name', 'Travel Idea') }}
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -47,10 +47,10 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav me-auto">
-                    @guest()
-                    @else
-                        <li class="nav-item search-box">
+                <div class="navbar-nav me-auto">
+{{--                    @guest()--}}
+{{--                    @else--}}
+                        <div class="search-box">
                             <form class="form-inline" action="{{ route('idea.search') }}" method="GET"
                                   style="display: flex;">
                                 <input class="form-control mr-sm-2" type="text" name="searchTerm"
@@ -60,10 +60,10 @@
                                     Search
                                 </button>
                             </form>
-                        </li>
-                    @endguest
+                        </div>
+{{--                    @endguest--}}
 
-                </ul>
+                </div>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
 
@@ -88,10 +88,10 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item"
-                                   href="{{ route('user.show', \Illuminate\Support\Facades\Auth::id()) }}">
-                                    User
-                                </a>
+{{--                                <a class="dropdown-item"--}}
+{{--                                   href="{{ route('user.show', \Illuminate\Support\Facades\Auth::id()) }}">--}}
+{{--                                    User--}}
+{{--                                </a>--}}
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -114,12 +114,13 @@
 </header>
 
 <main class="container-fluid row">
-    <aside class="col-2 bg-light sidebar">
-
-
-        @guest
-
-        @else
+    @guest
+        @if (Route::has('login'))
+        @endif
+        @if (Route::has('register'))
+        @endif
+    @else
+    <aside class="col-2 sidebar">
             <div class="aside-item">
                 <a href="{{ route('idea.index') }}">
                     <div class="aside-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
@@ -152,7 +153,7 @@
         @endguest
     </aside>
 
-    <div role="main" class="col-10 container">
+    <div role="main" class="col-10 main-container">
         @yield('content')
     </div>
 </main>

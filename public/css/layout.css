@@ -1,3 +1,10 @@
+body {
+    background-image: url('/css/images/background.png');
+    background-repeat: no-repeat;/* 设置背景图片的重复方式，这里设置为不重复 */
+    background-size: cover;/* 将背景图片铺满整个屏幕 */
+    background-attachment: fixed;/* 将背景图片固定在视口中 */
+}
+
 nav {
     padding: 0;
     /*height: 15vh; !* 高度为视口的10% *!*/
@@ -29,18 +36,28 @@ nav {
 }
 
 .search-box {
-    margin-left: 40%;
+    margin-left: 80%;
 }
 
-/*.container{*/
-/*    margin: 0 auto; !* 居中显示 *!*/
-/*    padding-top: 40px;*/
-/*    padding-left: 30px;*/
-/*    padding-right: 20px;*/
-/*}*/
+.glass-container{
+    /*margin: 0 auto; !* 居中显示 *!*/
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border-radius: 0px;
+    backdrop-filter: blur(5px);
+    background-color: rgba(97,204,163, 0.288);
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px;
+    border: 0 rgba(255,255,255,0.4) solid;
+    border-bottom: 0 rgba(40,40,40,0.35) solid;
+    border-right: 0 rgba(40,40,40,0.35) solid;
+}
 
 aside {
-    background-color: white; /* 设置背景色为白色 */
+    background-color: #eff6ef; /* 设置背景色为白色 */
+    flex: 1;
 }
 
 .aside-item {
@@ -52,7 +69,7 @@ aside {
 }
 
 .aside-item:hover {
-    background-color: #f0f0f0; /* 淡灰色背景 */
+    background-color: #85a384; /* 绿色背景 */
 }
 
 .aside-item img {
@@ -82,8 +99,13 @@ a:hover {
 
 main {
     margin-top: auto; /* 将内容推到nav元素下方 */
+    display: flex;
     padding: 0;
-    min-height: 85vh; /* 最小高度为视口的80% */
+    min-height: 80vh; /* 最小高度为视口的80% */
+}
+
+.main-container{
+    padding: 30px 0 0 30px; /* 添加内部 30px 的 padding */
 }
 
 
