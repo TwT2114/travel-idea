@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ApiController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\PlanIdeaController;
 use App\Http\Controllers\UserController;

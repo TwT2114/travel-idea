@@ -17,7 +17,6 @@ class CommentController extends Controller
     public function index(Request $request)
     {
         $id = $request->get('idea_id');
-        // $idea = Idea::find($id);
 
         $idea = Idea::with(['comments' => function ($query) {
             $query->orderBy('created_at', 'desc')->take(10); // 限制只获取最新的 10 条评论
