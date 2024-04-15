@@ -18,24 +18,29 @@
                 var commentList = $('#commentList');
                 commentList.empty();
 
-                response.forEach(function(comment) {
-                    var newComment = '<li><strong>' + comment.user_name + '</strong><p>' + comment.content + '</p><p>' + comment.created_at + '</p></li>';
+                response.forEach(function (comment) {
+                    var newComment = '<li>' +
+                        '<strong>' + comment.user_name + '</strong>' +
+                        '<p>' + comment.content + '</p>' +
+                        '<time>' + comment.created_at + '</time>' +
+                        '<form method="post" action="/comment/'+ comment.id +'">' +
+                        '<input type="hidden" name="_method" value="DELETE"> ' +
+                        '<button type="submit">Delete</button>' +
+
+                        '</form>' +
+
+                        '</li>';
                     commentList.append(newComment);
                 });
             });
         }
 
         // 每隔一定时间间隔调用 updateComments 函数
-        setInterval(updateComments, 1000); //  1 秒，根据需要调整时间间隔
+        setInterval(updateComments, 5000); //  5 秒，根据需要调整时间间隔
     </script>
 @endsection
 
 @section('content')
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
     <div>
         <a href="{{route('idea.index')}}">Back</a>
 
@@ -68,8 +73,8 @@
             </div>
 
 
-
         </div>
+        {{--Google Map--}}
         <div>
             <iframe
                 title="map"
@@ -94,10 +99,7 @@
         @else
             <p>no points of interest</p>
         @endif
-
-
-        <!-- 天气api -->
-        <div id="weatherInfo" src="http://api.weatherapi.com/v1/astronomy.json?key=56203730c15cf4319de5ea97fff5a8b2&q={{ $idea->destination }}&dt={{ $idea->start_date }}">
+        <div id="weatherInfo">
             <iframe src="/idea/{{ $idea->id }}/weather"></iframe>
         </div>
 
@@ -109,10 +111,10 @@
             <div class="form-group">
                 <label for="content">My Comment</label>
                 <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
-                <input id="content" name="content" type="text">  <button type="submit" class="btn btn-primary">submit</button>
+                <input id="content" name="content" type="text">
+                <button type="submit" class="btn btn-primary">submit</button>
             </div>
         </form>
-
         <!-- 评论区，只展示最新的10条评论 -->
         <div class="comments-section">
             <h3>Comments</h3>
@@ -121,7 +123,10 @@
                     <li>
                         <strong>{{ $comment->user_name }}</strong>
                         <p>{{ $comment->content }}</p>
-                        <p>{{ $comment->created_at }}</p>
+                        <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
+                        <form method="post" action="{{ route('comment.destroy',$comment->id) }}">
+                            <button type="submit">Delete</button>
+                        </form>
                     </li>
                 @endforeach
             </ul>
