@@ -33,7 +33,7 @@
 <body>
 <header id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class="container">
+        <div class="container" style="position:sticky;top:0;">
             <img src="/css/images/旅游主题_地图.png" alt="Logo" width="100">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Book Store') }}
@@ -48,18 +48,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
+                    @guest()
+                    @else
+                        <li class="nav-item search-box">
+                            <form class="form-inline" action="{{ route('idea.search') }}" method="GET"
+                                  style="display: flex;">
+                                <input class="form-control mr-sm-2" type="text" name="searchTerm"
+                                       placeholder="Search for destination or tags... " style="width: 250px;">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                                        style="margin-left: 10px;">
+                                    Search
+                                </button>
+                            </form>
+                        </li>
+                    @endguest
 
-                    <li class="nav-item search-box">
-                        <form class="form-inline" action="{{ route('idea.search') }}" method="GET"
-                              style="display: flex;">
-                            <input class="form-control mr-sm-2" type="text" name="searchTerm"
-                                   placeholder="Search for destination or tags... " style="width: 250px;">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                                    style="margin-left: 10px;">
-                                Search
-                            </button>
-                        </form>
-                    </li>
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
@@ -85,11 +88,16 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item"
+                                   href="{{ route('user.show', \Illuminate\Support\Facades\Auth::id()) }}">
+                                    User
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
+
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -107,30 +115,40 @@
 
 <main class="container-fluid row">
     <aside class="col-2 bg-light sidebar">
-        <div class="aside-item">
-            <a href="/idea">
-                <div class="aside-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
-            </a>
-        </div>
+
 
         @guest
-            @if (Route::has('login'))
-            @endif
-            @if (Route::has('register'))
-            @endif
+
         @else
             <div class="aside-item">
-                <a href="/idea/create">
+                <a href="{{ route('idea.index') }}">
+                    <div class="aside-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
+                </a>
+            </div>
+            <div class="aside-item">
+                <a href="{{ route('plan.index') }}">
+                    <div class="aside-text"><img src="/css/images/home.png" alt="Plan List">Plan List</div>
+                </a>
+            </div>
+            <div class="aside-item">
+                <a href="{{ route('idea.create') }}">
                     <img src="/css/images/new.png" alt="New Idea">
                     <div class="aside-text">New Idea</div>
                 </a>
             </div>
             <div class="aside-item">
-                <a href="/user/{{ Auth::id() }}">
+                <a href="{{ route('plan.create') }}">
+                    <img src="/css/images/new.png" alt="New Plan">
+                    <div class="aside-text">New Plan</div>
+                </a>
+            </div>
+            <div class="aside-item">
+                <a href="{{ route('user.show', \Illuminate\Support\Facades\Auth::id()) }}">
                     <img src="/css/images/user.png" alt="User">
                     <div class="aside-text">User</div>
                 </a>
             </div>
+
         @endguest
     </aside>
 
