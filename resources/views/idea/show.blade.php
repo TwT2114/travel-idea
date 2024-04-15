@@ -23,7 +23,7 @@
                         '<strong>' + comment.user_name + '</strong>' +
                         '<p>' + comment.content + '</p>' +
                         '<time>' + comment.created_at + '</time>' +
-                        '<form method="post" action="/comment/'+ comment.id +'">' +
+                        '<form method="delete" action="/comment/'+ comment.id +'">' +
                         '<input type="hidden" name="_method" value="DELETE"> ' +
                         '<button type="submit">Delete</button>' +
 
@@ -125,6 +125,7 @@
                         <p>{{ $comment->content }}</p>
                         <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
                         <form method="post" action="{{ route('comment.destroy',$comment->id) }}">
+                            @method('DELETE')
                             <button type="submit">Delete</button>
                         </form>
                     </li>
