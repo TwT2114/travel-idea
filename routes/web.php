@@ -20,12 +20,14 @@ Route::resource('plan', PlanController::class)->middleware('auth');
 Route::resource('plan_idea', PlanIdeaController::class)->middleware('auth');
 
 Route::get('/idea/{idea}/weather', [IdeaController::class, 'getWeather'])->name('idea.weather');
-Route::get('/idea/getPointsOfInterest/{id}', [IdeaController::class, 'getPointsOfInterest'])->name('idea.getPointsOfInterest');
+Route::get('/idea/getPointsOfInterest/{id}', [IdeaController::class, 'getPointsOfInterest'])
+    ->name('idea.getPointsOfInterest');
 Route::get('/search', [IdeaController::class, 'search'])->name('idea.search');
-Route::post('/plan/addIdea', [PlanController::class, 'addIdea'])->name('plan.addIdea');
-Route::delete('/plan/removeAllIdeas/{id}', [PlanController::class, 'removeAllIdeas'])->name('plan.removeAllIdeas');
 
-Route::get('/user/{user}', 'App\Http\Controllers\UserController@show')->name('user.show');
+Route::post('/plan/addIdea', [PlanController::class, 'addIdea'])->name('plan.addIdea');
+Route::get('/comment/delete/{id}', [CommentController::class, 'delete'])->name('comment.delete');
+
+Route::delete('/plan/removeAllIdeas/{id}', [PlanController::class, 'removeAllIdeas'])->name('plan.removeAllIdeas');
 
 Auth::routes();
 

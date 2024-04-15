@@ -25,7 +25,7 @@ class CommentController extends Controller
 
         $comments = $idea->comments->map(function ($comment) {
             return [
-                'id'=> $comment->id,
+                'id' => $comment->id,
                 'user_name' => $comment->user_name,
                 'content' => $comment->content,
                 'created_at' => $comment->created_at,
@@ -96,19 +96,46 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function delete(string $id)
+    {
+        //
+
+        $comment = Comment::find($id); // 通过评论ID查找评论
+
+        if ($comment) {
+            if ($comment->user_id === auth()->id()) {
+                $comment->delete(); // 删除评论
+                return redirect(route('idea.show', $comment->idea_id))
+                    ->with('success', 'Comment has been deleted successfully.');
+            } else {
+                // 无权限删除评论，返回错误信息或重定向到其他页面
+                return redirect(route('idea.show', $comment->idea_id))
+                    ->with('error', 'You do not have permission to delete this comment.');
+            }
+        } else{
+            return redirect(route('idea.index'))->with('error', 'Comment not found.');
+        }
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
         //
         $comment = Comment::find($id); // 通过评论ID查找评论
 
         if ($comment->user_id === auth()->id()) {
             $comment->delete(); // 删除评论
+            return redirect(route('idea.show', $comment->idea_id))
+                ->with('success', 'Comment has been deleted successfully.');
         } else {
             // 无权限删除评论，返回错误信息或重定向到其他页面
-            return redirect(route('idea.show'))->with('error', 'You do not have permission to delete this comment.');
+            return redirect(route('idea.show', $comment->idea_id))
+                ->with('error', 'You do not have permission to delete this comment.');
         }
         // 删除完成后，重定向到特定页面或返回成功信息
-        return redirect()->route('idea.show', $comment->idea_id)
-            ->with('success', 'Comment has been deleted successfully.');
+
     }
 }
