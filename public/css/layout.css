@@ -86,6 +86,12 @@ main {
     min-height: 85vh; /* 最小高度为视口的80% */
 }
 
+.weather {
+    position: absolute;
+    right: 10%;
+}
+
+.map {}
 
 
 
