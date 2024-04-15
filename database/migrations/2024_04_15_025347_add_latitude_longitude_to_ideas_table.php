@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::table('ideas', function (Blueprint $table) {
             //
 
-            $table->string('latitude')->nullable();
-            $table->string('longitude')->nullable();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
         });
     }
 
