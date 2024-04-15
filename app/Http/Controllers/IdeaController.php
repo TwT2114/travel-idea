@@ -60,13 +60,30 @@ class IdeaController extends Controller
             'tags' => 'required'
 
         ]);
+        $destination = $request->get( key: 'destination');
+        // 调用Google Maps Geocoding API获取地理信息
+        $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+
+            'address' => $destination,
+            'key' => config('api.google_map')
+        ]);
+        $geocodingData = $response->json();
+
+        //若获取失败，则返回空值
+        $location = $geocodingData['status'] === 'OK'
+            ? $geocodingData['results'][0]['geometry']['location']
+            : null;
+        $latitude = $location['lat'] ?? null;
+        $longitude = $location['lng'] ?? null;
 
         // 2. create a new idea model
         $idea = new Idea([
             'user_id' => Auth::id(),
             'user_name' => Auth::user()->name,
             'title' => $request->get('title'),
-            'destination' => $request->get('destination'),
+            'destination'=>$destination,
+            'latitude' => $latitude,
+            'longitude'=> $longitude,
             'start_date' => $request->get('start_date'),
             'end_date' => $request->get('end_date'),
             'tags' => $request->get('tags')
@@ -86,24 +103,7 @@ class IdeaController extends Controller
     {
         // show the idea
         $idea = Idea::find($id);
-
-        // 调用Google Maps Geocoding API获取地理信息
-        $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
-            'address' => $idea->destination,
-            'key' => config('api.google_map')
-        ]);
-
-        $geocodingData = $response->json();
-
-        if ($geocodingData['status'] === 'OK') {
-            $location = $geocodingData['results'][0]['geometry']['location'];
-            $latitude = $location['lat'];
-            $longitude = $location['lng'];
-            return view('idea.show', compact('idea', 'latitude', 'longitude'));
-        } else {
-            // 如果获取地理信息失败，处理相应逻辑
-            return view('idea.show', compact('idea'));
-        }
+        return view('idea.show', compact('idea'));
     }
 
     /**
@@ -148,6 +148,22 @@ class IdeaController extends Controller
         $idea->end_date = $request->get('end_date');
         $idea->tags = $request->get('tags');
 
+        // 调用Google Maps Geocoding API获取地理信息
+        $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
+
+            'address' => $idea->destination,
+            'key' => config('api.google_map')
+        ]);
+        $geocodingData = $response->json();
+
+        //若获取失败，则返回空值
+        $location = $geocodingData['status'] === 'OK'
+            ? $geocodingData['results'][0]['geometry']['location']
+            : null;
+        $latitude = $location['lat'] ?? null;
+        $longitude = $location['lng'] ?? null;
+        $idea->latitude =$latitude;
+        $idea->longitude =$longitude;
 
         //4. save the book into database
         $idea->save();
