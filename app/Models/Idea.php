@@ -25,9 +25,34 @@ class Idea extends Model
         'user_name',
         'title',
         'destination',
+        'latitude',
+        'longitude',
         'start_date',
         'end_date',
         'tags',
+        'favorites',
 
     ];
+    public function toggleLike() {
+        $user = auth()->user();
+
+        if (!$user) {
+            // 处理用户未认证的情况
+            return;
+        }
+
+        if ($this->isLikedByUser($user)) {
+            $this->decrement('favorites');
+            $this->users()->detach($user->id);
+        } else {
+            $this->increment('favorites');
+            $this->users()->attach($user->id);
+        }
+    }
+
+    public function isLikedByUser($user) {
+        return $this->users->contains($user);
+    }
+
+
 }

@@ -272,4 +272,23 @@ class IdeaController extends Controller
         }
         return $result;
     }
+
+    //点赞功能
+    public function likeIdea($id)
+    {
+        $idea = Idea::find($id);
+
+        if (!$idea) {
+            return response()->json(['error' => 'Idea not found'], 404);
+        }
+
+        $idea->favorites++;
+        $idea->save();
+
+        return response()->json(['success' => 'Idea liked successfully', 'data' => ['favorites' => $idea->favorites]]);
+    }
+
+
+
+
 }
