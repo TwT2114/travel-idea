@@ -39,6 +39,11 @@
 @endsection
 
 @section('content')
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div>
         <a href="{{route('idea.index')}}">Back</a>
 
