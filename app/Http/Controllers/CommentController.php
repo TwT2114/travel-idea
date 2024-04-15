@@ -102,7 +102,7 @@ class CommentController extends Controller
         $comment = Comment::find($id); // 通过评论ID查找评论
 
         if ($comment) {
-            if ($comment->user_id === auth()->id()) {
+            if ($comment->user_id === Auth::id()) {
                 $comment->delete(); // 删除评论
                 return redirect(route('idea.show', $comment->idea_id))
                     ->with('success', 'Comment has been deleted successfully.');

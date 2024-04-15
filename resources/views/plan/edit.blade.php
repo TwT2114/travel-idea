@@ -16,6 +16,11 @@
         <div>
             <h2>Plan Details</h2>
             <div class="message">
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
