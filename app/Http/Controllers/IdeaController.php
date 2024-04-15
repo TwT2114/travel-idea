@@ -227,6 +227,34 @@ class IdeaController extends Controller
 
         }
     }
+        public function getWeather(Idea $idea)
+        {
+            $weathers = $this->getCityWeather($idea->destination);
+            $html = view('weather_widget', compact('weathers'))->render();
+            // return response()->json(['html' => $html]);
+            return $html;
+        }
 
+        private function getCityWeather($destination)
+        {
+            $apiKey = env('WEATHER_API_KEY');
+            $getGeoUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" . $destination . "&limit=1&appid=" . $apiKey;
+            $geoData = Http::get($getGeoUrl)->throw()->json();
+            $lon = $geoData[0]['lon'];
+            $lat = $geoData[0]['lat'];
+            $url = "https://api.openweathermap.org/data/2.5/forecast?lat=" . $lat . "&lon=" . $lon . "&appid=" . $apiKey . "&units=metric";
+            $response = Http::get($url)->throw()->json();
+            $weatherData = array_slice($response['list'], 0, 5);
+            foreach ($weatherData as $weather) {
+                $weatherDataList[] = [
+                    'date' => explode(" ", $weather['dt_txt'])[0],
+                    'temperatureMax' => $weather['main']['temp_max'],
+                    'temperatureMin' => $weather['main']['temp_min'],
+                    'weatherIcon' => $weather['weather'][0]['icon'],
+                    'weatherIconPhrase' => $weather['weather'][0]['main'],
+                ];
+            }
+            return $weatherDataList;
+        }
 
 }
