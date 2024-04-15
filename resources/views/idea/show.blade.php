@@ -108,7 +108,7 @@
                     <li>
                         <strong>{{ $comment->user_name }}</strong>
                         <p>{{ $comment->content }}</p>
-                        <p>{{ $comment->created_at }}</p>
+                        <time datetime="{{ $comment->created_at }}"></time>
                     </li>
                 @endforeach
             </ul>
