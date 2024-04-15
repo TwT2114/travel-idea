@@ -48,8 +48,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <div class="navbar-nav me-auto">
-{{--                    @guest()--}}
-{{--                    @else--}}
+                    @guest
+                    @else
                         <div class="search-box">
                             <form class="form-inline" action="{{ route('idea.search') }}" method="GET"
                                   style="display: flex;">
@@ -61,7 +61,7 @@
                                 </button>
                             </form>
                         </div>
-{{--                    @endguest--}}
+                    @endguest
 
                 </div>
                 <!-- Right Side Of Navbar -->
@@ -88,10 +88,6 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item"
-                                   href="{{ route('user.show', \Illuminate\Support\Facades\Auth::id()) }}">
-                                    User
-                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -115,10 +111,6 @@
 
 <main class="container-fluid row">
     @guest
-        @if (Route::has('login'))
-        @endif
-        @if (Route::has('register'))
-        @endif
     @else
     <aside class="col-2">
             <div class="aside-item">
