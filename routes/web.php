@@ -36,3 +36,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('idea/like/{id}', [IdeaController::class, 'likeIdea'])->name('idea.like');
