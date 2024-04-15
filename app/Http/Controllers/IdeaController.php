@@ -75,20 +75,18 @@ class IdeaController extends Controller
             : null;
         $latitude = $location['lat'] ?? null;
         $longitude = $location['lng'] ?? null;
-
         // 2. create a new idea model
         $idea = new Idea([
             'user_id' => Auth::id(),
             'user_name' => Auth::user()->name,
             'title' => $request->get('title'),
             'destination'=>$destination,
-            'latitude' => $latitude,
-            'longitude'=> $longitude,
             'start_date' => $request->get('start_date'),
             'end_date' => $request->get('end_date'),
             'tags' => $request->get('tags')
         ]);
-
+        $idea->latitude =$latitude;
+        $idea->longitude =$longitude;
         // 3. save the data into database
         $idea->save();
         return redirect(route('idea.index'))->with('success', 'Idea has been added');
