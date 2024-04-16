@@ -219,14 +219,14 @@ class IdeaController extends Controller
             'longitude' => $longitude,
             'radius' => 20,
         ]);
-        if ($response->successful()) {
+        if ($response->status() === 200) {
             $pointsOfInterest = $response->json();
             return view('idea.interest', ['data' => $pointsOfInterest['data']]);
         } else {
             // 如果 API 响应不成功，返回到 idea.show 视图，并显示错误信息
-            return redirect()->route('idea.show', $idea->id)->with('error', 'Sorry, no points of interest yet');
-
+            return redirect(route('idea.show', $idea->id))->with('error', 'Sorry, no points of interest yet');
         }
+
     }
     public function getWeather(Idea $idea)
     {
