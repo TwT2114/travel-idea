@@ -64,6 +64,9 @@
     transition: color 0.3s, background-color 0.3s; /* 平滑过渡效果 */
 }
 
+.user-section .mainBody a:visited {
+    color: steelblue; /* 点击后颜色变为粉色 */
+}
 
 .user-section .mainBody a:hover {
     background-color: lightgrey; /* 悬停时背景灰色 */
@@ -71,10 +74,6 @@
 
 a{
     text-decoration: none;
-}
-
-a:visited {
-    color: steelblue; /* 点击后颜色变为粉色 */
 }
 
 /*ul {*/
