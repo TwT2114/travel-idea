@@ -41,6 +41,10 @@ AMADEUS_CLIENT_SECRET="YOUR_AMADEUS_CLIENT_SECRET"
 
 run `php artisan migrate` to migrate database
 
+```bash
+php artisan migrate
+```
+
 ### Run the project
 
 run `npm run dev` and `php artisan serve` separately in terminal to run the project
