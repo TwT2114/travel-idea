@@ -1,0 +1,29 @@
+h3{
+    text-align: center;
+}
+
+div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+
+th {
+    text-align: center;
+    white-space: nowrap; /* Prevent line breaks */
+    overflow: hidden; /* Hide overflowed content */
+    text-overflow: ellipsis; /* Show ellipsis if content overflows */
+    max-width: 100px;  /* Adjust the max width to your needs */
+}
+
+th img{
+    width: 20px;
+    height: 25px;
+}

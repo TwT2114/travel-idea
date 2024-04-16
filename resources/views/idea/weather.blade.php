@@ -1,17 +1,20 @@
-<div class="card bg-dark p-2 mb-3 weather-container">
-    <h5>{{$idea->destination }}'s Weather Forecast</h5>
-    @foreach ($weathers as $weather)
-        <div class="media-body d-inline-block rounded mb-1">
-            <div>
-                <h6 class="mt-0 mb-1">{{ \Carbon\Carbon::parse($weather['date'])->format('F d, Y') }}</h6>
 
-                <p class="mb-0"><img src="http://openweathermap.org/img/wn/{{ $weather['weatherIcon'] }}.png"
-                        alt="Weather Icon">
-                    {{ $weather['weatherIconPhrase'] }}
-                    <span class="mb-0 ms-3">{{ $weather['temperatureMin'] }} -
-                        {{ $weather['temperatureMax'] }}°C</span>
-                </p>
-            </div>
+<link rel="stylesheet" type="text/css" href="/css/weather.css" />
+<h3>{{$idea->destination }}'s Weather Forecast</h3>
+<div>
+    @foreach ($weathers as $weather)
+        <div>
+            <table>
+                <tr>
+                    <th>{{ \Carbon\Carbon::parse($weather['date'])->format('F d') }}</th>
+                </tr>
+                <tr>
+                    <th><img src="http://openweathermap.org/img/wn/{{ $weather['weatherIcon'] }}.png" alt="Weather Icon">{{ $weather['weatherIconPhrase'] }}</th>
+                </tr>
+                <tr>
+                    <th>{{ $weather['temperatureMin'] }} - {{ $weather['temperatureMax'] }}°C</th>
+                </tr>
+            </table>
         </div>
     @endforeach
 </div>
