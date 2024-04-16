@@ -8,7 +8,6 @@
             $.post($('#commentForm').attr('action'), formData, function (response) {
                 // 清空评论框
                 $('#content').val('');
-                updateComments();
             }, 'json');
         }
 

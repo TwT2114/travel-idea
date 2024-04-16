@@ -27,7 +27,7 @@ class CommentController extends Controller
                 'id' => $comment->id,
                 'user_name' => $comment->user_name,
                 'content' => $comment->content,
-                'created_at' => $comment->created_at,
+                'created_at' => $comment->created_at->toDateTimeString(),
             ];
         });
         return response()->json($comments);

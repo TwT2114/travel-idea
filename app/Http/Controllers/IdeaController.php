@@ -195,7 +195,6 @@ class IdeaController extends Controller
     {
         $client_id = config('api.amadeus_client_id');
         $client_secret = config('api.amadeus_client_secret');
-
         $response = Http::asForm()->post('https://test.api.amadeus.com/v1/security/oauth2/token', [
             'grant_type' => 'client_credentials',
             'client_id' => $client_id,
