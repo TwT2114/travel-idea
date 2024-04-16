@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    <link rel="stylesheet" type="text/css" href="/css/create.css" />
     <div class="title">
         Add a New Plan
     </div>
@@ -15,14 +16,14 @@
         <table class="table table-striped">
             <tbody>
             <tr>
-                <td><label for="title">Title</label></td>
+                <td><label for="title">Name Your Plan</label></td>
                 <td><input name="title" type="text" class="form-control"/></td>
             </tr>
 
             <tr>
                 <td></td>
                 <td>
-                    <button type="submit">Add</button>
+                    <button type="submit" class="plan-button common-button">Add</button>
                 </td>
             </tr>
             </tbody>
