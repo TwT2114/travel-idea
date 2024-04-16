@@ -1,0 +1,38 @@
+
+.zebra tr:nth-child(odd) td {
+    background-color: #dee5ce; /* 设置奇数行的背景色 */
+}
+
+.zebra tr:nth-child(even) td {
+    background-color: #ecf0e3; /* 设置偶数行的背景色 */
+}
+
+.zebra tr:nth-child(4n+1) td {
+    background-color: #dee9dd; /* 设置每第4行的背景色 */
+}
+
+.plan-header th {
+    background-color: #85a384; /* 表头背景色 */
+    font-weight: bold; /* 加粗字体 */
+}
+
+.border-header {
+    border-collapse: separate;
+    border-spacing: 0 1px;
+    border-radius: 20px; /* 设置圆角 */
+    overflow: hidden; /* 防止内容溢出 */
+}
+
+.border-header thead {
+    border-top-left-radius: 10px; /* 左上角圆角 */
+    border-top-right-radius: 10px; /* 右上角圆角 */
+}
+
+a {
+    text-decoration: none; /* Remove underline */
+}
+
+.search-outcome{
+    font-size: 20px;
+    margin: 0 0 20px 20px;
+}

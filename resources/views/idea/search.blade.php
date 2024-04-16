@@ -2,42 +2,23 @@
 
 @section('script')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.like-button').click(function(e) {
-                e.preventDefault();
-                var ideaId = $(this).data('idea-id');
-                var likeCountElement = $('#likeCount_' + ideaId);
-
-                $.ajax({
-                    url: '/idea/like/' + ideaId,
-                    method: 'GET',
-                    success: function(response) {
-                        var data = response.data;
-                        likeCountElement.text(data.favorites);
-                    },
-                    error: function(response) {
-                        console.log(response);
-                    }
-                });
-            });
-        });
-    </script>
 @endsection
 
 @section('content')
-    <h1>Search Results</h1>
+    <script src="{{ asset('js/favorites.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="/css/zebra.css" />
+
     @if(session()->has('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
 
-    <h2>Total Counts: {{ $ideas->count() }}</h2>
+    <div class="search-outcome">{{ $ideas->count() }} Search Results:</div>
     @if($ideas->count() > 0)
         <div>
-        <table class="table">
-            <thead>
+        <table class="table table-hover zebra border-header">
+            <thead class="plan-header">
                 <th>User</th>
                 <th>Title</th>
                 <th>Destination</th>
