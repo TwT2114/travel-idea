@@ -2,10 +2,9 @@
 
 @section('script')
 
-@endsection
-
 
 @section('content')
+
     <div>
         <a href="{{ route('plan.index') }}">Back</a>
 

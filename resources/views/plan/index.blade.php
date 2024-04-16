@@ -1,15 +1,17 @@
+
 @extends('layouts.app')
 
 @section('content')
+    <link rel="stylesheet" type="text/css" href="/css/zebra.css" />
     <div>
-        <table class="table">
-            <thead>
+        <table class="table table-hover zebra border-header">
+            <thead class="plan-header">
             <th>User</th>
             <th>Title</th>
             <th>Time</th>
             <th>Detail</th>
             </thead>
-            <tbody>
+            <tbody class="zebra"> <!-- 添加zebra类名到tbody -->
             @foreach($plans as $key => $plan)
                 <tr>
                     <td><a href="{{route('user.show',$plan->user_id)}}"> {{$plan->user_name}}</a></td>
@@ -21,5 +23,4 @@
             </tbody>
         </table>
     </div>
-
 @endsection
