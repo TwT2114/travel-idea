@@ -120,7 +120,7 @@
             </div>
             <div class="aside-item">
                 <a href="{{ route('plan.index') }}">
-                    <div class="aside-text"><img src="/css/images/home.png" alt="Plan List">Plan List</div>
+                    <div class="aside-text"><img src="/css/images/PlanList.png" alt="Plan List">Plan List</div>
                 </a>
             </div>
             <div class="aside-item">
@@ -131,7 +131,7 @@
             </div>
             <div class="aside-item">
                 <a href="{{ route('plan.create') }}">
-                    <img src="/css/images/new.png" alt="New Plan">
+                    <img src="/css/images/AddPlan.png" alt="New Plan">
                     <div class="aside-text">New Plan</div>
                 </a>
             </div>
