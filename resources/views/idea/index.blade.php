@@ -2,33 +2,15 @@
 
 @section('script')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.like-button').click(function(e) {
-                e.preventDefault();
-                var ideaId = $(this).data('idea-id');
-                var likeCountElement = $('#likeCount_' + ideaId);
-
-                $.ajax({
-                    url: '/idea/like/' + ideaId,
-                    method: 'GET',
-                    success: function(response) {
-                        var data = response.data;
-                        likeCountElement.text(data.favorites);
-                    },
-                    error: function(response) {
-                        console.log(response);
-                    }
-                });
-            });
-        });
-    </script>
 @endsection
 
 @section('content')
+    <script src="{{ asset('js/favorites.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="/css/zebra.css" />
+
     <div>
-        <table class="table">
-            <thead>
+        <table class="table table-hover zebra border-header">
+            <thead class="plan-header">
             <tr>
                 <th>User</th>
                 <th>Title</th>
@@ -43,19 +25,19 @@
             <tbody>
             @foreach($ideas as $key => $idea)
                 <tr>
-                    <td><a href="{{route('user.show',$idea->user_id)}}"> {{$idea->user_name}}</a></td>
+                    <td><a href="{{ route('user.show', $idea->user_id) }}">{{ $idea->user_name }}</a></td>
                     <td>{{ $idea->title }}</td>
                     <td>{{ $idea->destination }}</td>
                     <td>{{ $idea->tags }}</td>
                     <td>{{ $idea->start_date }}</td>
                     <td>{{ $idea->end_date }}</td>
-                    <!-- 点赞的区域 -->
+                    <!-- Like area -->
                     <td>
                         <a href="#" class="like-button" data-idea-id="{{ $idea->id }}">
-                            <img src="/css/images/heart.png" width="20" height="20" alt="Like" />
+                            <img src="/css/images/heart.png" width="20" height="20" alt="Like">
                             <i class="fa fa-heart"></i>
                         </a>
-                        <span id="likeCount_{{ $idea->id }}">{{ $idea->favorites }}</span> <!-- 显示点赞数的区域 -->
+                        <span id="likeCount_{{ $idea->id }}">{{ $idea->favorites }}</span> <!-- Like count area -->
                     </td>
                     <td><a href="{{ route("idea.show", $idea->id) }}">Detail</a></td>
                 </tr>
