@@ -21,6 +21,12 @@
                         {{ session('error') }}
                     </div>
                 @endif
+                @if(session('success'))
+                    {{--TODO 添加信息提示框样式--}}
+                    <div class="tip">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -73,7 +79,8 @@
                             <th>Tags</th>
                             <th>Start Date</th>
                             <th>End Date</th>
-                            <th><form method="post" action="{{ route('plan.removeAllIdeas', $plan->id ) }}">
+                            <th>
+                                <form method="post" action="{{ route('plan.removeAllIdeas', $plan->id ) }}">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit">Remove All</button>
@@ -95,13 +102,13 @@
                                 <td>{{ $planIdea->start_date }}</td>
                                 <td>{{ $planIdea->end_date }}</td>
                                 <td>
-                                    <form method="post"
-                                          action="{{route('plan_idea.destroy', $planIdea->id)}}">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit">Remove</button>
+{{--                                    <form method="post"--}}
+{{--                                          action="{{ route('plan_idea.destroy', $planIdea->id) }}">--}}
+{{--                                        @method('DELETE')--}}
+{{--                                        @csrf--}}
+{{--                                        <button type="submit">Remove</button>--}}
 
-                                    </form>
+{{--                                    </form>--}}
                                     {{--<a href="{{route('plan.removeIdea',[$plan->id, $planIdea->id])}}">Remove</a>--}}
                                 </td>
                             </tr>
