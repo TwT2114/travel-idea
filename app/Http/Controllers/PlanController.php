@@ -67,16 +67,54 @@ class PlanController extends Controller
     {
         //
         $plan = Plan::find($id);
-        $planIdeas = Idea::whereIn('id', function (Builder $query) use ($id) {
-            $query->select('idea_id')->from('plan_ideas')->where('plan_id', $id);
-        })->get();
-        return view('plan.show', compact('plan', 'planIdeas'));
+        // check if the plan exist
+        if ($plan) {
+
+            $planIdeas = Idea::whereIn('id', function (Builder $query) use ($id) {
+                $query->select('idea_id')->from('plan_ideas')->where('plan_id', $id);
+            })->get();
+            // check if the plan contains ideas
+            if ($planIdeas) {
+
+                // get the location of the plan
+                // check the # of the locations
+                if (count($planIdeas) > 1) {
+                    // set origin and destination if there are more than 1 location
+                    $loc = "origin="
+                        . $planIdeas[0]->latitude . ","
+                        . $planIdeas[0]->longitude
+                        . "&destination="
+                        . $planIdeas[count($planIdeas) - 1]->latitude . ","
+                        . $planIdeas[count($planIdeas) - 1]->longitude;
+
+                    // set 1 waypoint if there are more than 2 locations
+                    if (count($planIdeas) > 2) {
+                        $loc .= "&waypoints=" . $planIdeas[1]->latitude . "," . $planIdeas[1]->longitude;
+
+                        if (count($planIdeas) > 3) {
+                            // set waypoints if there are more than 3 locations
+                            for ($i = 2; $i < count($planIdeas); $i++) {
+                                $loc .= "|" . $planIdeas[$i]->latitude . "," . $planIdeas[$i]->longitude;
+                            }
+                        }
+                    }
+
+                    $plan->loc = $loc;
+                }
+
+            }
+            return view('plan.show', compact('plan', 'planIdeas'));
+        } else {
+            return redirect(route('plan.index'))->with('error', 'Plan not found.');
+        }
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public
+    function edit(string $id)
     {
         // edit plan
 
@@ -105,7 +143,8 @@ class PlanController extends Controller
     /**
      * Add idea to plan
      */
-    public function addIdea(Request $request)
+    public
+    function addIdea(Request $request)
     {
         // 1. validate the inputted data
         $request->validate([
@@ -145,7 +184,8 @@ class PlanController extends Controller
     /**
      * Remove all idea from plan
      */
-    public function removeAllIdeas(string $planId)
+    public
+    function removeAllIdeas(string $planId)
     {
         // delete all the related ideas in plan_ideas table
         $plan = Plan::find($planId);
@@ -166,7 +206,8 @@ class PlanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public
+    function update(Request $request, string $id)
     {
         // validate the inputted data
         $request->validate([
@@ -191,7 +232,8 @@ class PlanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public
+    function destroy(string $id)
     {
         // get Plan by id
         $plan = Plan::find($id);

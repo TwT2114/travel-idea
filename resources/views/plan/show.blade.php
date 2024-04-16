@@ -22,6 +22,11 @@
                 {{ session('error') }}
             </div>
         @endif
+        @if(session('success'))
+                <div class="alert alert-danger">
+                    {{ session('success') }}
+                </div>
+        @endif
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -70,6 +75,18 @@
                 @endforeach
                 </tbody>
             </table>
+            @if($plan->loc != null)
+                <iframe class="map"
+                        title="map"
+                        width="50%"
+                        height="450"
+                        loading="lazy"
+                        allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps/embed/v1/directions?key={{ config('api.google_map') }}&{!! $plan->loc !!}">
+                    {{--src="https://www.google.com/maps/embed/v1/directions?key={{config('api.google_map')}}&origin=30.753924,120.758543&destination=31.2983399,120.58319&waypoints=31.230416,121.473701">--}}
+                </iframe>
+            @endif
 
         @else
             <p>No ideas added</p>
