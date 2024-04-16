@@ -1,17 +1,20 @@
 @extends('layouts.app')
 
 @section('script')
+    <link rel="stylesheet" type="text/css" href="/css/user.css"/>
+    <script src="{{ asset('js/buttonShow.js') }}"></script>
 @endsection
 
 @section('content')
-    <link rel="stylesheet" type="text/css" href="/css/user.css" />
-    <script src="{{ asset('js/buttonShow.js') }}"></script>
 
+    <a href="{{ url()->previous() }}">Back</a>
     <div class="homeHead-item">
-        <li>
-            <img src="/css/images/User_homepage.png" alt="User">
-            <div class="homeHead-text">{{$user->name}}'s homepage</div>
-        </li>
+        <ul>
+            <li>
+                <img src="/css/images/User_homepage.png" alt="User">
+                <div class="homeHead-text">{{$user->name}}'s homepage</div>
+            </li>
+        </ul>
     </div>
 
     <div class="message">

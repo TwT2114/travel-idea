@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="{{ route('plan.show', $plan->id) }}">Back</a>
+    <a href="{{ url()->previous() }}">Back</a>
     @if( $plan->user_id == \Illuminate\Support\Facades\Auth::id() )
         <div>
             <form method="post" action="{{ route('plan.destroy', $plan->id) }}">

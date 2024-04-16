@@ -5,10 +5,11 @@
     <script async
             src="https://maps.googleapis.com/maps/api/js?key={{config('api.google_map')}}&libraries=places&callback=initMap">
     </script>
+    <link rel="stylesheet" type="text/css" href="/css/create.css" />
 @endsection
 
 @section('content')
-    <link rel="stylesheet" type="text/css" href="/css/create.css" />
+    <a href="{{ url()->previous() }}">Back</a>
     <div class="title">
         Add a New Idea
     </div>

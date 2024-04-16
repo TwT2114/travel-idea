@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('script')
-
+    <link rel="stylesheet" type="text/css" href="/css/create.css" />
 @endsection
 
 @section('content')
-    <link rel="stylesheet" type="text/css" href="/css/create.css" />
+    <a href="{{ url()->previous() }}">Back</a>
     <div class="title">
-        Add a New Plan
+        <h1>Add a New Plan</h1>
     </div>
 
 

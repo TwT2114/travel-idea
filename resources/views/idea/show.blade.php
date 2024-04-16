@@ -41,7 +41,7 @@
 @section('content')
 
     <div>
-        <a href="{{route('idea.index')}}">Back</a>
+        <a href="{{ url()->previous() }}">Back</a>
 
         {{--only the idea poster can modify--}}
         @if($idea->user_id == \Illuminate\Support\Facades\Auth::id())

@@ -1,10 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    <a href="{{ url()->previous() }}">Back</a>
     @if($idea->user_id==\Illuminate\Support\Facades\Auth::id())
-        <div>
-            <a href="{{route('idea.show',$idea->id)}}">Back</a>
-        </div>
         <div>
             <form method="post" action="{{ route('idea.destroy', $idea->id) }}">
                 @csrf

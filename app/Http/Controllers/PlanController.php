@@ -72,7 +72,7 @@ class PlanController extends Controller
 
             $planIdeas = Idea::whereIn('id', function (Builder $query) use ($id) {
                 $query->select('idea_id')->from('plan_ideas')->where('plan_id', $id);
-            })->get();
+            })->orderBy('start_date')->get();
             // check if the plan contains ideas
             if ($planIdeas) {
 
@@ -93,7 +93,7 @@ class PlanController extends Controller
 
                         if (count($planIdeas) > 3) {
                             // set waypoints if there are more than 3 locations
-                            for ($i = 2; $i < count($planIdeas); $i++) {
+                            for ($i = 2; $i < count($planIdeas) - 1; $i++) {
                                 $loc .= "|" . $planIdeas[$i]->latitude . "," . $planIdeas[$i]->longitude;
                             }
                         }
@@ -133,7 +133,7 @@ class PlanController extends Controller
             // get all the ideas that are not related to the plan
             $ideas = Idea::whereNotIn('id', function (Builder $query) use ($id) {
                 $query->select('idea_id')->from('plan_ideas')->where('plan_id', $id);
-            })->get();
+            })->latest()->get();
 
             return view('plan.edit', compact('plan', 'planIdeas', 'ideas'));
         }

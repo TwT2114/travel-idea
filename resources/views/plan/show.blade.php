@@ -6,9 +6,7 @@
 @section('content')
 
     <div>
-        <a href="{{ route('plan.index') }}">Back</a>
-
-        <a href="{{ route('plan.create') }}">Create</a>
+        <a href="{{ url()->previous() }}">Back</a>
 
         {{--check User--}}
         @if($plan->user_id == \Illuminate\Support\Facades\Auth::id())

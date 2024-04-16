@@ -2,11 +2,12 @@
 
 @section('script')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('js/favorites.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="/css/zebra.css" />
 @endsection
 
 @section('content')
-    <script src="{{ asset('js/favorites.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="/css/zebra.css" />
+
 
     <div>
         <table class="table table-hover zebra border-header">
