@@ -58,7 +58,7 @@ class IdeaController extends Controller
             'tags' => 'required'
 
         ]);
-        $destination = $request->get( key: 'destination');
+        $destination = $request->get(key: 'destination');
         // 调用Google Maps Geocoding API获取地理信息
         $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
 
@@ -78,13 +78,13 @@ class IdeaController extends Controller
             'user_id' => Auth::id(),
             'user_name' => Auth::user()->name,
             'title' => $request->get('title'),
-            'destination'=>$destination,
+            'destination' => $destination,
             'start_date' => $request->get('start_date'),
             'end_date' => $request->get('end_date'),
             'tags' => $request->get('tags')
         ]);
-        $idea->latitude =$latitude;
-        $idea->longitude =$longitude;
+        $idea->latitude = $latitude;
+        $idea->longitude = $longitude;
         // 3. save the data into database
         $idea->save();
         return redirect(route('idea.index'))->with('success', 'Idea has been added');
@@ -146,7 +146,6 @@ class IdeaController extends Controller
 
         // 调用Google Maps Geocoding API获取地理信息
         $response = Http::get('https://maps.googleapis.com/maps/api/geocode/json', [
-
             'address' => $idea->destination,
             'key' => config('api.google_map')
         ]);
@@ -158,8 +157,8 @@ class IdeaController extends Controller
             : null;
         $latitude = $location['lat'] ?? null;
         $longitude = $location['lng'] ?? null;
-        $idea->latitude =$latitude;
-        $idea->longitude =$longitude;
+        $idea->latitude = $latitude;
+        $idea->longitude = $longitude;
 
         //4. save the idea into database
         $idea->save();
@@ -189,11 +188,13 @@ class IdeaController extends Controller
         }
     }
 
-//获取景点的api
+    /**
+     * get points of interest
+     */
     public function getAccessToken()
     {
-        $client_id = 'W5CLahWjPhuJEotzu4Bwy8bYI5dQuCQd';
-        $client_secret = 'wEv3PcGoFMs5gZtK';
+        $client_id = config('api.amadeus_client_id');
+        $client_secret = config('api.amadeus_client_secret');
 
         $response = Http::asForm()->post('https://test.api.amadeus.com/v1/security/oauth2/token', [
             'grant_type' => 'client_credentials',
@@ -228,6 +229,7 @@ class IdeaController extends Controller
         }
 
     }
+
     public function getWeather(Idea $idea)
     {
         $weathers = $this->getCityWeather($idea->destination);
@@ -302,8 +304,6 @@ class IdeaController extends Controller
 
         return response()->json(['success' => 'Idea liked successfully', 'data' => ['favorites' => $idea->favorites]]);
     }
-
-
 
 
 }
