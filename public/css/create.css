@@ -11,7 +11,7 @@
     justify-content: center;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    background-color: rgba(67, 125, 100);
+    background-color: #85a384;
     font-size: 18px;
     color: white;
     font-weight: bold; /* 加粗字体 */
@@ -20,7 +20,7 @@
 .common-button{
     outline: none;
     border: none;
-    background-color: rgba(67, 125, 100);
+    background-color: #85a384;
     color: white;
     font-weight: bold;
     padding: 3px 20px; /* 调整按钮宽度 */
