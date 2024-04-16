@@ -48,23 +48,7 @@
             <a href="{{route("idea.edit", $idea->id)}}">Edit</a>
         @endif
     </div>
-    <div class="message">
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div><br/>
-        @endif
-    </div>
-    {{--    <div id="map" style="width: 80%; height: 400px;"></div>--}}
+
     <div style="margin: auto; width: auto">
         <div>
             <h1>

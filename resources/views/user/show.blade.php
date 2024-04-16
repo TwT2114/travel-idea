@@ -1,27 +1,10 @@
 @extends('layouts.app')
 
 @section('script')
+    <link rel="stylesheet" type="text/css" href="/css/user.css" />
 @endsection
 
 @section('content')
-    <link rel="stylesheet" type="text/css" href="/css/user.css" />
-
-    <div class="message">
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div><br/>
-        @endif
-    </div>
     <h2>{{$user->name}}'s Created Ideas and Plans</h2>
 
     <div class="user-container">
