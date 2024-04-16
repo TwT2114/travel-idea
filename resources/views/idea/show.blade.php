@@ -99,7 +99,7 @@
                     loading="lazy"
                     allowfullscreen
                     referrerpolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}&q={{$idea->destination}}">
+                    src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}&q={{$idea->destination}}&center={{$idea->latitude}},{{$idea->longitude}}">
             </iframe>
         </div>
         <div>
@@ -109,7 +109,7 @@
 
         <!-- 热门景点api -->
         @if($idea)
-            <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">Get Points Of Interest (Support cities in
+            <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">Get Points of Interest (Support cities in
                 EU)</a>
         @else
             <p>no points of interest</p>
@@ -138,8 +138,6 @@
                         <p>{{ $comment->content }}</p>
                         <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
                         <form method="get" action="{{ route('comment.delete', $comment->id) }}">
-                            {{--                            @method('DELETE')--}}
-                            {{--                            <input hidden="hidden" type="text" name="comment_id" value="{{ $comment->id }}">--}}
                             <button type="submit">Delete</button>
                         </form>
                     </li>
