@@ -231,8 +231,12 @@ class IdeaController extends Controller
     public function getWeather(Idea $idea)
     {
         $weathers = $this->getCityWeather($idea->destination);
+        // 如果$weathers为空或未找到相关数据，显示提示信息
+        if (empty($weathers)) {
+            return "Cannot find the weather forecast of this place! Please use the city name!";
+        }
+
         $html = view('idea.weather', compact('weathers', 'idea'))->render();
-        // return response()->json(['html' => $html]);
         return $html;
     }
 
@@ -241,10 +245,21 @@ class IdeaController extends Controller
         $apiKey = config('api.weather');
         $getGeoUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" . $destination . "&limit=1&appid=" . $apiKey;
         $geoData = Http::get($getGeoUrl)->throw()->json();
+
+        // 检查$geoData是否为空或不包含所需字段
+        if (empty($geoData) || !isset($geoData[0]['lon']) || !isset($geoData[0]['lat'])) {
+            return null; // 返回空值表示未找到数据
+        }
+
         $lon = $geoData[0]['lon'];
         $lat = $geoData[0]['lat'];
         $url = "https://api.openweathermap.org/data/2.5/forecast?lat=" . $lat . "&lon=" . $lon . "&appid=" . $apiKey . "&units=metric";
         $response = Http::get($url)->throw()->json();
+        // 检查$response是否为空或不包含所需字段
+        if (empty($response) || !isset($response['list'])) {
+            return null; // 返回空值表示未找到数据
+        }
+
         $weatherData = $this->array_slice_with_step($response['list'], 0, 5, 8);
         foreach ($weatherData as $weather) {
             $tenDaysOfWeatherDataList[] = [
