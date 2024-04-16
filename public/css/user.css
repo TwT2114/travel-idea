@@ -1,39 +1,104 @@
-h2 {
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-    /* Add any other desired styles for h2 heading */
+.homeHead-item {
+    width: 100%;
+    height: 20%;
+    background-color: rgba(67, 125, 100); /* 绿色，透明度30% */
+    padding: 0 0 0 40px;
+    display: flex; /* 使用flex布局 */
+    align-items: center; /* 垂直居中 */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
+
+.homeHead-item li {
+    list-style: none; /* 移除li的默认样式 */
+    display: flex; /* 使用flex布局 */
+    align-items: center; /* 垂直居中 */
+}
+
+.homeHead-item img {
+    width: 60px; /* 图像大小为50px */
+    margin-right: 10px; /* 图像右侧留出一定间距 */
+}
+
+.homeHead-text {
+    color: white; /* 文字颜色设为白色 */
+    font-size: 20px;
+}
+
 
 .user-container {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    border-bottom-left-radius: 10px; /* 左下圆角 */
+    border-bottom-right-radius: 10px; /* 右下圆角 */
 }
 
 .user-section {
-    width: 48%;
+    width: 50%;
     background-color:rgba(255, 255, 255, 0.9); /* Set the background color to white */
     border: 0px solid #ccc; /* Adjust the border to be less wide */
     padding: 10px;
-    border-radius: 10px; /* Add rounded corners */
+    min-height: 30vh; /* 最小高度为页面的50% */
+    overflow-y: auto; /* 设置垂直滚动条 */
 }
 
-h3 {
-    background-color: #f2f2f2; /* Set the background color of the headers to a light gray */
+.sub-head {
+    background-color: transparent;
+    transition: background-color 0.3s; /* 平滑过渡 */
+    font-size: 18px;
     padding: 5px;
-    margin-top: 0; /* Remove the default margin to have consistent spacing */
-    order-radius: 10px;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+
+.user-section .mainBody {
+    display: flex;
+    flex-direction: column;
 }
 
-ul li {
-    margin-bottom: 10px;
+.user-section .mainBody a:link {
+    color: black; /* 未点击链接为黑色 */
+    text-decoration: none; /* 移除下划线 */
+    display: block; /* 将链接块状化，整行可被选中 */
+    padding: 5px; /* 添加内边距 */
+    transition: color 0.3s, background-color 0.3s; /* 平滑过渡效果 */
 }
+
+
+.user-section .mainBody a:hover {
+    background-color: lightgrey; /* 悬停时背景灰色 */
+}
+
+a{
+    text-decoration: none;
+}
+
+a:visited {
+    color: steelblue; /* 点击后颜色变为粉色 */
+}
+
+/*ul {*/
+/*    list-style-type: none;*/
+/*    padding: 0;*/
+/*}*/
+
+/*ul li {*/
+/*    margin-bottom: 10px;*/
+/*}*/
 
 div {
     text-align: center;
+}
+
+button {
+    font-size: 10px;
+    background-color: transparent;
+    border: none;
+}
+
+.more-info {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
 }
