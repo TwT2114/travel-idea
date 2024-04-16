@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tags');
             $table->string('start_date');
             $table->string('end_date');
+            $table->integer('favorites');
 
             $table->timestamps();
         });
