@@ -19,18 +19,6 @@
     <div class="title">
         Add a New Idea
     </div>
-    <div class="message">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div><br/>
-        @endif
-    </div>
-
 
     <form method="post" action="{{ route('idea.store') }}">
         {{ csrf_field() }}

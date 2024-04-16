@@ -146,6 +146,28 @@
     </aside>
 
     <div role="main" class="col-10 main-container">
+        <div class="message">
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+            @if(session('success'))
+                {{--TODO 添加信息提示框样式--}}
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div><br/>
+            @endif
+        </div>
         @yield('content')
     </div>
 </main>

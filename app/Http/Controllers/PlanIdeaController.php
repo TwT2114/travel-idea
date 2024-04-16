@@ -6,6 +6,7 @@ use App\Models\Plan;
 use App\Models\PlanIdea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PlanIdeaController extends Controller
 {
@@ -83,20 +84,25 @@ class PlanIdeaController extends Controller
         //
         // check if the plan belongs to the current user
 
-        $planIdea = PlanIdea::find($planIdeaId);
-        if ($planIdea) {
+        $plan_idea = PlanIdea::find($planIdeaId);
+        if ($plan_idea) {
+//            return redirect(route('plan.index'))->with('error', 'Plan-idea not found:' . $plan_idea);
+//            PlanIdea::where('id', $planIdeaId)->delete();
+//            return back()->with('success', 'Plan idea deleted successfully.');
+
             // check if the plan belongs to the current user
-            $plan = Plan::find($planIdea->plan_id);
+            $plan = Plan::find($plan_idea->plan_id);
 
             if ($plan->user_id == Auth::id()) {
                 // delete the planned idea
-                $planIdea->delete();
+                $plan_idea->delete();
                 return redirect(route('plan.edit', $plan->id))->with('success', 'Plan idea deleted successfully.');
             } else {
                 return redirect(route('plan.show'))->with('error', 'You are not allowed to delete this plan-idea.');
             }
+
         } else {
-            return redirect(route('plan.index'))->with('error', 'Plan-idea not found.');
+            return redirect(route('plan.index'))->with('error', 'Plan-idea not found:' . $planIdeaId);
         }
 
     }

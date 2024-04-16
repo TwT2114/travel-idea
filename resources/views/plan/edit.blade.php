@@ -15,22 +15,7 @@
         </div>
         <div>
             <h2>Plan Details</h2>
-            <div class="message">
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div><br/>
-                @endif
-            </div>
+
             <div>
                 <form method="post" action="{{ route('plan.update', $plan->id) }}">
                     @method('PATCH')
@@ -73,7 +58,8 @@
                             <th>Tags</th>
                             <th>Start Date</th>
                             <th>End Date</th>
-                            <th><form method="post" action="{{ route('plan.removeAllIdeas', $plan->id ) }}">
+                            <th>
+                                <form method="post" action="{{ route('plan.removeAllIdeas', $plan->id ) }}">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit">Remove All</button>
@@ -95,13 +81,13 @@
                                 <td>{{ $planIdea->start_date }}</td>
                                 <td>{{ $planIdea->end_date }}</td>
                                 <td>
-                                    <form method="post"
-                                          action="{{route('plan_idea.destroy', $planIdea->id)}}">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit">Remove</button>
+{{--                                    <form method="post"--}}
+{{--                                          action="{{ route('plan_idea.destroy', $planIdea->id) }}">--}}
+{{--                                        @method('DELETE')--}}
+{{--                                        @csrf--}}
+{{--                                        <button type="submit">Remove</button>--}}
 
-                                    </form>
+{{--                                    </form>--}}
                                     {{--<a href="{{route('plan.removeIdea',[$plan->id, $planIdea->id])}}">Remove</a>--}}
                                 </td>
                             </tr>
