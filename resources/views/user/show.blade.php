@@ -5,6 +5,14 @@
 
 @section('content')
     <link rel="stylesheet" type="text/css" href="/css/user.css" />
+    <script src="{{ asset('js/buttonShow.js') }}"></script>
+
+    <div class="homeHead-item">
+        <li>
+            <img src="/css/images/User_homepage.png" alt="User">
+            <div class="homeHead-text">{{$user->name}}'s homepage</div>
+        </li>
+    </div>
 
     <div class="message">
         @if (session('error'))
@@ -22,34 +30,38 @@
             </div><br/>
         @endif
     </div>
-    <h2>{{$user->name}}'s Created Ideas and Plans</h2>
 
     <div class="user-container">
         <div class="user-section">
-            <h3>Created Ideas:</h3>
-            <ul>
+            <div class="sub-head">Created Ideas:</div>
+            <div class="mainBody">
                 @foreach($userIdeas as $idea)
-                    <li>
+                    <div>
                         <a href="{{route('idea.show', $idea->id)}}">{{$idea->title}}</a>
-                    </li>
+                    </div>
                 @endforeach
-            </ul>
+            </div>
         </div>
 
         <div class="user-section">
-            <h3>Created Plans:</h3>
-            <ul>
+            <div class="sub-head">Created Plans:</div>
+            <div class="mainBody">
                 @foreach($userPlans as $plan)
-                    <li>
+                    <div>
                         <a href="{{route('plan.show', $plan->id)}}">{{$plan->title}}</a>
-                    </li>
+                    </div>
                 @endforeach
-            </ul>
+            </div>
         </div>
     </div>
 
-    <div>
-        <a href="{{route('idea.index')}}">View All Ideas</a>
-        <a href="{{route('plan.index')}}">View All Plans</a>
+    <div class="more-info">
+        <div>Want some ideas for your trip?</div>
+        <button onclick="toggleIdeas()">▼</button>
     </div>
+    <div id="ideaSection" style="display: none; text-align: left;">
+        <a href="{{route('idea.index')}}">All Ideas&nbsp;&nbsp;</a>
+        <a href="{{route('plan.index')}}">&nbsp;&nbsp;All Plans</a>
+    </div>
+
 @endsection
