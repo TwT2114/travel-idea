@@ -1,31 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
+    <link rel="stylesheet" type="text/css" href="/css/create.css" />
+    <link rel="stylesheet" type="text/css" href="/css/zebra.css" />
+    <link rel="stylesheet" type="text/css" href="/css/edit.css" />
     <a href="{{ url()->previous() }}">Back</a>
+    <div class="plan_body">
     @if( $plan->user_id == \Illuminate\Support\Facades\Auth::id() )
-        <div>
-            <form method="post" action="{{ route('plan.destroy', $plan->id) }}">
-                @method('DELETE')
-                @csrf
-                <button type="submit">Delete</button>
-            </form>
-        </div>
-        <div>
+        <div style="display: flex; justify-content: space-between;">
             <h1>Edit Plan</h1>
+            <div>
+                <form method="post" action="{{ route('plan.destroy', $plan->id) }}">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="common-button">Delete the Plan</button>
+                </form>
+            </div>
         </div>
         <div>
-            <h2>Plan Details</h2>
+{{--            <h2>Plan Details</h2>--}}
 
             <div>
                 <form method="post" action="{{ route('plan.update', $plan->id) }}">
                     @method('PATCH')
                     @csrf
                     <table>
-                        <thead>
-                        <tr>
-                            <th></th>
-                        </tr>
-                        </thead>
                         <tbody>
                         <tr>
                             <td><label for="title">Title</label></td>
@@ -34,11 +33,10 @@
                             </td>
                         </tr>
 
-
                         <tr>
                             <td></td>
                             <td>
-                                <button type="submit">Update</button>
+                                <button type="submit" class="common-button">Update</button>
                             </td>
                         </tr>
                         </tbody>
@@ -46,11 +44,24 @@
                 </form>
             </div>
             <div>
-                <h2>Added Ideas</h2><br>
+                <div>Added Ideas</div>
                 @if($planIdeas->isNotEmpty())
-                    <table>
-
-                        <thead>
+                    <div>
+                        <form method="post" action="{{ route('plan.removeAllIdeas', $plan->id ) }}">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="common-button">Remove All</button>
+                        </form>
+                    </div>
+                    <table class="table table-hover zebra border-header">
+                        <thead class="plan-header">
+{{--                        <div>--}}
+{{--                            <form method="post" action="{{ route('plan.removeAllIdeas', $plan->id ) }}">--}}
+{{--                                @method('DELETE')--}}
+{{--                                @csrf--}}
+{{--                                <button type="submit" class="common-button">Remove All</button>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
                         <tr>
                             <th>User</th>
                             <th>Title</th>
@@ -58,13 +69,6 @@
                             <th>Tags</th>
                             <th>Start Date</th>
                             <th>End Date</th>
-                            <th>
-                                <form method="post" action="{{ route('plan.removeAllIdeas', $plan->id ) }}">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit">Remove All</button>
-                                </form>
-                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -98,11 +102,13 @@
                     <p>No ideas added</p>
                 @endif
             </div>
+        </div>
+    </div>
             <div>
                 @if($ideas->isNotEmpty())
-                    <h2>Ideas to add</h2>
-                    <table>
-                        <thead>
+                    <h2 >Ideas to add</h2>
+                    <table class="table table-hover zebra border-header">
+                        <thead class="plan-header">
                         <tr>
                             <th>User</th>
                             <th>Title</th>
@@ -133,7 +139,7 @@
                                         <input hidden="hidden" type="text" name="plan_id" value="{{ $plan->id}}">
                                         <input hidden="hidden" type="text" name="idea_id" value="{{ $idea->id }}">
 
-                                        <button type="submit">Add</button>
+                                        <button type="submit" class="common-button">Add</button>
 
                                     </form>
                                 </td>
