@@ -3,8 +3,8 @@
 @section('script')
     <link rel="stylesheet" type="text/css" href="/css/create.css"/>
     <link rel="stylesheet" type="text/css" href="/css/zebra.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/edit.css"/>
 @endsection
+
 @section('content')
 
     <div>
