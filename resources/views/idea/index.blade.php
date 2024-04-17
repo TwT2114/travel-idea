@@ -1,14 +1,22 @@
 @extends('layouts.app')
 
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/favorites.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="/css/zebra.css"/>
+
+    <script>
+        $(function() {
+            $("#idea-list").tablesorter();
+        });
+    </script>
+
 @endsection
 
 @section('content')
     <div>
-        <table class="table table-hover zebra border-header">
+        <article><h1>Idea List</h1></article>
+        Click the table header to sort
+        <table id="idea-list" class="table table-hover zebra border-header">
             <thead class="plan-header">
             <tr>
                 <th>User</th>
@@ -17,8 +25,9 @@
                 <th>Tags</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th></th>
-                <th></th>
+                <th>Total Comments</th>
+                <th>Likes</th>
+                <th>Detail</th>
             </tr>
             </thead>
             <tbody>
@@ -30,7 +39,9 @@
                     <td>{{ $idea->tags }}</td>
                     <td>{{ $idea->start_date }}</td>
                     <td>{{ $idea->end_date }}</td>
-                    <!-- Like area -->
+                    <!-- Show the comments count -->
+                    <td class="text-center">{{ $idea->comments_count }}</td>
+                    <!-- Show the favorite count -->
                     <td>
                         <a href="#" class="like-button" data-idea-id="{{ $idea->id }}">
                             <img src="/css/images/heart.png" width="20" height="20" alt="Like">

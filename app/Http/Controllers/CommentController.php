@@ -19,7 +19,7 @@ class CommentController extends Controller
         $id = $request->get('idea_id');
 
         $idea = Idea::with(['comments' => function ($query) {
-            $query->orderBy('created_at', 'desc')->take(10); // 限制只获取最新的 10 条评论
+            $query->orderBy('created_at', 'desc'); // 限制只获取最新的 20 条评论
         }])->find($id);
 
         $comments = $idea->comments->map(function ($comment) {
@@ -123,18 +123,5 @@ class CommentController extends Controller
     public function destroy(string $id)
     {
         //
-        $comment = Comment::find($id); // 通过评论ID查找评论
-
-        if ($comment->user_id === auth()->id()) {
-            $comment->delete(); // 删除评论
-            return redirect(route('idea.show', $comment->idea_id))
-                ->with('success', 'Comment has been deleted successfully.');
-        } else {
-            // 无权限删除评论，返回错误信息或重定向到其他页面
-            return redirect(route('idea.show', $comment->idea_id))
-                ->with('error', 'You do not have permission to delete this comment.');
-        }
-        // 删除完成后，重定向到特定页面或返回成功信息
-
     }
 }

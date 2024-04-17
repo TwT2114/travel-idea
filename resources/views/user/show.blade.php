@@ -6,7 +6,6 @@
 @endsection
 
 @section('content')
-
     <a href="{{ url()->previous() }}" class="left">Back</a>
     <div class="homeHead-item">
         <ul>
@@ -14,24 +13,10 @@
                 <img src="/css/images/User_homepage.png" alt="User">
                 <div class="homeHead-text">{{$user->name}}'s homepage</div>
             </li>
+            <li>
+                <p class="homeHead-text">{{ \Illuminate\Support\Facades\Auth::user()->email }}</p>
+            </li>
         </ul>
-    </div>
-
-    <div class="message">
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div><br/>
-        @endif
     </div>
 
     <div class="user-container">

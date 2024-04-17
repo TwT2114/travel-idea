@@ -6,13 +6,12 @@
 @endsection
 
 @section('content')
-
     <div>
         <a href="{{ url()->previous() }}">Back</a>
     </div>
 
     <div>
-        <h1>{{ $plan->title }}</h1>
+        <article><h1>{{ $plan->title }}</h1></article>
         <div style="display: flex; align-items: center;">
             <p>
                 Post By<a href="{{ route('user.show',$plan->user_id) }}"

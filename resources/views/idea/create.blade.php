@@ -11,7 +11,7 @@
 @section('content')
     <a href="{{ url()->previous() }}">Back</a>
     <div class="title">
-        Add a New Idea
+        <article><h1>Add a New Idea</h1></article>
     </div>
     <div class="main_table">
         <form method="post" action="{{ route('idea.store') }}">

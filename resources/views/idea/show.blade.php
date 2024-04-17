@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('script')
+    <link rel="stylesheet" type="text/css" href="/css/info.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/create.css"/>
     <script>
         // 使用 jQuery 发起 AJAX 请求，提交评论并获取最新评论列表
         function submitComment() {
@@ -33,16 +35,13 @@
         }
 
         // 每隔一定时间间隔调用 updateComments 函数
-        setInterval(updateComments, 5000); //  5 秒，根据需要调整时间间隔
+        setInterval(updateComments, 5000); //  5 秒
     </script>
 @endsection
 
 @section('content')
-    <link rel="stylesheet" type="text/css" href="/css/info.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/create.css"/>
     <div>
         <a href="{{route('idea.index')}}">Back</a>
-
     </div>
     <div id="weatherInfo" class="weather">
         <iframe title="weather" width="465" src="/idea/{{ $idea->id }}/weather"></iframe>
@@ -51,7 +50,9 @@
     <div>
         <div>
             <div class="idea-title">
-                {{$idea->title}}
+                <article>
+                    <h1>{{$idea->title}}</h1>
+                </article>
             </div>
 
             <div>
@@ -96,28 +97,30 @@
                     </div>
             </div>
             {{--        右边--}}
+            <!-- 评论区 -->
             <div class="comments-section">
                 <div class="common-header">Comments</div>
                 <div class="commentList">
                     @if($idea->comments->isEmpty())
                         <p>Oops, there's no comment.</p>
                     @else
-                        @foreach ($idea->comments->reverse() as $comment)
-                            <li>
-                                <div>
-                                    <strong>{{ $comment->user_name }}</strong>
-                                    <form method="get" action="{{ route('comment.delete', $comment->id) }}">
-                                        <button type="submit">Delete</button>
-                                    </form>
-                                </div>
-                                <p>{{ $comment->content }}</p>
-                                <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
-                            </li>
-                        @endforeach
+                        <ul>
+                            @foreach ($idea->comments->reverse() as $comment)
+                                <li>
+                                    <div>
+                                        <strong>{{ $comment->user_name }}</strong>
+                                        <form method="get" action="{{ route('comment.delete', $comment->id) }}">
+                                            <button type="submit">Delete</button>
+                                        </form>
+                                    </div>
+                                    <p>{{ $comment->content }}</p>
+                                    <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
+                                </li>
+                            @endforeach
+                        </ul>
                 </div>
                 @endif
-
-
+                <!-- 提交评论 -->
                 <form method="post" action="{{ route('comment.store') }}">
                     @csrf
                     <div class="form-group">
@@ -127,27 +130,6 @@
                         <button type="submit" class="common-button">submit</button>
                     </div>
                 </form>
-                {{--                    <div class="commentList">--}}
-                {{--                        @foreach ($idea->comments->reverse() as $comment)--}}
-                {{--                            <li>--}}
-                {{--                                <strong>{{ $comment->user_name }}</strong>--}}
-                {{--                                <p>{{ $comment->content }}</p>--}}
-                {{--                                <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>--}}
-                {{--                                <form method="get" action="{{ route('comment.delete', $comment->id) }}">--}}
-                {{--                                    <button type="submit">Delete</button>--}}
-                {{--                                </form>--}}
-                {{--                            </li>--}}
-                {{--                        @endforeach--}}
-                {{--                    </div>--}}
-                {{--                    <form method="post" action="{{ route('comment.store') }}" id="commentForm">--}}
-                {{--                        @csrf--}}
-                {{--                        <div class="form-group">--}}
-                {{--                            <label for="content">My Comment</label>--}}
-                {{--                            <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">--}}
-                {{--                            <input id="content" name="content" type="text">--}}
-                {{--                            <button type="submit" class="btn btn-primary">submit</button>--}}
-                {{--                        </div>--}}
-                {{--                    </form>--}}
             </div>
         </div>
 @endsection
