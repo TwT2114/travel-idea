@@ -3,7 +3,6 @@
 @section('content')
     <link rel="stylesheet" type="text/css" href="/css/create.css" />
     <link rel="stylesheet" type="text/css" href="/css/zebra.css" />
-    <link rel="stylesheet" type="text/css" href="/css/edit.css" />
 
     <div>
         <a href="{{ url()->previous() }}">Back</a>
