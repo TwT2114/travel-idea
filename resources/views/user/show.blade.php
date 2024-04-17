@@ -7,7 +7,7 @@
 
 @section('content')
 
-    <a href="{{ url()->previous() }}">Back</a>
+    <a href="{{ url()->previous() }}" class="left">Back</a>
     <div class="homeHead-item">
         <ul>
             <li>

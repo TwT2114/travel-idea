@@ -101,3 +101,9 @@ button {
     align-items: center;
     font-size: 15px;
 }
+
+a.left {
+    text-decoration: none; /* Remove the underline from the links */
+    display: block; /* Change the default inline behavior to block-level to enable left alignment */
+    text-align: left; /* Align the links to the left */
+}
