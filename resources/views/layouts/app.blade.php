@@ -142,7 +142,6 @@
                     </div>
                 @endif
                 @if(session('success'))
-                    {{--TODO 添加信息提示框样式--}}
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
