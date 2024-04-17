@@ -24,27 +24,14 @@ a{
     padding: 0 0 0 30px;
 }
 
-.comments-section .common-header {
-    position: sticky;
-    top: 0;
-    background-color: #85a384; /* Specify the background color for the header */
-    padding: 6px; /* Add padding for spacing */
-    border-bottom: 2px solid #000; /* Add a bottom border to the header */
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+.common-header{
+    /*position: fixed;*/
+    background-color: #85a384;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     text-align: center;
-    font-size: 15px;
-    font-weight: bold;
+    font-size: 20px;
 }
-
-/*.common-header{*/
-/*    background-color: #85a384;*/
-/*    border-top-left-radius: 10px;*/
-/*    border-top-right-radius: 10px;*/
-/*    text-align: center;*/
-/*    font-size: 20px;*/
-/*    font-weight: bold;*/
-/*}*/
 
 .commentsList {
     width: 45%;
@@ -56,7 +43,7 @@ a{
 .commentList li {
     display: flex;
     flex-direction: column;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     padding: 0 0 0 20px;
     background-color: rgba(255,255,255, 0.3);
 }
@@ -120,17 +107,28 @@ h2 {
     margin-left: auto; /* Push the "Edit" link to the right */
 }
 
-.idea-title{
-    font-size: 20px;
-    font-weight: bolder;
+/* Set a fixed width for the entire content to prevent it from resizing */
+.body-content {
+    width: 960px; /* Set a fixed width for the content */
+    margin: 0 auto; /* Center the content horizontally */
 }
 
-.common-button{
-    outline: none;
-    border: none;
-    background-color: #85a384;
-    color: white;
-    font-weight: bold;
-    padding: 3px 20px; /* 调整按钮宽度 */
-    border-radius: 5px; /* 添加圆角 */
+/* Set a minimum width for the page to prevent it from getting too small */
+body {
+    min-width: 960px; /* Set a minimum width for the body */
+}
+
+/* Prevent the content from wrapping or resizing */
+* {
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Prevent images from resizing */
+img {
+    max-width: 100%; /* Ensure images don't exceed the width of their container */
+}
+
+/* Prevent iframes from resizing */
+iframe {
+    min-width: 100%; /* Set a minimum width for iframes to prevent resizing */
 }
