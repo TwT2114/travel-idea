@@ -36,7 +36,7 @@
         <div class="container" style="position:sticky;top:0;">
             <img src="/css/images/旅游主题_地图.png" alt="Logo" width="100">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Travel Idea') }}
+                {{ config('app.name', 'Travel Genius') }}
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
