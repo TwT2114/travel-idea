@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
-@section('content')
+@section('script')
     <link rel="stylesheet" type="text/css" href="/css/create.css"/>
+@endsection
+
+@section('content')
+
     <a href="{{ url()->previous() }}">Back</a>
     @if($idea->user_id==\Illuminate\Support\Facades\Auth::id())
         <div>

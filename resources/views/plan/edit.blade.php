@@ -6,7 +6,6 @@
 @endsection
 
 @section('content')
-
     <a href="{{ url()->previous() }}">Back</a>
     <div class="plan_body">
         @if( $plan->user_id == \Illuminate\Support\Facades\Auth::id() )
