@@ -112,7 +112,7 @@
 <main class="container-fluid row">
     @guest
     @else
-    <aside class="col-2">
+        <aside class="col-2">
             <a class="aside-item" href="{{ route('idea.index') }}">
                 <div class="aside-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
             </a>
@@ -131,34 +131,34 @@
                 <div class="aside-text"><img src="/css/images/user.png" alt="User">User</div>
             </a>
 
-        @endguest
-    </aside>
+            @endguest
+        </aside>
 
-    <div role="main" class="col-10 main-container">
-        <div class="message">
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
-            @if(session('success'))
-                {{--TODO 添加信息提示框样式--}}
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div><br/>
-            @endif
+        <div role="main" class="col-10 main-container">
+            <div class="message">
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                @if(session('success'))
+                    {{--TODO 添加信息提示框样式--}}
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div><br/>
+                @endif
+            </div>
+            @yield('content')
         </div>
-        @yield('content')
-    </div>
 </main>
 <footer>
     <div>Copyright &copy; 2024 Travel Idea</div>

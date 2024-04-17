@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="stylesheet" type="text/css" href="/css/create.css" />
+    <link rel="stylesheet" type="text/css" href="/css/create.css"/>
     <a href="{{ url()->previous() }}">Back</a>
     @if($idea->user_id==\Illuminate\Support\Facades\Auth::id())
         <div>
@@ -10,7 +10,6 @@
                 @method('DELETE')
                 <button type="submit" class="common-button">Delete</button>
             </form>
-{{--            <a href="{{ route('idea.destroy',$idea->id) }}">Delete</a>--}}
         </div>
         <br>
         <div>

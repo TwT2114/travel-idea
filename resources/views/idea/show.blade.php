@@ -38,7 +38,7 @@
 @endsection
 
 @section('content')
-    <link rel="stylesheet" type="text/css" href="/css/info.css" />
+    <link rel="stylesheet" type="text/css" href="/css/info.css"/>
     <div>
         <a href="{{route('idea.index')}}">Back</a>
 
@@ -52,10 +52,10 @@
             <div class="idea-title">
                 {{$idea->title}}
             </div>
-{{--            --}}{{--only the idea poster can modify--}}
-{{--            @if($idea->user_id == \Illuminate\Support\Facades\Auth::id())--}}
-{{--                <a href="{{route("idea.edit", $idea->id)}}">Edit</a>--}}
-{{--            @endif--}}
+            {{--            --}}{{--only the idea poster can modify--}}
+            {{--            @if($idea->user_id == \Illuminate\Support\Facades\Auth::id())--}}
+            {{--                <a href="{{route("idea.edit", $idea->id)}}">Edit</a>--}}
+            {{--            @endif--}}
 
             <div>
                 Post By <a href="{{route('user.show',$idea->user_id)}}">{{$idea->user_name}}</a>
@@ -75,7 +75,7 @@
                 Tags: {{$idea->tags}}
             </div>
         </div>
-{{--        左边--}}
+        {{--        左边--}}
         <div class="row">
             <div class="map-container">
                 <iframe class="map"
@@ -86,24 +86,25 @@
                         allowfullscreen
                         referrerpolicy="no-referrer-when-downgrade"
                         src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}&q={{$idea->destination}}¢er={{$idea->latitude}},{{$idea->longitude}}">
-                    </iframe>
+                </iframe>
                 <!-- 热门景点api -->
                 @if($idea)
                     <div class="interest">
-                    <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">▶Get Points of Interest (Support cities in
-                        EU)</a>
-                @else
-                    <p>no points of interest</p>
-                @endif
-                </div>
-                </div>
+                        <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">▶Get Points of Interest (Support
+                            cities in
+                            EU)</a>
+                        @else
+                            <p>no points of interest</p>
+                        @endif
+                    </div>
+            </div>
             {{--        右边--}}
-                <div class="comments-section">
-                    <div class="common-header">Comments</div>
-                  <div class="commentList">
+            <div class="comments-section">
+                <div class="common-header">Comments</div>
+                <div class="commentList">
                     @if($idea->comments->isEmpty())
-                        <p >Oops, there's no comment.</p>
-                      @else
+                        <p>Oops, there's no comment.</p>
+                    @else
                         @foreach ($idea->comments->reverse() as $comment)
                             <li>
                                 <div>
@@ -116,40 +117,40 @@
                                 <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
                             </li>
                         @endforeach
-                    </div>
-                    @endif
-
-
-                    <form method="post" action="{{ route('comment.store') }}">
-                        @csrf
-                        <div class="form-group">
-                            <label for="content">My Comment</label>
-                            <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
-                            <input id="content" name="content" type="text">
-                            <button type="submit" class="common-button">submit</button>
-                        </div>
-                    </form>
-{{--                    <div class="commentList">--}}
-{{--                        @foreach ($idea->comments->reverse() as $comment)--}}
-{{--                            <li>--}}
-{{--                                <strong>{{ $comment->user_name }}</strong>--}}
-{{--                                <p>{{ $comment->content }}</p>--}}
-{{--                                <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>--}}
-{{--                                <form method="get" action="{{ route('comment.delete', $comment->id) }}">--}}
-{{--                                    <button type="submit">Delete</button>--}}
-{{--                                </form>--}}
-{{--                            </li>--}}
-{{--                        @endforeach--}}
-{{--                    </div>--}}
-{{--                    <form method="post" action="{{ route('comment.store') }}" id="commentForm">--}}
-{{--                        @csrf--}}
-{{--                        <div class="form-group">--}}
-{{--                            <label for="content">My Comment</label>--}}
-{{--                            <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">--}}
-{{--                            <input id="content" name="content" type="text">--}}
-{{--                            <button type="submit" class="btn btn-primary">submit</button>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
                 </div>
+                @endif
+
+
+                <form method="post" action="{{ route('comment.store') }}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="content">My Comment</label>
+                        <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
+                        <input id="content" name="content" type="text">
+                        <button type="submit" class="common-button">submit</button>
+                    </div>
+                </form>
+                {{--                    <div class="commentList">--}}
+                {{--                        @foreach ($idea->comments->reverse() as $comment)--}}
+                {{--                            <li>--}}
+                {{--                                <strong>{{ $comment->user_name }}</strong>--}}
+                {{--                                <p>{{ $comment->content }}</p>--}}
+                {{--                                <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>--}}
+                {{--                                <form method="get" action="{{ route('comment.delete', $comment->id) }}">--}}
+                {{--                                    <button type="submit">Delete</button>--}}
+                {{--                                </form>--}}
+                {{--                            </li>--}}
+                {{--                        @endforeach--}}
+                {{--                    </div>--}}
+                {{--                    <form method="post" action="{{ route('comment.store') }}" id="commentForm">--}}
+                {{--                        @csrf--}}
+                {{--                        <div class="form-group">--}}
+                {{--                            <label for="content">My Comment</label>--}}
+                {{--                            <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">--}}
+                {{--                            <input id="content" name="content" type="text">--}}
+                {{--                            <button type="submit" class="btn btn-primary">submit</button>--}}
+                {{--                        </div>--}}
+                {{--                    </form>--}}
             </div>
-    @endsection
+        </div>
+@endsection

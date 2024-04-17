@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('script')
-    <link rel="stylesheet" type="text/css" href="/css/create.css" />
+    <link rel="stylesheet" type="text/css" href="/css/create.css"/>
 @endsection
 
 @section('content')
