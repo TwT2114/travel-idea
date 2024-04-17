@@ -35,7 +35,7 @@
         }
 
         // 每隔一定时间间隔调用 updateComments 函数
-        setInterval(updateComments, 5000); //  5 秒，根据需要调整时间间隔
+        setInterval(updateComments, 5000); //  5 秒
     </script>
 @endsection
 
@@ -129,27 +129,6 @@
                         <button type="submit" class="common-button">submit</button>
                     </div>
                 </form>
-                {{--                    <div class="commentList">--}}
-                {{--                        @foreach ($idea->comments->reverse() as $comment)--}}
-                {{--                            <li>--}}
-                {{--                                <strong>{{ $comment->user_name }}</strong>--}}
-                {{--                                <p>{{ $comment->content }}</p>--}}
-                {{--                                <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>--}}
-                {{--                                <form method="get" action="{{ route('comment.delete', $comment->id) }}">--}}
-                {{--                                    <button type="submit">Delete</button>--}}
-                {{--                                </form>--}}
-                {{--                            </li>--}}
-                {{--                        @endforeach--}}
-                {{--                    </div>--}}
-                {{--                    <form method="post" action="{{ route('comment.store') }}" id="commentForm">--}}
-                {{--                        @csrf--}}
-                {{--                        <div class="form-group">--}}
-                {{--                            <label for="content">My Comment</label>--}}
-                {{--                            <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">--}}
-                {{--                            <input id="content" name="content" type="text">--}}
-                {{--                            <button type="submit" class="btn btn-primary">submit</button>--}}
-                {{--                        </div>--}}
-                {{--                    </form>--}}
             </div>
         </div>
 @endsection
