@@ -24,27 +24,28 @@
                 <form method="post" action="{{ route('plan.update', $plan->id) }}">
                     @method('PATCH')
                     @csrf
-                    <table>
-                        <tbody>
+                    <table >
+                        <tbody style="display: flex; justify-content: space-between;">
                         <tr>
-                            <td><label for="title">Title</label></td>
-                            <td><input id="title" name="title" type="text" value="{{ $plan->title }}"
-                                       class="form-control">
+                            <td class="large-font"><label for="title">Title</label></td>
+                            <td style="margin-left: auto;">
+                                <input id="title" name="title" type="text" value="{{ $plan->title }}" class="form-control">
                             </td>
                         </tr>
 
                         <tr>
                             <td></td>
                             <td>
-                                <button type="submit" class="common-button">Update</button>
+                                <button type="submit" class="common-button" >Update</button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
+                    <br>
                 </form>
             </div>
             <div>
-                <div>Added Ideas</div>
+{{--                <h2>Added Ideas</h2>--}}
                 @if($planIdeas->isNotEmpty())
                     <div>
                         <form method="post" action="{{ route('plan.removeAllIdeas', $plan->id ) }}">
@@ -69,6 +70,7 @@
                             <th>Tags</th>
                             <th>Start Date</th>
                             <th>End Date</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -104,7 +106,7 @@
             </div>
         </div>
     </div>
-            <div>
+        <div class="plan_body">
                 @if($ideas->isNotEmpty())
                     <h2 >Ideas to add</h2>
                     <table class="table table-hover zebra border-header">
@@ -116,7 +118,6 @@
                             <th>Tags</th>
                             <th>Start Date</th>
                             <th>End Date</th>
-
                             <th>Add</th>
                         </tr>
                         </thead>
@@ -150,10 +151,7 @@
                 @else
                     <p>No ideas</p>
                 @endif
-
             </div>
-
-        </div>
     @else
 
     @endif
