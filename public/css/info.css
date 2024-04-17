@@ -24,14 +24,27 @@ a{
     padding: 0 0 0 30px;
 }
 
-.common-header{
-    background-color: #85a384;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+.comments-section .common-header {
+    position: sticky;
+    top: 0;
+    background-color: #85a384; /* Specify the background color for the header */
+    padding: 6px; /* Add padding for spacing */
+    border-bottom: 2px solid #000; /* Add a bottom border to the header */
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     text-align: center;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
 }
+
+/*.common-header{*/
+/*    background-color: #85a384;*/
+/*    border-top-left-radius: 10px;*/
+/*    border-top-right-radius: 10px;*/
+/*    text-align: center;*/
+/*    font-size: 20px;*/
+/*    font-weight: bold;*/
+/*}*/
 
 .commentsList {
     width: 45%;
