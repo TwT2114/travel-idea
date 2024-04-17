@@ -108,7 +108,6 @@ main {
     padding: 30px;
     backdrop-filter: blur(3px);
     background-color: rgba(150,204,163, 0.4);
-    border-radius: 10px;
     overflow: auto;
     max-height: 77vh; /* 减去顶部和底部的 padding 值 */
 }
@@ -123,7 +122,4 @@ footer {
         position: absolute;
         right: 5%;
     }
-
-    .map {}
-
 
