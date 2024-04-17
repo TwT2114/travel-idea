@@ -39,6 +39,7 @@
 
 @section('content')
     <link rel="stylesheet" type="text/css" href="/css/info.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/create.css"/>
     <div>
         <a href="{{route('idea.index')}}">Back</a>
 
@@ -52,10 +53,6 @@
             <div class="idea-title">
                 {{$idea->title}}
             </div>
-            {{--            --}}{{--only the idea poster can modify--}}
-            {{--            @if($idea->user_id == \Illuminate\Support\Facades\Auth::id())--}}
-            {{--                <a href="{{route("idea.edit", $idea->id)}}">Edit</a>--}}
-            {{--            @endif--}}
 
             <div>
                 Post By <a href="{{route('user.show',$idea->user_id)}}">{{$idea->user_name}}</a>
