@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('script')
+    <link rel="stylesheet" type="text/css" href="/css/info.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/create.css"/>
     <script>
         // 使用 jQuery 发起 AJAX 请求，提交评论并获取最新评论列表
         function submitComment() {
@@ -38,8 +40,6 @@
 @endsection
 
 @section('content')
-    <link rel="stylesheet" type="text/css" href="/css/info.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/create.css"/>
     <div>
         <a href="{{route('idea.index')}}">Back</a>
 
@@ -103,18 +103,20 @@
                     @if($idea->comments->isEmpty())
                         <p>Oops, there's no comment.</p>
                     @else
-                        @foreach ($idea->comments->reverse() as $comment)
-                            <li>
-                                <div>
-                                    <strong>{{ $comment->user_name }}</strong>
-                                    <form method="get" action="{{ route('comment.delete', $comment->id) }}">
-                                        <button type="submit">Delete</button>
-                                    </form>
-                                </div>
-                                <p>{{ $comment->content }}</p>
-                                <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
-                            </li>
-                        @endforeach
+                        <ul>
+                            @foreach ($idea->comments->reverse() as $comment)
+                                <li>
+                                    <div>
+                                        <strong>{{ $comment->user_name }}</strong>
+                                        <form method="get" action="{{ route('comment.delete', $comment->id) }}">
+                                            <button type="submit">Delete</button>
+                                        </form>
+                                    </div>
+                                    <p>{{ $comment->content }}</p>
+                                    <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
+                                </li>
+                            @endforeach
+                        </ul>
                 </div>
                 @endif
                 <!-- 提交评论 -->

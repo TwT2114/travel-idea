@@ -6,7 +6,6 @@
 @endsection
 
 @section('content')
-
     <a href="{{ url()->previous() }}">Back</a>
     <div class="plan_body">
         @if( $plan->user_id == \Illuminate\Support\Facades\Auth::id() )
@@ -60,13 +59,6 @@
                         </div>
                         <table class="table table-hover zebra border-header">
                             <thead class="plan-header">
-                            {{--                        <div>--}}
-                            {{--                            <form method="post" action="{{ route('plan.removeAllIdeas', $plan->id ) }}">--}}
-                            {{--                                @method('DELETE')--}}
-                            {{--                                @csrf--}}
-                            {{--                                <button type="submit" class="common-button">Remove All</button>--}}
-                            {{--                            </form>--}}
-                            {{--                        </div>--}}
                             <tr>
                                 <th>User</th>
                                 <th>Title</th>
@@ -74,7 +66,6 @@
                                 <th>Tags</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
-                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -90,16 +81,6 @@
                                     <td>{{ $planIdea->tags }}</td>
                                     <td>{{ $planIdea->start_date }}</td>
                                     <td>{{ $planIdea->end_date }}</td>
-                                    <td>
-                                        {{--                                    <form method="post"--}}
-                                        {{--                                          action="{{ route('plan_idea.destroy', $planIdea->id) }}">--}}
-                                        {{--                                        @method('DELETE')--}}
-                                        {{--                                        @csrf--}}
-                                        {{--                                        <button type="submit">Remove</button>--}}
-
-                                        {{--                                    </form>--}}
-                                        {{--<a href="{{route('plan.removeIdea',[$plan->id, $planIdea->id])}}">Remove</a>--}}
-                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -6,7 +6,6 @@
 @endsection
 
 @section('content')
-
     <div>
         <a href="{{ url()->previous() }}">Back</a>
     </div>
