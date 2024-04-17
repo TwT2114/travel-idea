@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
+@section('script')
+    <link rel="stylesheet" type="text/css" href="/css/create.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/zebra.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/edit.css"/>
+@endsection
 @section('content')
-    <link rel="stylesheet" type="text/css" href="/css/create.css" />
-    <link rel="stylesheet" type="text/css" href="/css/zebra.css" />
-    <link rel="stylesheet" type="text/css" href="/css/edit.css" />
 
     <div>
         <a href="{{ url()->previous() }}">Back</a>
@@ -13,9 +15,11 @@
         <h1>{{ $plan->title }}</h1>
         <div style="display: flex; align-items: center;">
             <p>
-            Post By<a href="{{ route('user.show',$plan->user_id) }}" style="margin-left: 5px;">{{ $plan->user_name }}</a>
-            @if($plan->user_id == \Illuminate\Support\Facades\Auth::id()) <a href="{{ route('plan.edit', $plan->id) }}" style="margin-left: 10px;">Edit</a>
-            @endif
+                Post By<a href="{{ route('user.show',$plan->user_id) }}"
+                          style="margin-left: 5px;">{{ $plan->user_name }}</a>
+                @if($plan->user_id == \Illuminate\Support\Facades\Auth::id())
+                    <a href="{{ route('plan.edit', $plan->id) }}" style="margin-left: 10px;">Edit</a>
+                @endif
             </p>
         </div>
     </div>

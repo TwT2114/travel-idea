@@ -1,9 +1,12 @@
 @extends('layouts.app')
-
-@section('content')
+@section('script')
     <link rel="stylesheet" type="text/css" href="/css/create.css" />
     <link rel="stylesheet" type="text/css" href="/css/zebra.css" />
     <link rel="stylesheet" type="text/css" href="/css/edit.css" />
+@endsection
+
+@section('content')
+
     <a href="{{ url()->previous() }}">Back</a>
     <div class="plan_body">
     @if( $plan->user_id == \Illuminate\Support\Facades\Auth::id() )

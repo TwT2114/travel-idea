@@ -1,8 +1,11 @@
 
 @extends('layouts.app')
 
-@section('content')
+@section('script')
     <link rel="stylesheet" type="text/css" href="/css/zebra.css" />
+@endsection
+
+@section('content')
     <div>
         <table class="table table-hover zebra border-header">
             <thead class="plan-header">
