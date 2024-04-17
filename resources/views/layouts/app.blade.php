@@ -113,34 +113,23 @@
     @guest
     @else
     <aside class="col-2">
-            <div class="aside-item">
-                <a href="{{ route('idea.index') }}">
-                    <div class="aside-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
-                </a>
-            </div>
-            <div class="aside-item">
-                <a href="{{ route('plan.index') }}">
-                    <div class="aside-text"><img src="/css/images/PlanList.png" alt="Plan List">Plan List</div>
-                </a>
-            </div>
-            <div class="aside-item">
-                <a href="{{ route('idea.create') }}">
-                    <img src="/css/images/new.png" alt="New Idea">
-                    <div class="aside-text">New Idea</div>
-                </a>
-            </div>
-            <div class="aside-item">
-                <a href="{{ route('plan.create') }}">
-                    <img src="/css/images/AddPlan.png" alt="New Plan">
-                    <div class="aside-text">New Plan</div>
-                </a>
-            </div>
-            <div class="aside-item">
-                <a href="{{ route('user.show', \Illuminate\Support\Facades\Auth::id()) }}">
-                    <img src="/css/images/user.png" alt="User">
-                    <div class="aside-text">User</div>
-                </a>
-            </div>
+            <a class="aside-item" href="{{ route('idea.index') }}">
+                <div class="aside-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
+            </a>
+
+            <a class="aside-item" href="{{ route('plan.index') }}">
+                <div class="aside-text"><img src="/css/images/PlanList.png" alt="Plan List">Plan List</div>
+            </a>
+
+            <a class="aside-item" href="{{ route('idea.create') }}">
+                <div class="aside-text"><img src="/css/images/new.png" alt="New Idea">New Idea</div>
+            </a>
+            <a class="aside-item" href="{{ route('plan.create') }}">
+                <div class="aside-text"><img src="/css/images/AddPlan.png" alt="New Plan">New Plan</div>
+            </a>
+            <a class="aside-item" href="{{ route('user.show', \Illuminate\Support\Facades\Auth::id()) }}">
+                <div class="aside-text"><img src="/css/images/user.png" alt="User">User</div>
+            </a>
 
         @endguest
     </aside>
