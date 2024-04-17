@@ -1,13 +1,19 @@
 @extends('layouts.app')
 
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/favorites.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="/css/zebra.css"/>
+    <script>
+        $(function() {
+            $("#idea-list").tablesorter();
+        });
+        $(function() {
+            $("#plan-list").tablesorter();
+        });
+    </script>
 @endsection
 
 @section('content')
-
     @if(session()->has('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -17,7 +23,7 @@
     <div class="search-outcome">{{ $ideas->count() }} Ideas Found:</div>
     @if($ideas->count() > 0)
         <div>
-            <table class="table table-hover zebra border-header">
+            <table id="idea-list" class="table table-hover zebra border-header">
                 <thead class="plan-header">
                 <tr>
                     <th>User</th>
@@ -60,7 +66,7 @@
     @if($plans->count() > 0)
         <div class="search-outcome">{{ $plans->count() }} Plans Found:</div>
         <div>
-            <table class="table table-hover zebra border-header">
+            <table id="plan-list" class="table table-hover zebra border-header">
                 <thead class="plan-header">
                 <tr>
                     <th>User</th>

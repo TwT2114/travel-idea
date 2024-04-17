@@ -1,14 +1,21 @@
 @extends('layouts.app')
 
 @section('script')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/favorites.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="/css/zebra.css"/>
+
+    <script>
+        $(function() {
+            $("#idea-list").tablesorter();
+        });
+    </script>
+
 @endsection
 
 @section('content')
     <div>
-        <table class="table table-hover zebra border-header">
+        Click the table header to sort
+        <table id="idea-list" class="table table-hover zebra border-header">
             <thead class="plan-header">
             <tr>
                 <th>User</th>
