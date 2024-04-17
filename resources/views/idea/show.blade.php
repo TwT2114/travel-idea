@@ -119,6 +119,7 @@
                     </div>
                     @endif
 
+
                     <form method="post" action="{{ route('comment.store') }}">
                         @csrf
                         <div class="form-group">
