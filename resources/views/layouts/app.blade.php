@@ -46,7 +46,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
+                <!-- Left Side Of Navbar. Search box-->
                 <div class="navbar-nav me-auto">
                     @guest
                     @else

@@ -96,6 +96,7 @@
                     </div>
             </div>
             {{--        右边--}}
+            <!-- 评论区 -->
             <div class="comments-section">
                 <div class="common-header">Comments</div>
                 <div class="commentList">
@@ -116,8 +117,7 @@
                         @endforeach
                 </div>
                 @endif
-
-
+                <!-- 提交评论 -->
                 <form method="post" action="{{ route('comment.store') }}">
                     @csrf
                     <div class="form-group">

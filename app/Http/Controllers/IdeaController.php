@@ -27,8 +27,7 @@ class IdeaController extends Controller
 
         $ideas = Idea::where(function ($query) use ($searchTerm) {
             $query->where('destination', 'like', '%' . $searchTerm . '%')
-                ->orWhere('tags', 'like', '%' . $searchTerm . '%')
-                ->orWhere('title', 'like', '%' . $searchTerm . '%');
+                ->orWhere('tags', 'like', '%' . $searchTerm . '%');
         })->get();
 
         $plans = Plan::where(function ($query) use ($searchTerm) {
