@@ -1,32 +1,30 @@
 @extends('layouts.app')
 
-@section('script')
-
-
 @section('content')
+    <link rel="stylesheet" type="text/css" href="/css/create.css" />
+    <link rel="stylesheet" type="text/css" href="/css/zebra.css" />
+    <link rel="stylesheet" type="text/css" href="/css/edit.css" />
 
     <div>
         <a href="{{ url()->previous() }}">Back</a>
-
-        {{--check User--}}
-        @if($plan->user_id == \Illuminate\Support\Facades\Auth::id())
-            <a href="{{ route('plan.edit', $plan->id) }}">Edit</a>
-        @endif
     </div>
 
     <div>
-
         <h1>{{ $plan->title }}</h1>
-
-        <p>Post By <a href="{{ route('user.show',$plan->user_id) }}"> {{ $plan->user_name }}</a></p>
-
+        <div style="display: flex; align-items: center;">
+            <p>
+            Post By<a href="{{ route('user.show',$plan->user_id) }}" style="margin-left: 5px;">{{ $plan->user_name }}</a>
+            @if($plan->user_id == \Illuminate\Support\Facades\Auth::id()) <a href="{{ route('plan.edit', $plan->id) }}" style="margin-left: 10px;">Edit</a>
+            @endif
+            </p>
+        </div>
     </div>
 
     <div>
-        <h2>Added Ideas</h2><br>
+        <div class="large-font">Added Ideas</div>
         @if($planIdeas->isNotEmpty())
-            <table>
-                <thead>
+            <table class="table table-hover zebra border-header">
+                <thead class="plan-header">
                 <tr>
                     <th>User</th>
                     <th>Title</th>
@@ -47,7 +45,6 @@
                         <td>{{ $planIdea->start_date }}</td>
                         <td>{{ $planIdea->end_date }}</td>
                         <td><a href="{{ route('idea.show', $planIdea->id) }}">Detail</a></td>
-
                     </tr>
                 @endforeach
                 </tbody>
