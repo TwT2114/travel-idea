@@ -7,11 +7,14 @@
 @section('content')
     <div>
         <table class="table table-hover zebra border-header">
+
             <thead class="plan-header">
-            <th>User</th>
-            <th>Title</th>
-            <th>Time</th>
-            <th>Detail</th>
+            <tr>
+                <th>User</th>
+                <th>Title</th>
+                <th>Time</th>
+                <th>Detail</th>
+            </tr>
             </thead>
             <tbody class="zebra"> <!-- 添加zebra类名到tbody -->
             @foreach($plans as $key => $plan)
