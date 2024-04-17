@@ -1,0 +1,123 @@
+
+a{
+    text-decoration: none;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.map-container {
+    width: 50%;
+    margin: 0;
+
+}
+
+.comments-section {
+    width: 45%;
+    overflow-y: auto;
+    height: 35%;
+    max-height: 340px;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 0 0 0 30px;
+}
+
+.common-header{
+    background-color: #85a384;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.commentsList {
+    width: 45%;
+    height: 30%;
+    overflow-y: auto;
+    max-height: 80%; /* Set a max-height to activate scroll bar when content exceeds this value */
+}
+
+.commentList li {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    padding: 0 0 0 20px;
+    background-color: rgba(255,255,255, 0.3);
+}
+
+.commentList li div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.commentList li strong {
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.commentList li form {
+    flex-shrink: 0;
+    margin-left: 10px;
+}
+
+.commentList li p {
+    margin: 5px 0;
+}
+
+.commentList li time {
+    align-self: flex-end;
+}
+
+.commentList li button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+.commentList li form, .commentList li p, .commentList li time {
+    margin-top: 5px;
+}
+
+
+.form-group{
+    position: fixed;
+    bottom: 15px;
+    width: 45%;
+}
+
+/*.top-item{*/
+/*    margin-top: 0;*/
+/*    font-size: 13px;*/
+/*}*/
+
+.idea-header {
+    display: flex;
+    align-items: center;
+}
+
+h2 {
+    margin: 0; /* Remove any default margin */
+}
+
+.edit {
+    margin-left: auto; /* Push the "Edit" link to the right */
+}
+
+.idea-title{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.common-button{
+    outline: none;
+    border: none;
+    background-color: #85a384;
+    color: white;
+    font-weight: bold;
+    padding: 3px 20px; /* 调整按钮宽度 */
+    border-radius: 5px; /* 添加圆角 */
+}

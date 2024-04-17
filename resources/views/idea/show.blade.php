@@ -38,27 +38,31 @@
 @endsection
 
 @section('content')
-
+    <link rel="stylesheet" type="text/css" href="/css/info.css" />
     <div>
-        <a href="{{ url()->previous() }}">Back</a>
+        <a href="{{route('idea.index')}}">Back</a>
 
-        {{--only the idea poster can modify--}}
-        @if($idea->user_id == \Illuminate\Support\Facades\Auth::id())
-            <a href="{{route("idea.edit", $idea->id)}}">Edit</a>
-        @endif
+    </div>
+    <div id="weatherInfo" class="weather">
+        <iframe title="weather" width="465" src="/idea/{{ $idea->id }}/weather"></iframe>
     </div>
 
-    <div style="margin: auto; width: auto">
+    <div>
         <div>
-            <h1>
+            <div class="idea-title">
                 {{$idea->title}}
-            </h1>
-
-            <div id="weatherInfo" class="weather">
-                <iframe title="weather" height="700" src="/idea/{{ $idea->id }}/weather"></iframe>
             </div>
+{{--            --}}{{--only the idea poster can modify--}}
+{{--            @if($idea->user_id == \Illuminate\Support\Facades\Auth::id())--}}
+{{--                <a href="{{route("idea.edit", $idea->id)}}">Edit</a>--}}
+{{--            @endif--}}
+
             <div>
                 Post By <a href="{{route('user.show',$idea->user_id)}}">{{$idea->user_name}}</a>
+                {{--only the idea poster can modify--}}
+                @if($idea->user_id == \Illuminate\Support\Facades\Auth::id())
+                    <a href="{{route("idea.edit", $idea->id)}}">&nbsp;&nbsp;&nbsp;Edit</a>
+                @endif
             </div>
 
             <div>
@@ -71,61 +75,80 @@
                 Tags: {{$idea->tags}}
             </div>
         </div>
+{{--        左边--}}
+        <div class="row">
+            <div class="map-container">
+                <iframe class="map"
+                        title="map"
+                        width="500"
+                        height="350"
+                        loading="lazy"
+                        allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}&q={{$idea->destination}}¢er={{$idea->latitude}},{{$idea->longitude}}">
+                    </iframe>
+                <!-- 热门景点api -->
+                @if($idea)
+                    <div class="interest">
+                    <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">▶Get Points of Interest (Support cities in
+                        EU)</a>
+                @else
+                    <p>no points of interest</p>
+                @endif
+                </div>
+                </div>
+            {{--        右边--}}
+                <div class="comments-section">
+                    <div class="common-header">Comments</div>
+                  <div class="commentList">
+                    @if($idea->comments->isEmpty())
+                        <p >Oops, there's no comment.</p>
+                      @else
+                        @foreach ($idea->comments->reverse() as $comment)
+                            <li>
+                                <div>
+                                    <strong>{{ $comment->user_name }}</strong>
+                                    <form method="get" action="{{ route('comment.delete', $comment->id) }}">
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                </div>
+                                <p>{{ $comment->content }}</p>
+                                <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
+                            </li>
+                        @endforeach
+                    </div>
+                    @endif
 
-
-        {{--Google Map--}}
-        <div>
-            <iframe class="map"
-                    title="map"
-                    width="50%"
-                    height="450"
-                    loading="lazy"
-                    allowfullscreen
-                    referrerpolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps/embed/v1/place?key={{config('api.google_map')}}&q={{$idea->destination}}&center={{$idea->latitude}},{{$idea->longitude}}">
-            </iframe>
-        </div>
-        <div>
-            <p>Latitude：{{$idea->latitude}}</p>
-            <p>Longitude：{{$idea->longitude}}</p>
-        </div>
-
-        <!-- 热门景点api -->
-        @if($idea)
-            <a href="{{ route('idea.getPointsOfInterest', $idea->id) }}">Get Points of Interest (Support cities in
-                EU)</a>
-        @else
-            <p>no points of interest</p>
-        @endif
-
-
-
-        <!-- 用户提交评论模块 -->
-        <form method="post" action="{{ route('comment.store') }}" id="commentForm">
-            @csrf
-            {{ csrf_field() }}
-            <div class="form-group">
-                <label for="content">My Comment</label>
-                <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
-                <input id="content" name="content" type="text">
-                <button type="submit" class="btn btn-primary">submit</button>
+                    <form method="post" action="{{ route('comment.store') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="content">My Comment</label>
+                            <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
+                            <input id="content" name="content" type="text">
+                            <button type="submit" class="common-button">submit</button>
+                        </div>
+                    </form>
+{{--                    <div class="commentList">--}}
+{{--                        @foreach ($idea->comments->reverse() as $comment)--}}
+{{--                            <li>--}}
+{{--                                <strong>{{ $comment->user_name }}</strong>--}}
+{{--                                <p>{{ $comment->content }}</p>--}}
+{{--                                <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>--}}
+{{--                                <form method="get" action="{{ route('comment.delete', $comment->id) }}">--}}
+{{--                                    <button type="submit">Delete</button>--}}
+{{--                                </form>--}}
+{{--                            </li>--}}
+{{--                        @endforeach--}}
+{{--                    </div>--}}
+{{--                    <form method="post" action="{{ route('comment.store') }}" id="commentForm">--}}
+{{--                        @csrf--}}
+{{--                        <div class="form-group">--}}
+{{--                            <label for="content">My Comment</label>--}}
+{{--                            <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">--}}
+{{--                            <input id="content" name="content" type="text">--}}
+{{--                            <button type="submit" class="btn btn-primary">submit</button>--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
+                </div>
             </div>
-        </form>
-        <!-- 评论区，只展示最新的10条评论 -->
-        <div class="comments-section">
-            <h3>Comments</h3>
-            <ul id="commentList">
-                @foreach ($idea->comments->reverse() as $comment)
-                    <li>
-                        <strong>{{ $comment->user_name }}</strong>
-                        <p>{{ $comment->content }}</p>
-                        <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
-                        <form method="get" action="{{ route('comment.delete', $comment->id) }}">
-                            <button type="submit">Delete</button>
-                        </form>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
-@endsection
+    @endsection

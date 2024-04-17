@@ -1,21 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+    <link rel="stylesheet" type="text/css" href="/css/create.css" />
     <a href="{{ url()->previous() }}">Back</a>
     @if($idea->user_id==\Illuminate\Support\Facades\Auth::id())
         <div>
             <form method="post" action="{{ route('idea.destroy', $idea->id) }}">
                 @csrf
                 @method('DELETE')
-                <button type="submit">Delete</button>
+                <button type="submit" class="common-button">Delete</button>
             </form>
 {{--            <a href="{{ route('idea.destroy',$idea->id) }}">Delete</a>--}}
         </div>
+        <br>
         <div>
-            <h1>Edit Idea</h1>
+            <div class="title">Edit Idea</div>
         </div>
         <div>
-            <div>
+            <div class="main_table">
                 <form method="post" action="{{ route('idea.update', $idea->id) }}">
                     @method('PATCH')
                     @csrf
@@ -54,7 +56,7 @@
                         <tr>
                             <td></td>
                             <td>
-                                <button type="submit">Update</button>
+                                <button type="submit" class="common-button edit-button">Update</button>
                             </td>
                         </tr>
                         </tbody>
