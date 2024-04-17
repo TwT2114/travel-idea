@@ -16,7 +16,7 @@ class IdeaController extends Controller
     public function index()
     {
         //
-        $ideas = Idea::latest()->get();
+        $ideas = Idea::latest()->withCount('comments')->get();
         return view('idea.index', compact('ideas'));
 
     }
@@ -25,9 +25,11 @@ class IdeaController extends Controller
     {
         $searchTerm = $request->input('searchTerm');
 
-        $ideas = Idea::where(function ($query) use ($searchTerm) {
-            $query->where('destination', 'like', '%' . $searchTerm . '%')
-                ->orWhere('tags', 'like', '%' . $searchTerm . '%');
+        $ideas = Idea::withCount('comments')
+            ->where(function ($query) use ($searchTerm) {
+                $query->where('destination', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('tags', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('title', 'like', '%' . $searchTerm . '%');
         })->get();
 
         $plans = Plan::where(function ($query) use ($searchTerm) {

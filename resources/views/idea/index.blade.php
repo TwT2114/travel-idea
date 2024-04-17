@@ -25,8 +25,9 @@
                 <th>Tags</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th></th>
-                <th></th>
+                <th>Total Comments</th>
+                <th>Likes</th>
+                <th>Detail</th>
             </tr>
             </thead>
             <tbody>
@@ -38,7 +39,9 @@
                     <td>{{ $idea->tags }}</td>
                     <td>{{ $idea->start_date }}</td>
                     <td>{{ $idea->end_date }}</td>
-                    <!-- Like area -->
+                    <!-- Show the comments count -->
+                    <td class="text-center">{{ $idea->comments_count }}</td>
+                    <!-- Show the favorite count -->
                     <td>
                         <a href="#" class="like-button" data-idea-id="{{ $idea->id }}">
                             <img src="/css/images/heart.png" width="20" height="20" alt="Like">
