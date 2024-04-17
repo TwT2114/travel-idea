@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Idea;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -26,11 +27,16 @@ class IdeaController extends Controller
 
         $ideas = Idea::where(function ($query) use ($searchTerm) {
             $query->where('destination', 'like', '%' . $searchTerm . '%')
-                ->orWhere('tags', 'like', '%' . $searchTerm . '%');
+                ->orWhere('tags', 'like', '%' . $searchTerm . '%')
+                ->orWhere('title', 'like', '%' . $searchTerm . '%');
+        })->get();
+
+        $plans = Plan::where(function ($query) use ($searchTerm) {
+            $query->where('title', 'like', '%' . $searchTerm . '%');
         })
             ->get();
 
-        return view('idea.search', compact('ideas'));
+        return view('search', compact('ideas', 'plans'));
     }
 
     /**
@@ -134,7 +140,7 @@ class IdeaController extends Controller
             'tags' => 'required'
         ]);
 
-        //2. search the book from database
+        //2. Find the Idea from database
         $idea = Idea::find($id);
 
         //3. set the new values

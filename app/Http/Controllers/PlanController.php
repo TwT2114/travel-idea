@@ -113,8 +113,7 @@ class PlanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public
-    function edit(string $id)
+    public function edit(string $id)
     {
         // edit plan
 
@@ -143,8 +142,7 @@ class PlanController extends Controller
     /**
      * Add idea to plan
      */
-    public
-    function addIdea(Request $request)
+    public function addIdea(Request $request)
     {
         // 1. validate the inputted data
         $request->validate([
@@ -184,8 +182,7 @@ class PlanController extends Controller
     /**
      * Remove all idea from plan
      */
-    public
-    function removeAllIdeas(string $planId)
+    public function removeAllIdeas(string $planId)
     {
         // delete all the related ideas in plan_ideas table
         $plan = Plan::find($planId);
@@ -206,8 +203,7 @@ class PlanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public
-    function update(Request $request, string $id)
+    public function update(Request $request, string $id)
     {
         // validate the inputted data
         $request->validate([
@@ -232,8 +228,7 @@ class PlanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public
-    function destroy(string $id)
+    public function destroy(string $id)
     {
         // get Plan by id
         $plan = Plan::find($id);
