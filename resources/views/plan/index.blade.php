@@ -12,6 +12,7 @@
 
 @section('content')
     <div>
+        <article><h1>Plan List</h1></article>
         Click the table header to sort
         <table id="plan-list" class="table table-hover zebra border-header">
             <thead class="plan-header">

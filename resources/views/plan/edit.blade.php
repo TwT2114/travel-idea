@@ -10,7 +10,7 @@
     <div class="plan_body">
         @if( $plan->user_id == \Illuminate\Support\Facades\Auth::id() )
             <div style="display: flex; justify-content: space-between;">
-                <h1>Edit Plan</h1>
+                <article><h1>Edit Plan</h1></article>
                 <div>
                     <form method="post" action="{{ route('plan.destroy', $plan->id) }}">
                         @method('DELETE')

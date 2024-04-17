@@ -42,7 +42,6 @@
 @section('content')
     <div>
         <a href="{{route('idea.index')}}">Back</a>
-
     </div>
     <div id="weatherInfo" class="weather">
         <iframe title="weather" width="465" src="/idea/{{ $idea->id }}/weather"></iframe>
@@ -51,7 +50,9 @@
     <div>
         <div>
             <div class="idea-title">
-                {{$idea->title}}
+                <article>
+                    <h1>{{$idea->title}}</h1>
+                </article>
             </div>
 
             <div>

@@ -7,7 +7,7 @@
 @section('content')
     <a href="{{ url()->previous() }}">Back</a>
     <div class="title">
-        <h1>Add a New Plan</h1>
+        <article><h1>Add a New Plan</h1></article>
     </div>
 
 

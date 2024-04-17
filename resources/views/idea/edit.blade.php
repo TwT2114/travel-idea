@@ -17,7 +17,7 @@
         </div>
         <br>
         <div>
-            <div class="title">Edit Idea</div>
+            <div class="title"><article><h1>Edit Idea</h1></article></div>
         </div>
         <div>
             <div class="main_table">
