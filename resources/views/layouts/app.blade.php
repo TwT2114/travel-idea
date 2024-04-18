@@ -19,7 +19,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Travel Idea') }}@yield('title')</title>
+    <title>{{ config('app.name', 'Laravel') }}@yield('title')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -38,7 +38,7 @@
         <div class="container" style="position:sticky;top:0;">
             <img src="/css/images/旅游主题_地图.png" alt="Logo" width="100">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Travel Genius') }}
+                {{ config('app.name', 'Travel Idea') }}
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
