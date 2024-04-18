@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title','Create New Idea')
 @section('script')
     <script src="{{ asset('js/datepicker.js') }}"></script>
     <script async

@@ -55,7 +55,7 @@ class PlanController extends Controller
 
         $newPlan = Plan::where('user_id', Auth::id())->latest()->first();
 
-        // 4. redirect to the plan index page
+        // 4. redirect to the plan edit page to add ideas to plan
         return redirect()->route('plan.edit', $newPlan->id)->with('success', 'Plan created successfully.');
 
     }
