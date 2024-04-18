@@ -65,17 +65,15 @@ class PlanController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // get Plan by id
         $plan = Plan::find($id);
         // check if the plan exist
         if ($plan) {
-
             $planIdeas = Idea::whereIn('id', function (Builder $query) use ($id) {
                 $query->select('idea_id')->from('plan_ideas')->where('plan_id', $id);
             })->orderBy('start_date')->get();
             // check if the plan contains ideas
             if ($planIdeas) {
-
                 // get the location of the plan
                 // check the # of the locations
                 if (count($planIdeas) > 1) {
@@ -86,11 +84,9 @@ class PlanController extends Controller
                         . "&destination="
                         . $planIdeas[count($planIdeas) - 1]->latitude . ","
                         . $planIdeas[count($planIdeas) - 1]->longitude;
-
                     // set 1 waypoint if there are more than 2 locations
                     if (count($planIdeas) > 2) {
                         $loc .= "&waypoints=" . $planIdeas[1]->latitude . "," . $planIdeas[1]->longitude;
-
                         if (count($planIdeas) > 3) {
                             // set waypoints if there are more than 3 locations
                             for ($i = 2; $i < count($planIdeas) - 1; $i++) {
@@ -98,10 +94,8 @@ class PlanController extends Controller
                             }
                         }
                     }
-
                     $plan->loc = $loc;
                 }
-
             }
             return view('plan.show', compact('plan', 'planIdeas'));
         } else {
