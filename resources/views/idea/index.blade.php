@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/css/zebra.css"/>
 
     <script>
-        $(function() {
+        $(function () {
             $("#idea-list").tablesorter();
         });
     </script>
@@ -49,7 +49,10 @@
                         </a>
                         <span id="likeCount_{{ $idea->id }}">{{ $idea->favorites }}</span> <!-- Like count area -->
                     </td>
-                    <td><a href="{{ route("idea.show", $idea->id) }}">Detail</a></td>
+                    <td>
+                        {{--Click to jump to the detail page--}}
+                        <a href="{{ route("idea.show", $idea->id) }}">Detail</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

@@ -7,8 +7,10 @@
 @section('content')
 
     <a href="{{ url()->previous() }}">Back</a>
+    {{--check the user permission--}}
     @if($idea->user_id==\Illuminate\Support\Facades\Auth::id())
         <div>
+            {{--Delete the idea--}}
             <form method="post" action="{{ route('idea.destroy', $idea->id) }}">
                 @csrf
                 @method('DELETE')
@@ -17,7 +19,9 @@
         </div>
         <br>
         <div>
-            <div class="title"><article><h1>Edit Idea</h1></article></div>
+            <div class="title">
+                <article><h1>Edit Idea</h1></article>
+            </div>
         </div>
         <div>
             <div class="main_table">
