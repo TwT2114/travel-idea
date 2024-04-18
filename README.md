@@ -54,3 +54,9 @@ npm run dev
 
 php artisan serve
 ```
+
+# Contributors
+
+- [TwT](https://github.com/TwT2114)
+- [Yan](https://github.com/Yanyliao)
+- [YXQ](https://github.com/yangxq122)
