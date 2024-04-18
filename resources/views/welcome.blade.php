@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', '-Welcome')
 @section('script')
 
 @endsection
@@ -25,7 +25,7 @@
                 <p>
                     You can post your travel ideas,
                     chat with friends under the idea,
-                    and create travel plans with ideas.
+                    and create travel plans with ideas after login.
                 </p>
             </article>
         </div>
