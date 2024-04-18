@@ -95,8 +95,6 @@ class IdeaController extends Controller
         // 3. save the data into database
         $idea->save();
         return redirect(route('idea.index'))->with('success', 'Idea has been added');
-
-
     }
 
     /**
@@ -122,8 +120,6 @@ class IdeaController extends Controller
         } else {
             return redirect(route('idea.index'))->with('error', 'Idea has been updated');
         }
-
-
     }
 
     /**
