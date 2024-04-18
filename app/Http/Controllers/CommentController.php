@@ -65,7 +65,7 @@ class CommentController extends Controller
         $comment->save();
 
         //评论成功后跳转到该idea
-        return redirect()->route('idea.show', $id);
+        return redirect()->route('idea.show', $id)->with('success', 'Add comment successfully');
     }
 
     /**
