@@ -1,46 +1,23 @@
-
-a{
+a {
     text-decoration: none;
 }
-.row {
-    display: flex;
-    flex-wrap: wrap;
+
+.idea-container {
+    display: grid;
+    grid-template-areas:
+        "top-left top-right"
+        "bottom-left bottom-right";
+    grid-template-rows: 32% 68%;
+    grid-template-columns: 55% 45%;
+    height: 100%;
 }
 
-.map-container {
-    width: 50%;
-    margin: 0;
+.top-left { grid-area: top-left; }
+.bottom-left { grid-area: bottom-left; }
+.top-right { grid-area: top-right; }
+.bottom-right { grid-area: bottom-right; }
 
-}
-
-.comments-section {
-    width: 45%;
-    overflow-y: auto;
-    height: 35%;
-    max-height: 340px;
-    margin-left: 10px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 0 0 0 30px;
-}
-
-.common-header{
-    /*position: fixed;*/
-    background-color: #85a384;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    text-align: center;
-    font-size: 20px;
-}
-
-.commentsList {
-    width: 45%;
-    height: 30%;
-    overflow-y: auto;
-    max-height: 80%; /* Set a max-height to activate scroll bar when content exceeds this value */
-}
-
-.commentList li {
+.comment-info {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
@@ -48,87 +25,128 @@ a{
     background-color: rgba(255,255,255, 0.3);
 }
 
-.commentList li div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 5px;
-}
-
-.commentList li strong {
+.commentList strong {
     margin-right: 10px;
     flex-shrink: 0;
 }
 
-.commentList li form {
-    flex-shrink: 0;
-    margin-left: 10px;
-}
+/*.commentList form {*/
+/*    flex-shrink: 0;*/
+/*}*/
 
-.commentList li p {
+.commentList p {
     margin: 5px 0;
 }
 
-.commentList li time {
+.commentList time {
     align-self: flex-end;
 }
 
-.commentList li button {
+.commentList button {
     outline: none;
     border: none;
     background-color: transparent;
 }
-.commentList li form, .commentList li p, .commentList li time {
-    margin-top: 5px;
+
+.common-header {
+    background-color: #85a384;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+    font-size: 20px;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-
-.form-group{
-    position: fixed;
-    bottom: 15px;
-    width: 45%;
+.bottom-right {
+    flex: 1;
+    max-width: 95%;
+    display: flex;
+    flex-direction: column;
 }
 
-/*.top-item{*/
-/*    margin-top: 0;*/
-/*    font-size: 13px;*/
-/*}*/
+.comments-section {
+    flex: 1;
+    max-width: 95%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.commentList {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(85% - 30px);
+    padding: 10px 10px 10px 0;
+}
+
 
 .idea-header {
     display: flex;
     align-items: center;
 }
 
-h2 {
-    margin: 0; /* Remove any default margin */
+.form-group {
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-top: auto; /* Align to the bottom */
 }
 
-.edit {
-    margin-left: auto; /* Push the "Edit" link to the right */
+.form-group form {
+    width: 100%; /* Occupy the full width of the form-group */
+    display: flex;
+    align-items: center;
 }
 
-/* Set a fixed width for the entire content to prevent it from resizing */
-.body-content {
-    width: 960px; /* Set a fixed width for the content */
-    margin: 0 auto; /* Center the content horizontally */
+.form-group label {
+    margin-right: 10px; /* Add spacing between label and input */
 }
 
-/* Set a minimum width for the page to prevent it from getting too small */
-body {
-    min-width: 960px; /* Set a minimum width for the body */
+.form-group input {
+    flex: 1; /* Occupy remaining space */
+    margin-right: 10px; /* Add spacing between input and button */
 }
 
-/* Prevent the content from wrapping or resizing */
-* {
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+.form-group button {
+    min-width: 80px; /* Set a minimum width for the submit button */
 }
 
-/* Prevent images from resizing */
-img {
-    max-width: 100%; /* Ensure images don't exceed the width of their container */
+.weather {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 让iframe的高度与宽度比例为16:9，适应不同屏幕大小 */
 }
 
-/* Prevent iframes from resizing */
-iframe {
-    min-width: 100%; /* Set a minimum width for iframes to prevent resizing */
+.weather iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.map-container {
+    position: relative;
+    overflow: hidden;
+    height: 100%; /* Ensure the container has a defined height */
+    width: 85%;
+}
+
+.map {
+    width: 100%;
+    height: 100%; /* 让地图充满容器 */
+}
+
+.interest {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
 }

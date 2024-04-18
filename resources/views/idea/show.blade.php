@@ -40,11 +40,11 @@
 @endsection
 
 @section('content')
+    {{--        左上--}}
+<div class="idea-container">
+    <div class="top-left">
     <div>
         <a href="{{route('idea.index')}}">Back</a>
-    </div>
-    <div id="weatherInfo" class="weather">
-        <iframe title="weather" width="465" src="/idea/{{ $idea->id }}/weather"></iframe>
     </div>
 
     <div>
@@ -73,13 +73,14 @@
                 Tags: {{$idea->tags}}
             </div>
         </div>
-        {{--        左边--}}
-        <div class="row">
+    </div>
+    </div>
+        {{--        左下--}}
+    <div class="bottom-left">
+{{--        <div>--}}
             <div class="map-container">
                 <iframe class="map"
                         title="map"
-                        width="500"
-                        height="350"
                         loading="lazy"
                         allowfullscreen
                         referrerpolicy="no-referrer-when-downgrade"
@@ -96,17 +97,26 @@
                         @endif
                     </div>
             </div>
-            {{--        右边--}}
+{{--        </div>--}}
+    </div>
+    {{--        右上--}}
+    <div class="top-right">
+        <div id="weatherInfo" class="weather">
+            <iframe title="weather" src="/idea/{{ $idea->id }}/weather"></iframe>
+        </div>
+    </div>
+    {{--        右下--}}
             <!-- 评论区 -->
+    <div class="bottom-right">
             <div class="comments-section">
                 <div class="common-header">Comments</div>
                 <div class="commentList">
                     @if($idea->comments->isEmpty())
                         <p>Oops, there's no comment.</p>
                     @else
-                        <ul>
+                        <div>
                             @foreach ($idea->comments->reverse() as $comment)
-                                <li>
+                                <div class="comment-info">
                                     <div>
                                         <strong>{{ $comment->user_name }}</strong>
                                         <form method="get" action="{{ route('comment.delete', $comment->id) }}">
@@ -115,21 +125,22 @@
                                     </div>
                                     <p>{{ $comment->content }}</p>
                                     <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
-                                </li>
+                                </div>
                             @endforeach
-                        </ul>
+                        </div>
                 </div>
                 @endif
                 <!-- 提交评论 -->
+                <div class="form-group">
                 <form method="post" action="{{ route('comment.store') }}">
                     @csrf
-                    <div class="form-group">
                         <label for="content">My Comment</label>
                         <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
                         <input id="content" name="content" type="text">
                         <button type="submit" class="common-button">submit</button>
-                    </div>
                 </form>
-            </div>
+                </div>
         </div>
+    </div>
+</div>
 @endsection
