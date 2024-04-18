@@ -11,7 +11,11 @@
         <img src="/css/images/User_homepage.png" alt="User">
         <div class="homeHead-text">
             <div>{{$user->name}}'s homepage</div>
-            <div class="small-font">{{ \Illuminate\Support\Facades\Auth::user()->email }}</div>
+            <div class="small-font">
+                <a href="mailto:{{ \Illuminate\Support\Facades\Auth::user()->email }}">
+                    {{ \Illuminate\Support\Facades\Auth::user()->email }}
+                </a>
+            </div>
         </div>
     </div>
 

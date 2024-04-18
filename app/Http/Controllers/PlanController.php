@@ -212,7 +212,6 @@ class PlanController extends Controller
             $plan->title = $request->get('title');
         }
 
-
         // save the data
         $plan->save();
         return redirect(route('plan.show', $plan->id))->with('success', 'Plan updated successfully.');
