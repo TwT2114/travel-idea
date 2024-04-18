@@ -30,6 +30,10 @@ Route::delete('/plan/removeAllIdeas/{id}', [PlanController::class, 'removeAllIde
     ->name('plan.removeAllIdeas')
     ->middleware('auth');
 
+Route::delete('/plan/removeIdea/{id}', [PlanController::class, 'removeIdea'])
+    ->name('plan.removeIdea')
+    ->middleware('auth');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -62,6 +62,7 @@
                                 <th>Tags</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
+                                <th>Operation</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -77,6 +78,13 @@
                                     <td>{{ $planIdea->tags }}</td>
                                     <td>{{ $planIdea->start_date }}</td>
                                     <td>{{ $planIdea->end_date }}</td>
+                                    <td>
+                                        <form method="post" action="{{ route('plan.removeIdea', $planIdea->id ) }}">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="common-button">Remove</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
