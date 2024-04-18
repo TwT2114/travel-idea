@@ -9,10 +9,14 @@
     border-top-right-radius: 10px;
 }
 
-.homeHead-item li {
-    list-style: none; /* 移除li的默认样式 */
-    display: flex; /* 使用flex布局 */
-    align-items: center; /* 垂直居中 */
+/*.homeHead-item li {*/
+/*    list-style: none; !* 移除li的默认样式 *!*/
+/*    display: flex; !* 使用flex布局 *!*/
+/*    align-items: center; !* 垂直居中 *!*/
+/*}*/
+
+.small-font{
+    font-size: 12px;
 }
 
 .homeHead-item img {
@@ -22,7 +26,8 @@
 
 .homeHead-text {
     color: white; /* 文字颜色设为白色 */
-    font-size: 20px;
+    font-size: 18px;
+    text-align: left; /* This aligns the text to the left */
 }
 
 

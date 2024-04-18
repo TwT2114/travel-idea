@@ -8,15 +8,11 @@
 @section('content')
     <a href="{{ url()->previous() }}" class="left">Back</a>
     <div class="homeHead-item">
-        <ul>
-            <li>
-                <img src="/css/images/User_homepage.png" alt="User">
-                <div class="homeHead-text">{{$user->name}}'s homepage</div>
-            </li>
-            <li>
-                <p class="homeHead-text">{{ \Illuminate\Support\Facades\Auth::user()->email }}</p>
-            </li>
-        </ul>
+        <img src="/css/images/User_homepage.png" alt="User">
+        <div class="homeHead-text">
+            <div>{{$user->name}}'s homepage</div>
+            <div class="small-font">{{ \Illuminate\Support\Facades\Auth::user()->email }}</div>
+        </div>
     </div>
 
     <div class="user-container">
