@@ -1,8 +1,13 @@
 @extends('layouts.app')
 @section('title', '-Idea Detail')
+
 @section('script')
     <link rel="stylesheet" type="text/css" href="/css/info.css"/>
     <link rel="stylesheet" type="text/css" href="/css/create.css"/>
+@endsection
+
+@section('script')
+
     <script>
         // 使用 jQuery 发起 AJAX 请求，提交评论并获取最新评论列表
         function submitComment() {
