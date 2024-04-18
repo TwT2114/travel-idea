@@ -56,7 +56,7 @@
                             <form class="form-inline" action="{{ route('idea.search') }}" method="GET"
                                   style="display: flex;">
                                 <input class="form-control mr-sm-2" type="text" name="searchTerm"
-                                       placeholder="Search for destination or tags... " style="width: 250px;">
+                                       placeholder="Search for ideas or plans... " style="width: 250px;">
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
                                         style="margin-left: 10px;">
                                     Search
