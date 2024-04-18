@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', '-Idea Detail')
 @section('script')
     <link rel="stylesheet" type="text/css" href="/css/info.css"/>
     <link rel="stylesheet" type="text/css" href="/css/create.css"/>

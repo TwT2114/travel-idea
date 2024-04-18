@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', '-Plan Detail')
 @section('script')
     <link rel="stylesheet" type="text/css" href="/css/create.css"/>
     <link rel="stylesheet" type="text/css" href="/css/zebra.css"/>
