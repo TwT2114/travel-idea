@@ -4,9 +4,6 @@
 @section('script')
     <link rel="stylesheet" type="text/css" href="/css/info.css"/>
     <link rel="stylesheet" type="text/css" href="/css/create.css"/>
-@endsection
-
-@section('script')
 
     <script>
         // 使用 jQuery 发起 AJAX 请求，提交评论并获取最新评论列表
@@ -46,43 +43,42 @@
 
 @section('content')
     {{--        左上--}}
-<div class="idea-container">
-    <div class="top-left">
-    <div>
-        <a href="{{route('idea.index')}}">Back</a>
-    </div>
-
-    <div>
-        <div>
-            <div class="idea-title">
-                <article>
-                    <h1>{{$idea->title}}</h1>
-                </article>
+    <div class="idea-container">
+        <div class="top-left">
+            <div>
+                <a href="{{route('idea.index')}}">Back</a>
             </div>
 
             <div>
-                Post By <a href="{{route('user.show',$idea->user_id)}}">{{$idea->user_name}}</a>
-                {{--only the idea poster can modify--}}
-                @if($idea->user_id == \Illuminate\Support\Facades\Auth::id())
-                    <a href="{{route("idea.edit", $idea->id)}}">&nbsp;&nbsp;&nbsp;Edit</a>
-                @endif
-            </div>
+                <div>
+                    <div class="idea-title">
+                        <article>
+                            <h1>{{$idea->title}}</h1>
+                        </article>
+                    </div>
 
-            <div>
-                {{$idea->destination}}
-            </div>
-            <div>
-                Start From {{$idea->start_date}} to {{$idea->end_date}}
-            </div>
-            <div>
-                Tags: {{$idea->tags}}
+                    <div>
+                        Post By <a href="{{route('user.show',$idea->user_id)}}">{{$idea->user_name}}</a>
+                        {{--only the idea poster can modify--}}
+                        @if($idea->user_id == \Illuminate\Support\Facades\Auth::id())
+                            <a href="{{route("idea.edit", $idea->id)}}">&nbsp;&nbsp;&nbsp;Edit</a>
+                        @endif
+                    </div>
+
+                    <div>
+                        {{$idea->destination}}
+                    </div>
+                    <div>
+                        Start From {{$idea->start_date}} to {{$idea->end_date}}
+                    </div>
+                    <div>
+                        Tags: {{$idea->tags}}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
         {{--        左下--}}
-    <div class="bottom-left">
-{{--        <div>--}}
+        <div class="bottom-left">
             <div class="map-container">
                 <iframe class="map"
                         title="map"
@@ -102,17 +98,16 @@
                         @endif
                     </div>
             </div>
-{{--        </div>--}}
-    </div>
-    {{--        右上--}}
-    <div class="top-right">
-        <div id="weatherInfo" class="weather">
-            <iframe title="weather" src="/idea/{{ $idea->id }}/weather"></iframe>
         </div>
-    </div>
-    {{--        右下--}}
-            <!-- 评论区 -->
-    <div class="bottom-right">
+        {{--        右上--}}
+        <div class="top-right">
+            <div id="weatherInfo" class="weather">
+                <iframe title="weather" src="/idea/{{ $idea->id }}/weather"></iframe>
+            </div>
+        </div>
+        {{--        右下--}}
+        <!-- 评论区 -->
+        <div class="bottom-right">
             <div class="comments-section">
                 <div class="common-header">Comments</div>
                 <div class="commentList">
@@ -137,15 +132,15 @@
                 @endif
                 <!-- 提交评论 -->
                 <div class="form-group">
-                <form method="post" action="{{ route('comment.store') }}">
-                    @csrf
+                    <form method="post" action="{{ route('comment.store') }}">
+                        @csrf
                         <label for="content">My Comment</label>
                         <input hidden="hidden" id="idea_id" name="idea_id" type="text" value="{{ $idea->id }}">
                         <input id="content" name="content" type="text">
                         <button type="submit" class="common-button">submit</button>
-                </form>
+                    </form>
                 </div>
+            </div>
         </div>
     </div>
-</div>
 @endsection
