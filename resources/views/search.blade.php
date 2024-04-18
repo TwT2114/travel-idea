@@ -4,10 +4,10 @@
     <script src="{{ asset('js/favorites.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="/css/zebra.css"/>
     <script>
-        $(function() {
+        $(function () {
             $("#idea-list").tablesorter();
         });
-        $(function() {
+        $(function () {
             $("#plan-list").tablesorter();
         });
     </script>
