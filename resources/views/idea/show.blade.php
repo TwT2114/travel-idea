@@ -58,10 +58,10 @@
                     </div>
 
                     <div>
-                        Post By <a href="{{route('user.show',$idea->user_id)}}">{{$idea->user_name}}</a>
+                        Post By <a href="{{ route('user.show',$idea->user_id) }}">{{ $idea->user_name }}</a>
                         {{--only the idea poster can modify--}}
                         @if($idea->user_id == \Illuminate\Support\Facades\Auth::id())
-                            <a href="{{route("idea.edit", $idea->id)}}">&nbsp;&nbsp;&nbsp;Edit</a>
+                            <a href="{{ route("idea.edit", $idea->id) }}">&nbsp;&nbsp;&nbsp;Edit</a>
                         @endif
                     </div>
 
