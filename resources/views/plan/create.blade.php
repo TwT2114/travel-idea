@@ -9,8 +9,6 @@
     <div class="title">
         <article><h1>Add a New Plan</h1></article>
     </div>
-
-
     <form method="post" action="{{ route('plan.store') }}">
         {{ csrf_field() }}
         <table class="table table-striped">

@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="/css/zebra.css"/>
 
     <script>
-        $(function() {
+        $(function () {
             $("#plan-list").tablesorter();
         });
     </script>
