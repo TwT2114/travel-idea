@@ -17,5 +17,9 @@ class Plan extends Model
         'user_name',
         'title',
     ];
+    public function ideas()
+    {
+        return $this->belongsToMany(Idea::class, 'plan_ideas', 'plan_id', 'idea_id');
+    }
 
 }
