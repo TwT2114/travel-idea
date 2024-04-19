@@ -105,7 +105,7 @@
                 <iframe title="weather" src="/idea/{{ $idea->id }}/weather"></iframe>
             </div>
         </div>
-        {{--        右下--}}
+        {{-- 右下--}}
         <!-- 评论区 -->
         <div class="bottom-right">
             <div class="comments-section">
