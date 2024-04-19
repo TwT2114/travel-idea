@@ -12,8 +12,8 @@
         <div class="homeHead-text">
             <div>{{$user->name}}'s homepage</div>
             <div class="small-font">
-                <a href="mailto:{{ \Illuminate\Support\Facades\Auth::user()->email }}?subject=Contact From Travel Idea">
-                    {{ \Illuminate\Support\Facades\Auth::user()->email }}
+                <a href="mailto:{{ \Illuminate\Support\Facades\Auth::user()->email }}?subject=Contact From Travel Idea"
+                   class="email-link">{{ \Illuminate\Support\Facades\Auth::user()->email }}
                 </a>
             </div>
         </div>

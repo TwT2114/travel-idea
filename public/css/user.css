@@ -112,3 +112,12 @@ a.left {
     display: block; /* Change the default inline behavior to block-level to enable left alignment */
     text-align: left; /* Align the links to the left */
 }
+
+a.email-link {
+    color: white; /* 设置邮件链接文字颜色为黑色 */
+    text-decoration: none; /* 去除链接下划线 */
+}
+
+a.email-link:hover {
+    text-decoration: underline; /* 当鼠标悬停在邮件链接上时显示下划线 */
+}

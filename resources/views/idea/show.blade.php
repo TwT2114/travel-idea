@@ -12,6 +12,7 @@
             $.post($('#commentForm').attr('action'), formData, function (response) {
                 // 清空评论框
                 $('#content').val('');
+                updateComments();
             }, 'json');
         }
 
@@ -106,30 +107,52 @@
             </div>
         </div>
         {{-- 右下--}}
+
+
+        <!-- 评论区，只展示最新的10条评论 -->
+        <div class="comments-section">
+            <h3>Comments</h3>
+
+        </div>
+
+
         <!-- 评论区 -->
         <div class="bottom-right">
             <div class="comments-section">
                 <div class="common-header">Comments</div>
-                <div class="commentList">
-                    @if($idea->comments->isEmpty())
-                        <p>Oops, there's no comment. Come and post first comment!</p>
-                    @else
-                        <div>
-                            @foreach ($idea->comments->reverse() as $comment)
-                                <div class="comment-info">
-                                    <div>
-                                        <strong>{{ $comment->user_name }}</strong>
-                                        <form method="get" action="{{ route('comment.delete', $comment->id) }}">
-                                            <button type="submit">Delete</button>
-                                        </form>
-                                    </div>
-                                    <p>{{ $comment->content }}</p>
-                                    <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
-                                </div>
-                            @endforeach
-                        </div>
-                </div>
-                @endif
+                <ul id="commentList">
+                    @foreach ($idea->comments->reverse() as $comment)
+                        <li>
+                            <strong>{{ $comment->user_name }}</strong>
+                            <p>{{ $comment->content }}</p>
+                            <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
+                            <form method="get" action="{{ route('comment.delete', $comment->id) }}">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </li>
+                    @endforeach
+                </ul>
+{{--                <div class="commentList">--}}
+{{--                    @if($idea->comments->isEmpty())--}}
+{{--                        <p>Oops, there's no comment. Come and post first comment!</p>--}}
+{{--                    @else--}}
+{{--                        <div>--}}
+{{--                            @foreach ($idea->comments->reverse() as $comment)--}}
+{{--                                <div class="comment-info">--}}
+{{--                                    <div>--}}
+{{--                                        <strong>{{ $comment->user_name }}</strong>--}}
+{{--                                        <form method="get" action="{{ route('comment.delete', $comment->id) }}">--}}
+{{--                                            <button type="submit">Delete</button>--}}
+{{--                                        </form>--}}
+{{--                                    </div>--}}
+{{--                                    <p>{{ $comment->content }}</p>--}}
+{{--                                    <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>--}}
+{{--                                </div>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+
                 <!-- 提交评论 -->
                 <div class="form-group">
                     <form method="post" action="{{ route('comment.store') }}">
