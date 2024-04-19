@@ -39,20 +39,6 @@ class IdeaController extends Controller
         return view('search', compact('ideas', 'plans'));
     }
 
-//    public function searchIdea(Request $request)
-//    {
-//        $ideaSearchTerm = $request->input('searchTerm');
-//
-//        $ideas = Idea::withCount('comments')
-//            ->where(function ($query) use ($ideaSearchTerm) {
-//                $query->where('destination', 'like', '%' . $ideaSearchTerm . '%')
-//                    ->orWhere('tags', 'like', '%' . $ideaSearchTerm . '%')
-//                    ->orWhere('title', 'like', '%' . $ideaSearchTerm . '%');
-//            })
-//            ->get();
-//
-//        return view('searchIdea', compact('ideas'));
-//    }
 
     /**
      * Show the form for creating a new resource.
