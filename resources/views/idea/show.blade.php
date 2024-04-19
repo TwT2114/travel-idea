@@ -112,7 +112,7 @@
                 <div class="common-header">Comments</div>
                 <div class="commentList">
                     @if($idea->comments->isEmpty())
-                        <p>Oops, there's no comment.</p>
+                        <p>Oops, there's no comment. Come and post first comment!</p>
                     @else
                         <div>
                             @foreach ($idea->comments->reverse() as $comment)
