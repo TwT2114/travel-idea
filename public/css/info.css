@@ -17,35 +17,38 @@ a {
 .top-right { grid-area: top-right; }
 .bottom-right { grid-area: bottom-right; }
 
-.comment-info {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    padding: 0 0 0 20px;
-    background-color: rgba(255,255,255, 0.3);
+#commentList {
+    background-color: rgba(255, 255, 255, 0.4); /* 设置背景颜色为白色并且30%透明度 */
+    border: none; /* 移除任何边框 */
+    list-style-type: none;
+    overflow-y: auto; /* 添加垂直滚动条 */
+    padding: 0; /* 移除容器的内边距 */
 }
 
-.commentList strong {
-    margin-right: 10px;
-    flex-shrink: 0;
+#commentList li {
+    padding: 5px 10px 5px 20px; /* 设置每个评论项的内边距 */
+    border-bottom: 1px solid #bbb; /* 添加下边框分隔线 */
 }
 
-/*.commentList form {*/
-/*    flex-shrink: 0;*/
-/*}*/
-
-.commentList p {
+#commentList li p {
     margin: 5px 0;
 }
 
-.commentList time {
-    align-self: flex-end;
+#commentList li strong {
+    display: inline-block; /* 将用户名设为块级元素，使其独占一行 */
 }
 
-.commentList button {
-    outline: none;
-    border: none;
-    background-color: transparent;
+#commentList li form {
+    display: inline-block; /* 将删除按钮表单设为块级元素，使其与用户名在同一行 */
+    float: right; /* 将删除按钮移到右侧 */
+}
+
+
+#commentList li form button {
+    background: none; /* 设置按钮背景为透明 */
+    border: none; /* 移除按钮边框 */
+    cursor: pointer; /*添加手形光标效果 */
+    margin-left: 10px; /* 设置左边距以增加按钮与用户名之间的间距 */
 }
 
 .common-header {
@@ -73,14 +76,13 @@ a {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    /*background-color: white;*/
+    border: 1px solid #ccc; /* 添加1px宽度的灰色边框 */
+    border-radius: 10px; /* 设置圆角为10px */
+    padding: 10px; /* 添加内边距 */
+    background-color: rgba(255,255,255, 0.3);
 }
 
-.commentList {
-    flex: 1;
-    overflow-y: auto;
-    max-height: calc(85% - 30px);
-    padding: 10px 10px 10px 0;
-}
 
 
 .idea-header {
@@ -89,7 +91,7 @@ a {
 }
 
 .form-group {
-    width: 95%;
+    width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -114,6 +116,8 @@ a {
 .form-group button {
     min-width: 80px; /* Set a minimum width for the submit button */
 }
+
+
 
 .weather {
     position: relative;
