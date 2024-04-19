@@ -79,9 +79,14 @@
                                     <td>{{ $planIdea->start_date }}</td>
                                     <td>{{ $planIdea->end_date }}</td>
                                     <td>
-                                        <form method="post" action="{{ route('plan.removeIdea', $planIdea->id ) }}">
-                                            @method('DELETE')
+{{--                                        <form method="post" action="{{ route('plan.removeIdea', $planIdea->id ) }}">--}}
+{{--                                            @method('DELETE')--}}
+{{--                                            @csrf--}}
+{{--                                            <button type="submit" class="common-button">Remove</button>--}}
+{{--                                        </form>--}}
+                                        <form method="post" action="{{ route('plan.removeIdea', ['planId' => $plan->id, 'ideaId' => $planIdea->id]) }}">
                                             @csrf
+                                            @method('DELETE')
                                             <button type="submit" class="common-button">Remove</button>
                                         </form>
                                     </td>
@@ -98,7 +103,8 @@
         <div class="plan_body">
             @if($ideas->isNotEmpty())
                 <h2>Ideas to add</h2>
-                <table class="table table-hover zebra border-header">
+
+                <table class="table table-hover zebra border-header" id="search-results">
                     <thead class="plan-header">
                     <tr>
                         <th>User</th>

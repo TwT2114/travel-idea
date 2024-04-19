@@ -172,16 +172,6 @@ class PlanController extends Controller
         }
     }
 
-    public function removeIdea($id)
-    {
-        // Get the idea by ID and delete it
-        $idea = Idea::findOrFail($id);
-        $idea->delete();
-
-        return redirect()->back()->with('success', 'Idea removed successfully!');
-    }
-
-
 
     /**
      * Remove all idea from plan
