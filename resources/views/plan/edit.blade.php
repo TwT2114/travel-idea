@@ -3,6 +3,11 @@
 @section('script')
     <link rel="stylesheet" type="text/css" href="/css/create.css">
     <link rel="stylesheet" type="text/css" href="/css/zebra.css">
+    <script>
+        $(function () {
+            $("#idea-list").tablesorter();
+        });
+    </script>
 @endsection
 
 @section('content')
@@ -100,8 +105,7 @@
         <div class="plan_body">
             @if($ideas->isNotEmpty())
                 <h2>Ideas to add</h2>
-
-                <table class="table table-hover zebra border-header" id="search-results">
+                <table id="idea-list" class="table table-hover zebra border-header">
                     <thead class="plan-header">
                     <tr>
                         <th>User</th>
