@@ -58,10 +58,14 @@ class CommentController extends Controller
         $comment->user_id = Auth::id();
         $comment->idea_id = $idea->id;
 
+        // 在存储评论前使用escape方法进行转义
+        $content=$request->get('content');
+        $escapedContent=e($content);
+
         //获取用户名
         $user = User::find(Auth::id());
         $comment->user_name = $user->name;
-        $comment->content = $request->get('content');
+        $comment->content = $escapedContent;
         $comment->save();
 
         //评论成功后跳转到该idea
