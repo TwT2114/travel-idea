@@ -62,7 +62,5 @@
         @else
             <p>No idea found. <a href="{{ route('idea.create') }}">Post your first idea!</a></p>
         @endif
-
     </div>
-
 @endsection
