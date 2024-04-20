@@ -28,6 +28,7 @@ class IdeaController extends Controller
         $ideas = Idea::withCount('comments')// find number of comments
         ->where(function ($query) use ($searchTerm) {
             $query->where('destination', 'like', '%' . $searchTerm . '%')
+                ->orWhere('title', 'like', '%' . $searchTerm . '%')
                 ->orWhere('tags', 'like', '%' . $searchTerm . '%');
         })->get();
 
