@@ -26,9 +26,9 @@ class IdeaController extends Controller
         $searchTerm = $request->input('searchTerm');
 
         $ideas = Idea::withCount('comments')// find number of comments
-            ->where(function ($query) use ($searchTerm) {
-                $query->where('destination', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('tags', 'like', '%' . $searchTerm . '%');
+        ->where(function ($query) use ($searchTerm) {
+            $query->where('destination', 'like', '%' . $searchTerm . '%')
+                ->orWhere('tags', 'like', '%' . $searchTerm . '%');
         })->get();
 
         $plans = Plan::where(function ($query) use ($searchTerm) {
@@ -38,7 +38,6 @@ class IdeaController extends Controller
 
         return view('search', compact('ideas', 'plans'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -231,7 +230,7 @@ class IdeaController extends Controller
         }
 
     }
-//天气预报功能
+
     public function getWeather(Idea $idea)
     {
         $weathers = $this->getCityWeather($idea->destination);
@@ -243,7 +242,7 @@ class IdeaController extends Controller
         $html = view('idea.weather', compact('weathers', 'idea'))->render();
         return $html;
     }
-    // 用内置geo api获取经纬度
+
     public function getCityWeather($destination)
     {
         $apiKey = config('api.weather');
@@ -254,7 +253,7 @@ class IdeaController extends Controller
         if (empty($geoData) || !isset($geoData[0]['lon']) || !isset($geoData[0]['lat'])) {
             return null; // 返回空值表示未找到数据
         }
-        //经纬度传递给天气预报API
+
         $lon = $geoData[0]['lon'];
         $lat = $geoData[0]['lat'];
         $url = "https://api.openweathermap.org/data/2.5/forecast?lat=" . $lat . "&lon=" . $lon . "&appid=" . $apiKey . "&units=metric";
@@ -263,7 +262,7 @@ class IdeaController extends Controller
         if (empty($response) || !isset($response['list'])) {
             return null; // 返回空值表示未找到数据
         }
-        //提取元素  并做未来五天天气预报
+
         $weatherData = $this->array_slice_with_step($response['list'], 0, 5, 8);
         foreach ($weatherData as $weather) {
             $tenDaysOfWeatherDataList[] = [
@@ -276,7 +275,7 @@ class IdeaController extends Controller
         }
         return $tenDaysOfWeatherDataList;
     }
-    //切片，提高可读性
+
     function array_slice_with_step($array, $offset, $length, $step = 1, $preserve_keys = false)
     {
         $result = [];
