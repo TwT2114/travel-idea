@@ -11,14 +11,14 @@
                 <h1>Welcome to {{ config('app.name', 'Travel Idea') }}, please
 
                     @if (Route::has('login'))
-                        <p class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <p class="header-item">
+                            <a class="header-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </p>
                     @endif
                     /
                     @if (Route::has('register'))
-                        <p class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <p class="header-item">
+                            <a class="header-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </p>
                     @endif
                 </h1>
