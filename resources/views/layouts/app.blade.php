@@ -4,19 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="/css/jquery-ui.css"/>
-    <script src="/js/jquery.js"></script>
-    <script src="/js/jquery-ui.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -27,6 +14,13 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles and Scripts -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery-ui.css">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
 
@@ -34,8 +28,7 @@
 
 </head>
 <body>
-<header id="app">
-    <nav class="navbar navbar-expand-md navbar-light glass-container">
+<header id="app" class="navbar navbar-expand-md navbar-light glass-container">
         <div class="container" style="position:sticky;top:0;">
             <img src="/css/images/旅游主题_地图.png" alt="Logo" width="100">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -73,20 +66,20 @@
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <li class="header-item">
+                                <a class="header-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @endif
 
                         @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <li class="header-item">
+                                <a class="header-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @endif
                     @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <li class="header-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button"
+                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->name }}
                             </a>
 
@@ -109,59 +102,58 @@
 
             </div>
         </div>
-    </nav>
 </header>
 
-<main class="container-fluid row">
+<div class="downContainer container-fluid row">
+<nav class="col-2">
     @guest
     @else
-        <aside class="col-2">
-            <a class="aside-item" href="{{ route('idea.index') }}">
-                <div class="aside-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
-            </a>
+    <a class="nav-item" href="{{ route('idea.index') }}">
+        <div class="nav-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
+    </a>
 
-            <a class="aside-item" href="{{ route('plan.index') }}">
-                <div class="aside-text"><img src="/css/images/PlanList.png" alt="Plan List">Plan List</div>
-            </a>
+    <a class="nav-item" href="{{ route('plan.index') }}">
+        <div class="nav-text"><img src="/css/images/PlanList.png" alt="Plan List">Plan List</div>
+    </a>
 
-            <a class="aside-item" href="{{ route('idea.create') }}">
-                <div class="aside-text"><img src="/css/images/new.png" alt="New Idea">New Idea</div>
-            </a>
-            <a class="aside-item" href="{{ route('plan.create') }}">
-                <div class="aside-text"><img src="/css/images/AddPlan.png" alt="New Plan">New Plan</div>
-            </a>
-            <a class="aside-item" href="{{ route('user.show', \Illuminate\Support\Facades\Auth::id()) }}">
-                <div class="aside-text"><img src="/css/images/user.png" alt="User">User</div>
-            </a>
+    <a class="nav-item" href="{{ route('idea.create') }}">
+        <div class="nav-text"><img src="/css/images/new.png" alt="New Idea">New Idea</div>
+    </a>
+    <a class="nav-item" href="{{ route('plan.create') }}">
+        <div class="nav-text"><img src="/css/images/AddPlan.png" alt="New Plan">New Plan</div>
+    </a>
+    <a class="nav-item" href="{{ route('user.show', \Illuminate\Support\Facades\Auth::id()) }}">
+        <div class="nav-text"><img src="/css/images/user.png" alt="User">User</div>
+    </a>
 
-            @endguest
-        </aside>
+    @endguest
+</nav>
 
-        <div role="main" class="col-10 main-container">
-            <div class="message">
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div><br/>
-                @endif
+<main class="col-10 main-container">
+    <div class="message">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
             </div>
-            @yield('content')
-        </div>
+        @endif
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div><br/>
+        @endif
+    </div>
+    @yield('content')
 </main>
+</div>
 <footer>
     <div>Copyright &copy; 2024 Travel Idea</div>
 </footer>

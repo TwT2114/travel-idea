@@ -5,24 +5,24 @@ body {
     background-attachment: fixed;/* 将背景图片固定在视口中 */
 }
 
-nav {
+header {
     padding: 0;
     height: 15vh; /* 高度为视口的10% */
 
 }
 
-.nav-item {
+.header-item {
     display: inline-block; /* 确保横向排列 */
     /*margin: 20px 50px; !* 两侧外间距 *!*/
     align-self: flex-start; /* 调整此项以改变nav-item的垂直对齐而不影响logo */
 }
 
-.nav-item img {
+.header-item img {
     vertical-align: bottom; /* 图片底端对齐 */
     /*height: auto; !* 高度自适应以保持比例 *!*/
 }
 
-.nav-text {
+.header-text {
     color: #000;
     font-weight: bold;
     font-family: 'Nunito', sans-serif; /* 保持整站字体风格统一 */
@@ -53,13 +53,14 @@ nav {
     border-right: 0 rgba(40,40,40,0.35) solid;
 }
 
-aside {
+nav {
     background-color: #eff6ef; /* 设置背景色为白色 */
     min-height: 85vh;
+    max-height: 85vh;
     text-decoration: none;
 }
 
-.aside-item {
+.nav-item {
     margin-top: 40px; /* 增加上边距 */
     margin-bottom: 20px;
     margin-left: 10px; /* 设置距禽左边5像素 */
@@ -68,24 +69,24 @@ aside {
     text-decoration: none;
 }
 
-.aside-item:hover {
+.nav-item:hover {
     background-color: #85a384; /* 绿色背景 */
     text-decoration: none;
 }
 
-.aside-item img {
+.nav-item img {
     width: 23px; /* 设置图片宽度为20像素 */
     margin-right: 5px; /* 图片和文本之间的间距 */
 }
 
-.aside-item a {
+.nav-item a {
     display: block;
     align-items: center;
     text-decoration: none;
     color: black;
 }
 
-.aside-text {
+.nav-text {
     font-size: 18px; /* 设置字体大小为20像素 */
     text-align: left; /* 文本左对齐 */
     font-weight: bold;
@@ -100,11 +101,13 @@ a:hover {
 }
 
 
-main {
+.downContainer {
     margin-top: auto; /* 将内容推到nav元素下方 */
     display: flex;
     padding: 0;
     min-height: 85vh; /* 最小高度为视口的80% */
+    max-height: 85vh;
+    verflow-y: auto; /* 添加垂直滚动条 */
 }
 
 .main-container{
@@ -128,7 +131,5 @@ footer {
         position: absolute;
         right: 5%;
     }
-
-    .map {}
 
 
