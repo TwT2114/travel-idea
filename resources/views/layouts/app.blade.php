@@ -95,14 +95,17 @@
                     </li>
                 @endguest
             </ul>
+
+
         </div>
     </div>
 </header>
 
 <div class="downContainer container-fluid row">
-    <nav class="col-2">
-        @guest
-        @else
+    @guest
+    @else
+        <nav class="col-2">
+
             <a class="nav-item" href="{{ route('idea.index') }}">
                 <div class="nav-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
             </a>
@@ -121,8 +124,9 @@
                 <div class="nav-text"><img src="/css/images/user.png" alt="User">User</div>
             </a>
 
-        @endguest
-    </nav>
+
+        </nav>
+    @endguest
 
     <main class="col-10 main-container">
         <div class="message">
