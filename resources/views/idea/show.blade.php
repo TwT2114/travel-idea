@@ -44,7 +44,7 @@
         }
 
         // 每隔一定时间间隔调用 updateComments 函数
-        setInterval(updateComments, 5000); //  5 秒
+        setInterval(updateComments, 2000); //  2 秒
     </script>
 @endsection
 
