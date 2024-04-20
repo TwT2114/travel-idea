@@ -2,9 +2,6 @@
 @section('title','-New Idea')
 @section('script')
     <script src="{{ asset('js/datepicker.js') }}"></script>
-    <script async
-            src="https://maps.googleapis.com/maps/api/js?key={{config('api.google_map')}}&libraries=places&callback=initMap">
-    </script>
     <link rel="stylesheet" type="text/css" href="/css/create.css">
 @endsection
 
@@ -27,14 +24,14 @@
                     <td><input name="destination" type="text" class="form-control"/></td>
                 </tr>
                 <tr>
-                    <td><label for="datepicker">Start Date</label></td>
+                    <td><label for="start_date">Start Date</label></td>
                     <td><input name="start_date" type="text" class="form-control"
-                               id="start_datepicker"></td>
+                               id="start_date"></td>
                 </tr>
                 <tr>
-                    <td><label for="datepicker">End Date</label></td>
+                    <td><label for="end_date">End Date</label></td>
                     <td><input name="end_date" type="text" class="form-control"
-                               id="end_datepicker"></td>
+                               id="end_date"></td>
                 </tr>
 
                 <tr>
