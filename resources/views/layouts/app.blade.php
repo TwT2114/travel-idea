@@ -66,7 +66,7 @@
                     @guest
                         @if (Route::has('login'))
                             <li class="header-item">
-                                <a class="header-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="header-link" href="{{ route('login') }}">&nbsp;{{ __('Login') }}</a>
                             </li>
                         @endif
 
@@ -77,7 +77,7 @@
                         @endif
                     @else
                         <li class="header-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button"
+                            <a id="navbarDropdown" class="header-link dropdown-toggle" role="button"
                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->name }}
                             </a>

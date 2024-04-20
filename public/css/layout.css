@@ -31,6 +31,12 @@ header {
     display: flex;
     justify-content: space-between; /* 将内容靠右对齐并留有间距 */
 }
+.header-link{
+    color: black; /* 设置链接默认颜色为黑色 */
+    text-decoration: none; /* 去除下划线 */
+    transition: color 0.3s; /* 添加颜色变化的过渡效果 */
+    margin: 5px;
+}
 
 .search-box {
     display: flex;
