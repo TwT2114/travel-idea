@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Idea;
 use App\Models\Plan;
+use App\Models\PlanIdea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -182,6 +183,9 @@ class IdeaController extends Controller
             // check Authorization
             if ($idea->user_id == Auth::id()) {
                 $idea->delete();
+                // delete the idea from the database
+                PlanIdea::where('idea_id', $idea->id)->delete();
+                // delete plan related idea
                 return redirect(route('idea.index'))->with('success', 'Idea has been deleted');
             } else {
                 return redirect(route('idea.index'))->with('fail', 'No Authorization to delete this idea');
