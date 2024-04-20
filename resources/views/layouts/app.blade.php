@@ -69,7 +69,6 @@
                         <li class="header-item">
                             <a class="header-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
-
                     @endif
 
                     @if (Route::has('register'))
@@ -96,16 +95,18 @@
                     </li>
                 @endguest
             </ul>
+
+
         </div>
     </div>
 </header>
+
 
 <div class="downContainer container-fluid row">
     @guest
     @else
         <aside>
             <nav class="col-2">
-
                 <a class="nav-item" href="{{ route('idea.index') }}">
                     <div class="nav-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
                 </a>
@@ -124,10 +125,10 @@
                     <div class="nav-text"><img src="/css/images/user.png" alt="User">User</div>
                 </a>
 
+
             </nav>
         </aside>
     @endguest
-
     <main class="col-10 main-container">
         <div class="message">
             @if (session('error'))
