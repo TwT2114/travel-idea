@@ -69,6 +69,7 @@
                         <li class="header-item">
                             <a class="header-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
+
                     @endif
 
                     @if (Route::has('register'))
@@ -95,8 +96,6 @@
                     </li>
                 @endguest
             </ul>
-
-
         </div>
     </div>
 </header>
@@ -104,28 +103,29 @@
 <div class="downContainer container-fluid row">
     @guest
     @else
-        <nav class="col-2">
+        <aside>
+            <nav class="col-2">
 
-            <a class="nav-item" href="{{ route('idea.index') }}">
-                <div class="nav-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
-            </a>
+                <a class="nav-item" href="{{ route('idea.index') }}">
+                    <div class="nav-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
+                </a>
 
-            <a class="nav-item" href="{{ route('plan.index') }}">
-                <div class="nav-text"><img src="/css/images/PlanList.png" alt="Plan List">Plan List</div>
-            </a>
+                <a class="nav-item" href="{{ route('plan.index') }}">
+                    <div class="nav-text"><img src="/css/images/PlanList.png" alt="Plan List">Plan List</div>
+                </a>
 
-            <a class="nav-item" href="{{ route('idea.create') }}">
-                <div class="nav-text"><img src="/css/images/new.png" alt="New Idea">New Idea</div>
-            </a>
-            <a class="nav-item" href="{{ route('plan.create') }}">
-                <div class="nav-text"><img src="/css/images/AddPlan.png" alt="New Plan">New Plan</div>
-            </a>
-            <a class="nav-item" href="{{ route('user.show', \Illuminate\Support\Facades\Auth::id()) }}">
-                <div class="nav-text"><img src="/css/images/user.png" alt="User">User</div>
-            </a>
+                <a class="nav-item" href="{{ route('idea.create') }}">
+                    <div class="nav-text"><img src="/css/images/new.png" alt="New Idea">New Idea</div>
+                </a>
+                <a class="nav-item" href="{{ route('plan.create') }}">
+                    <div class="nav-text"><img src="/css/images/AddPlan.png" alt="New Plan">New Plan</div>
+                </a>
+                <a class="nav-item" href="{{ route('user.show', \Illuminate\Support\Facades\Auth::id()) }}">
+                    <div class="nav-text"><img src="/css/images/user.png" alt="User">User</div>
+                </a>
 
-
-        </nav>
+            </nav>
+        </aside>
     @endguest
 
     <main class="col-10 main-container">
