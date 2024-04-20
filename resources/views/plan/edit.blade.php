@@ -7,6 +7,7 @@
 
 @section('content')
     <a href="{{ url()->previous() }}">Back</a>
+    <a href="{{ route('plan.show', $plan->id) }}">Detail</a>
     @if( $plan->user_id == \Illuminate\Support\Facades\Auth::id() )
         <div class="plan_body">
             <div style="display: flex; justify-content: space-between;">
