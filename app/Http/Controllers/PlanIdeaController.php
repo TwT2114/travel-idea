@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Plan; // 导入 Plan 模型
+use App\Models\Plan;
+
+// 导入 Plan 模型
 
 class PlanIdeaController extends Controller
 {

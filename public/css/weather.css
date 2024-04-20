@@ -1,4 +1,4 @@
-h3{
+h3 {
     text-align: center;
 }
 
@@ -22,10 +22,10 @@ th {
     white-space: nowrap; /* Prevent line breaks */
     overflow: hidden; /* Hide overflowed content */
     text-overflow: ellipsis; /* Show ellipsis if content overflows */
-    max-width: 100px;  /* Adjust the max width to your needs */
+    max-width: 100px; /* Adjust the max width to your needs */
 }
 
-th img{
+th img {
     width: 40px;
     height: 30px;
 }

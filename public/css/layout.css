@@ -1,8 +1,8 @@
 body {
     background-image: url('/css/images/background.png');
-    background-repeat: no-repeat;/* 设置背景图片的重复方式，这里设置为不重复 */
-    background-size: cover;/* 将背景图片铺满整个屏幕 */
-    background-attachment: fixed;/* 将背景图片固定在视口中 */
+    background-repeat: no-repeat; /* 设置背景图片的重复方式，这里设置为不重复 */
+    background-size: cover; /* 将背景图片铺满整个屏幕 */
+    background-attachment: fixed; /* 将背景图片固定在视口中 */
 }
 
 nav {
@@ -37,7 +37,7 @@ nav {
     justify-content: flex-start; /* Change the alignment to start */
 }
 
-.glass-container{
+.glass-container {
     /*margin: 0 auto; !* 居中显示 *!*/
     color: white;
     display: flex;
@@ -46,11 +46,11 @@ nav {
     gap: 20px;
     border-radius: 0px;
     backdrop-filter: blur(5px);
-    background-color: rgba(97,204,163, 0.288);
+    background-color: rgba(97, 204, 163, 0.288);
     box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px;
-    border: 0 rgba(255,255,255,0.4) solid;
-    border-bottom: 0 rgba(40,40,40,0.35) solid;
-    border-right: 0 rgba(40,40,40,0.35) solid;
+    border: 0 rgba(255, 255, 255, 0.4) solid;
+    border-bottom: 0 rgba(40, 40, 40, 0.35) solid;
+    border-right: 0 rgba(40, 40, 40, 0.35) solid;
 }
 
 aside {
@@ -89,7 +89,7 @@ aside {
     font-size: 18px; /* 设置字体大小为20像素 */
     text-align: left; /* 文本左对齐 */
     font-weight: bold;
-    color:black;
+    color: black;
     text-decoration: none;
 }
 
@@ -107,12 +107,12 @@ main {
     min-height: 85vh; /* 最小高度为视口的80% */
 }
 
-.main-container{
+.main-container {
     flex: 1; /* 设置剩余空间为flex-grow: 1，即自动填充剩余空间 */
     margin: 30px 0 30px 30px; /* 左侧的 margin */
     padding: 30px;
     backdrop-filter: blur(3px);
-    background-color: rgba(150,204,163, 0.4);
+    background-color: rgba(150, 204, 163, 0.4);
     border-radius: 10px;
     overflow: auto;
     max-height: 77vh; /* 减去顶部和底部的 padding 值 */
@@ -124,11 +124,12 @@ footer {
     left: 50%;
 }
 
-    .weather {
-        position: absolute;
-        right: 5%;
-    }
+.weather {
+    position: absolute;
+    right: 5%;
+}
 
-    .map {}
+.map {
+}
 
 

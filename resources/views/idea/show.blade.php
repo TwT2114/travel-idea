@@ -22,18 +22,6 @@
                 var commentList = $('#commentList');
                 commentList.empty();
 
-                // response.forEach(function (comment) {
-                //     var newComment = '<li>' +
-                //         '<strong>' + comment.user_name + '</strong>' +
-                //         '<p>' + comment.content + '</p>' +
-                //         '<time>' + comment.created_at + '</time>' +
-                //         '<form method="get" action="/comment/delete/' + comment.id + '">' +
-                //         // '<input type="hidden" name="comment_id" value="'+ comment.id +'"> ' +
-                //         '<button type="submit">Delete</button>' +
-                //         '</form>' +
-                //         '</li>';
-                //     commentList.append(newComment);
-                // });
                 if (response.length === 0) {
                     // 如果没有评论，显示提示信息
                     commentList.append('<p>Oops, there\'s no comment. Come and post first comment!</p>');
@@ -54,8 +42,6 @@
                 }
             });
         }
-        //     });
-        // }
 
         // 每隔一定时间间隔调用 updateComments 函数
         setInterval(updateComments, 5000); //  5 秒
@@ -135,19 +121,19 @@
                 @if($idea->comments->isEmpty())
                     <p>Oops, there's no comment. Come and post first comment!</p>
                 @else
-                <ul id="commentList">
-                    @foreach ($idea->comments->reverse() as $comment)
-                        <li>
-                            <strong>{{ $comment->user_name }}</strong>
-                            <p>{{ $comment->content }}</p>
-                            <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
-                            <form method="get" action="{{ route('comment.delete', $comment->id) }}">
-                                <button type="submit">Delete</button>
-                            </form>
-                        </li>
-                    @endforeach
+                    <ul id="commentList">
+                        @foreach ($idea->comments->reverse() as $comment)
+                            <li>
+                                <strong>{{ $comment->user_name }}</strong>
+                                <p>{{ $comment->content }}</p>
+                                <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
+                                <form method="get" action="{{ route('comment.delete', $comment->id) }}">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </li>
+                        @endforeach
 
-                </ul>
+                    </ul>
                 @endif
 
                 <!-- 提交评论 -->
