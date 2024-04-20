@@ -13,26 +13,30 @@
 @section('content')
     <div>
         <article><h1>Plan List</h1></article>
-        Click the table header to sort
-        <table id="plan-list" class="table table-hover zebra border-header">
-            <thead class="plan-header">
-            <tr>
-                <th>User</th>
-                <th>Title</th>
-                <th>Time</th>
-                <th>Detail</th>
-            </tr>
-            </thead>
-            <tbody class="zebra"> <!-- 添加zebra类名到tbody -->
-            @foreach($plans as $key => $plan)
+        @if($plans->isNotEmpty())
+            Click the table header to sort
+            <table id="plan-list" class="table table-hover zebra border-header">
+                <thead class="plan-header">
                 <tr>
-                    <td><a href="{{route('user.show',$plan->user_id)}}"> {{$plan->user_name}}</a></td>
-                    <td>{{$plan->title}}</td>
-                    <td>{{$plan->created_at}}</td>
-                    <td><a href="{{ route("plan.show", $plan->id) }}">Detail</a></td>
+                    <th>User</th>
+                    <th>Title</th>
+                    <th>Time</th>
+                    <th>Detail</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="zebra"> <!-- 添加zebra类名到tbody -->
+                @foreach($plans as $key => $plan)
+                    <tr>
+                        <td><a href="{{route('user.show',$plan->user_id)}}"> {{$plan->user_name}}</a></td>
+                        <td>{{$plan->title}}</td>
+                        <td>{{$plan->created_at}}</td>
+                        <td><a href="{{ route("plan.show", $plan->id) }}">Detail</a></td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        @else
+            <p>No plans found. <a href="{{ route('plan.create') }}">Post your first plan!</a></p>
+        @endif
     </div>
 @endsection
