@@ -12,10 +12,21 @@ a {
     height: 100%;
 }
 
-.top-left { grid-area: top-left; }
-.bottom-left { grid-area: bottom-left; }
-.top-right { grid-area: top-right; }
-.bottom-right { grid-area: bottom-right; }
+.top-left {
+    grid-area: top-left;
+}
+
+.bottom-left {
+    grid-area: bottom-left;
+}
+
+.top-right {
+    grid-area: top-right;
+}
+
+.bottom-right {
+    grid-area: bottom-right;
+}
 
 #commentList {
     background-color: rgba(255, 255, 255, 0.4); /* 设置背景颜色为白色并且30%透明度 */
@@ -80,9 +91,8 @@ a {
     border: 1px solid #ccc; /* 添加1px宽度的灰色边框 */
     border-radius: 10px; /* 设置圆角为10px */
     padding: 10px; /* 添加内边距 */
-    background-color: rgba(255,255,255, 0.3);
+    background-color: rgba(255, 255, 255, 0.3);
 }
-
 
 
 .idea-header {
@@ -116,7 +126,6 @@ a {
 .form-group button {
     min-width: 80px; /* Set a minimum width for the submit button */
 }
-
 
 
 .weather {

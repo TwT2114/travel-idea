@@ -42,8 +42,6 @@
                 }
             });
         }
-        //     });
-        // }
 
         // 每隔一定时间间隔调用 updateComments 函数
         setInterval(updateComments, 5000); //  5 秒
@@ -123,19 +121,19 @@
                 @if($idea->comments->isEmpty())
                     <p>Oops, there's no comment. Come and post first comment!</p>
                 @else
-                <ul id="commentList">
-                    @foreach ($idea->comments->reverse() as $comment)
-                        <li>
-                            <strong>{{ $comment->user_name }}</strong>
-                            <p>{{ $comment->content }}</p>
-                            <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
-                            <form method="get" action="{{ route('comment.delete', $comment->id) }}">
-                                <button type="submit">Delete</button>
-                            </form>
-                        </li>
-                    @endforeach
+                    <ul id="commentList">
+                        @foreach ($idea->comments->reverse() as $comment)
+                            <li>
+                                <strong>{{ $comment->user_name }}</strong>
+                                <p>{{ $comment->content }}</p>
+                                <time datetime="{{ $comment->created_at }}">{{ $comment->created_at }}</time>
+                                <form method="get" action="{{ route('comment.delete', $comment->id) }}">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </li>
+                        @endforeach
 
-                </ul>
+                    </ul>
                 @endif
 
                 <!-- 提交评论 -->

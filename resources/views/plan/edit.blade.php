@@ -79,12 +79,8 @@
                                     <td>{{ $planIdea->start_date }}</td>
                                     <td>{{ $planIdea->end_date }}</td>
                                     <td>
-{{--                                        <form method="post" action="{{ route('plan.removeIdea', $planIdea->id ) }}">--}}
-{{--                                            @method('DELETE')--}}
-{{--                                            @csrf--}}
-{{--                                            <button type="submit" class="common-button">Remove</button>--}}
-{{--                                        </form>--}}
-                                        <form method="post" action="{{ route('plan.removeIdea', ['planId' => $plan->id, 'ideaId' => $planIdea->id]) }}">
+                                        <form method="post"
+                                              action="{{ route('plan.removeIdea', ['planId' => $plan->id, 'ideaId' => $planIdea->id]) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="common-button">Remove</button>

@@ -1,4 +1,4 @@
-.main_table{
+.main_table {
     background-color: white;
     font-size: medium;
     text-align: center;
@@ -17,7 +17,7 @@
     font-weight: bold; /* 加粗字体 */
 }
 
-.common-button{
+.common-button {
     outline: none;
     border: none;
     background-color: #85a384;
@@ -31,24 +31,24 @@
     transform: scale(0.95);
 }
 
-.idea-button{
+.idea-button {
     margin: 2vh 35vh 2vh 0;
 }
 
-.plan-button{
+.plan-button {
     margin: 2vh 0 2vh 14vh;
 }
 
-.edit-button{
+.edit-button {
     margin: 2vh 27vh 2vh 0;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-.plan_body{
-    background-color: rgba(255,255,255, 0.4);
+.plan_body {
+    background-color: rgba(255, 255, 255, 0.4);
     font-size: medium;
     padding: 20px 20px 10px 20px;
     margin: 10px 0 5px 0;
@@ -59,7 +59,7 @@ a{
 /*    width: 500px; !* 调整输入框的宽度为80% *!*/
 /*}*/
 
-.large-font{
+.large-font {
     font-size: 20px;
     font-weight: bold;
 }

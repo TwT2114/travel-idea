@@ -15,7 +15,7 @@
 /*    align-items: center; !* 垂直居中 *!*/
 /*}*/
 
-.small-font{
+.small-font {
     font-size: 12px;
 }
 
@@ -41,7 +41,7 @@
 
 .user-section {
     width: 50%;
-    background-color:rgba(255, 255, 255, 0.9); /* Set the background color to white */
+    background-color: rgba(255, 255, 255, 0.9); /* Set the background color to white */
     border: 0px solid #ccc; /* Adjust the border to be less wide */
     padding: 10px;
     min-height: 30vh; /* 最小高度为页面的50% */
@@ -77,7 +77,7 @@
     background-color: lightgrey; /* 悬停时背景灰色 */
 }
 
-a{
+a {
     text-decoration: none;
 }
 
