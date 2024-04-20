@@ -1,6 +1,7 @@
-$(function () {
-    $("#start_datepicker").datepicker({dateFormat: 'yy-mm-dd'});
-});
-$(function () {
-    $("#end_datepicker").datepicker({dateFormat: 'yy-mm-dd'});
-});
+
+$( function() {
+    $( "#start_date" ).datepicker({dateFormat: 'yy-mm-dd'});
+} );
+$( function() {
+    $( "#end_date" ).datepicker({dateFormat: 'yy-mm-dd'});
+} );

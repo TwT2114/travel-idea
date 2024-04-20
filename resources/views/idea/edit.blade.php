@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', '-Edit Idea')
 @section('script')
+    <script src="{{ asset('js/datepicker.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="/css/create.css">
 @endsection
 
