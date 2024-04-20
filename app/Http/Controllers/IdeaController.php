@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Idea;
 use App\Models\Plan;
+use App\Models\PlanIdea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -26,10 +27,10 @@ class IdeaController extends Controller
         $searchTerm = $request->input('searchTerm');
 
         $ideas = Idea::withCount('comments')// find number of comments
-            ->where(function ($query) use ($searchTerm) {
-                $query->where('destination', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('tags', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('title', 'like', '%' . $searchTerm . '%');
+        ->where(function ($query) use ($searchTerm) {
+            $query->where('destination', 'like', '%' . $searchTerm . '%')
+                ->orWhere('tags', 'like', '%' . $searchTerm . '%')
+                ->orWhere('title', 'like', '%' . $searchTerm . '%');
         })->get();
 
         $plans = Plan::where(function ($query) use ($searchTerm) {
@@ -39,21 +40,6 @@ class IdeaController extends Controller
 
         return view('search', compact('ideas', 'plans'));
     }
-
-//    public function searchIdea(Request $request)
-//    {
-//        $ideaSearchTerm = $request->input('searchTerm');
-//
-//        $ideas = Idea::withCount('comments')
-//            ->where(function ($query) use ($ideaSearchTerm) {
-//                $query->where('destination', 'like', '%' . $ideaSearchTerm . '%')
-//                    ->orWhere('tags', 'like', '%' . $ideaSearchTerm . '%')
-//                    ->orWhere('title', 'like', '%' . $ideaSearchTerm . '%');
-//            })
-//            ->get();
-//
-//        return view('searchIdea', compact('ideas'));
-//    }
 
     /**
      * Show the form for creating a new resource.
@@ -197,6 +183,9 @@ class IdeaController extends Controller
             // check Authorization
             if ($idea->user_id == Auth::id()) {
                 $idea->delete();
+                // delete the idea from the database
+                PlanIdea::where('idea_id', $idea->id)->delete();
+                // delete plan related idea
                 return redirect(route('idea.index'))->with('success', 'Idea has been deleted');
             } else {
                 return redirect(route('idea.index'))->with('fail', 'No Authorization to delete this idea');
@@ -246,6 +235,7 @@ class IdeaController extends Controller
         }
 
     }
+
 //天气预报功能
     public function getWeather(Idea $idea)
     {
@@ -258,6 +248,7 @@ class IdeaController extends Controller
         $html = view('idea.weather', compact('weathers', 'idea'))->render();
         return $html;
     }
+
     // 用内置geo api获取经纬度
     public function getCityWeather($destination)
     {
@@ -291,6 +282,7 @@ class IdeaController extends Controller
         }
         return $tenDaysOfWeatherDataList;
     }
+
     //切片，提高可读性
     function array_slice_with_step($array, $offset, $length, $step = 1, $preserve_keys = false)
     {

@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/css/weather.css"/>
+<link rel="stylesheet" type="text/css" href="/css/weather.css">
 <h3>{{$idea->destination }}'s Weather Forecast</h3>
 <div>
     @foreach ($weathers as $weather)

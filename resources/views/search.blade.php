@@ -2,7 +2,7 @@
 @section('title', '-Search')
 @section('script')
     <script src="{{ asset('js/favorites.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="/css/zebra.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/zebra.css">
     <script>
         $(function () {
             $("#idea-list").tablesorter();

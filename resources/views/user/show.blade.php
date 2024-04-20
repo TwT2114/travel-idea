@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', '-'.$user->name.'\'s homepage')
 @section('script')
-    <link rel="stylesheet" type="text/css" href="/css/user.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/user.css">
     <script src="{{ asset('js/buttonShow.js') }}"></script>
 @endsection
 
@@ -21,24 +21,33 @@
 
     <div class="user-container">
         <div class="user-section">
-            <div class="sub-head">Created Ideas:</div>
+            <div class="sub-head">Created Ideas</div>
             <div class="mainBody">
-                @foreach($userIdeas as $idea)
-                    <div>
-                        <a href="{{route('idea.show', $idea->id)}}">{{$idea->title}}</a>
-                    </div>
-                @endforeach
+                @if($userIdeas->count() > 0)
+                    @foreach($userIdeas as $idea)
+                        <div>
+                            <a href="{{route('idea.show', $idea->id)}}">{{$idea->title}}</a>
+                        </div>
+                    @endforeach
+                @else
+                    <p>No idea found. <a href="{{ route('plan.create') }}">Let's post your first Idea!</a></p>
+                @endif
             </div>
         </div>
 
         <div class="user-section">
-            <div class="sub-head">Created Plans:</div>
+            <div class="sub-head">Created Plans</div>
             <div class="mainBody">
-                @foreach($userPlans as $plan)
-                    <div>
-                        <a href="{{route('plan.show', $plan->id)}}">{{$plan->title}}</a>
-                    </div>
-                @endforeach
+                @if($userPlans->count() > 0)
+                    @foreach($userPlans as $plan)
+                        <div>
+                            <a href="{{route('plan.show', $plan->id)}}">{{$plan->title}}</a>
+                        </div>
+                    @endforeach
+                @else
+                    <p>No plan found. <a href="{{ route('plan.create') }}">Let's post your first Plan!</a></p>
+                @endif
+
             </div>
         </div>
     </div>
