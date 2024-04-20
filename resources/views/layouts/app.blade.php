@@ -100,10 +100,11 @@
         </div>
 </header>
 
+
 <div class="downContainer container-fluid row">
-<nav class="col-2">
     @guest
     @else
+<nav class="col-2">
     <a class="nav-item" href="{{ route('idea.index') }}">
         <div class="nav-text"><img src="/css/images/home.png" alt="Idea List">Idea List</div>
     </a>
