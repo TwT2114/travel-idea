@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('title', '-Edit Plan')
 @section('script')
-    <link rel="stylesheet" type="text/css" href="/css/create.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/zebra.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/create.css">
+    <link rel="stylesheet" type="text/css" href="/css/zebra.css">
 @endsection
 
 @section('content')

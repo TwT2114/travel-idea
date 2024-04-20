@@ -5,7 +5,7 @@
     <script async
             src="https://maps.googleapis.com/maps/api/js?key={{config('api.google_map')}}&libraries=places&callback=initMap">
     </script>
-    <link rel="stylesheet" type="text/css" href="/css/create.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/create.css">
 @endsection
 
 @section('content')

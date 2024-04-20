@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', '-'.$user->name.'\'s homepage')
 @section('script')
-    <link rel="stylesheet" type="text/css" href="/css/user.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/user.css">
     <script src="{{ asset('js/buttonShow.js') }}"></script>
 @endsection
 
