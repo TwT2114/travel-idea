@@ -58,7 +58,7 @@
                         loading="lazy"
                         allowfullscreen
                         referrerpolicy="no-referrer-when-downgrade"
-                        src="https://www.google.com/maps/embed/v1/directions?key={{ config('api.google_map') }}&{!! $plan->loc !!}">
+                        src="https://www.google.com/maps/embed/v1/directions?key={{ config('api.google_map') }}&{{{ $plan->loc }}}">
                 </iframe>
             @endif
         @else
