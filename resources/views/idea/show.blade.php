@@ -22,18 +22,6 @@
                 var commentList = $('#commentList');
                 commentList.empty();
 
-                // response.forEach(function (comment) {
-                //     var newComment = '<li>' +
-                //         '<strong>' + comment.user_name + '</strong>' +
-                //         '<p>' + comment.content + '</p>' +
-                //         '<time>' + comment.created_at + '</time>' +
-                //         '<form method="get" action="/comment/delete/' + comment.id + '">' +
-                //         // '<input type="hidden" name="comment_id" value="'+ comment.id +'"> ' +
-                //         '<button type="submit">Delete</button>' +
-                //         '</form>' +
-                //         '</li>';
-                //     commentList.append(newComment);
-                // });
                 if (response.length === 0) {
                     // 如果没有评论，显示提示信息
                     commentList.append('<p>Oops, there\'s no comment. Come and post first comment!</p>');
