@@ -26,10 +26,10 @@ class IdeaController extends Controller
         $searchTerm = $request->input('searchTerm');
 
         $ideas = Idea::withCount('comments')// find number of comments
-            ->where(function ($query) use ($searchTerm) {
-                $query->where('destination', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('tags', 'like', '%' . $searchTerm . '%')
-                    ->orWhere('title', 'like', '%' . $searchTerm . '%');
+        ->where(function ($query) use ($searchTerm) {
+            $query->where('destination', 'like', '%' . $searchTerm . '%')
+                ->orWhere('tags', 'like', '%' . $searchTerm . '%')
+                ->orWhere('title', 'like', '%' . $searchTerm . '%');
         })->get();
 
         $plans = Plan::where(function ($query) use ($searchTerm) {
@@ -39,21 +39,6 @@ class IdeaController extends Controller
 
         return view('search', compact('ideas', 'plans'));
     }
-
-//    public function searchIdea(Request $request)
-//    {
-//        $ideaSearchTerm = $request->input('searchTerm');
-//
-//        $ideas = Idea::withCount('comments')
-//            ->where(function ($query) use ($ideaSearchTerm) {
-//                $query->where('destination', 'like', '%' . $ideaSearchTerm . '%')
-//                    ->orWhere('tags', 'like', '%' . $ideaSearchTerm . '%')
-//                    ->orWhere('title', 'like', '%' . $ideaSearchTerm . '%');
-//            })
-//            ->get();
-//
-//        return view('searchIdea', compact('ideas'));
-//    }
 
     /**
      * Show the form for creating a new resource.
@@ -246,6 +231,7 @@ class IdeaController extends Controller
         }
 
     }
+
 //天气预报功能
     public function getWeather(Idea $idea)
     {
@@ -258,6 +244,7 @@ class IdeaController extends Controller
         $html = view('idea.weather', compact('weathers', 'idea'))->render();
         return $html;
     }
+
     // 用内置geo api获取经纬度
     public function getCityWeather($destination)
     {
@@ -291,6 +278,7 @@ class IdeaController extends Controller
         }
         return $tenDaysOfWeatherDataList;
     }
+
     //切片，提高可读性
     function array_slice_with_step($array, $offset, $length, $step = 1, $preserve_keys = false)
     {
